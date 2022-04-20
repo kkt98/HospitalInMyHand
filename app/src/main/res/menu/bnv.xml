@@ -5,7 +5,7 @@
         android:title="Home"
         android:icon="@drawable/ic_hospital"/>
 
-    <item android:id="@+id/bookmark"
+    <item android:id="@+id/bnv_bookmark"
         android:title="Bookmark"
         android:icon="@drawable/ic_faver"/>
 
