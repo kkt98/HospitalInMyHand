@@ -9,17 +9,14 @@ import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 
 class HomePage1Fragment:Fragment() {
 
-    lateinit var binding:FragmentHomePage1Binding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentHomePage1Binding.inflate(inflater, container, false)
-
         return binding.root
-    }
 
+    }
+        val binding: FragmentHomePage1Binding by lazy { FragmentHomePage1Binding.inflate(layoutInflater) }
 }

@@ -6,16 +6,20 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class HomePageAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity){
+class HomePageAdapter(fragmentActivity: HomeFragment): FragmentStateAdapter(fragmentActivity){
 
-    var fragments : ArrayList<Fragment> = ArrayList()
+    private val NUM_PAGES = 3
 
-    override fun getItemCount(): Int {
-        return fragments.size
-    }
+    override fun getItemCount(): Int = NUM_PAGES
 
     override fun createFragment(position: Int): Fragment {
-        return fragments[position]
+        return when (position) {
+            0 -> HomePage1Fragment()
+            1 -> HomePage2Fragment()
+            2 -> HomePage3Fragment()
+            else -> HomePage1Fragment()
+        }
+
     }
 
 }

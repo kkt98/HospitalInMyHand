@@ -10,24 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HospitalInMyHand">
         <activity
-            android:name=".HomePage3Fragment"
-            android:exported="false" />
-        <activity
-            android:name=".HomePage2Fragment"
-            android:exported="false" />
-        <activity
-            android:name=".HomePage1Fragment"
-            android:exported="false" />
-        <activity
-            android:name=".HomeFragment"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity1"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
