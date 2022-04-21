@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.162" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable/backgoround.xml" value="0.1485" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page1_fragment.xml" value="0.2574074074074074" />
@@ -11,9 +12,12 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page3_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_login1.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_main.xml" value="0.2574074074074074" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/bg_edit.xml" value="0.35520833333333335" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/dialog.xml" value="0.2324074074074074" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/dialog2.xml" value="0.2324074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_bookmark.xml" value="0.26851851851851855" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_home.xml" value="0.2574074074074074" />
-        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_home_page1.xml" value="0.35520833333333335" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_home_page1.xml" value="0.2324074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_home_page2.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_home_page3.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/fragment_map.xml" value="0.35520833333333335" />

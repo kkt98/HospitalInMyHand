@@ -41,7 +41,7 @@ class HomeFragment: Fragment() {
         val adapter = HomePageAdapter(this)
         viewPager.adapter = adapter
 
-        val tabName = arrayOf<String>("병원", "응급실", "약국")
+        val tabName = arrayOf("병원", "응급실", "약국")
 
         TabLayoutMediator(tabLayout, viewPager) {
                 tab, position -> tab.text = tabName[position].toString()
