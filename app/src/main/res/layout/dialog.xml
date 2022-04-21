@@ -28,6 +28,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/radio_my"
         android:padding="10dp"
+        android:layout_marginRight="10dp"
         android:text="운영중 병원 보기" />
 
     <Spinner
@@ -39,7 +40,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:padding="10dp"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"/>
 
     <Spinner
         android:id="@+id/spinner2"
