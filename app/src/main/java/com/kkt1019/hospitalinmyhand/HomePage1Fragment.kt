@@ -9,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 
 class HomePage1Fragment:Fragment() {
 
+    val recycler:RecyclerView by lazy { binding.recycler }
 
+    var items = mutableListOf<HomeItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,9 +26,23 @@ class HomePage1Fragment:Fragment() {
 
         binding.btn.setOnClickListener { spinner() }
 
+        datas()
+
         return binding.root
     }
         val binding: FragmentHomePage1Binding by lazy { FragmentHomePage1Binding.inflate(layoutInflater) }
+
+    fun datas(){
+
+        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        recycler.adapter = HomeAdapter(activity as Context, items)
+
+    }
 
 
 

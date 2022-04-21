@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.162" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable/backgoround.xml" value="0.1485" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.155" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page1_fragment.xml" value="0.2574074074074074" />
@@ -28,6 +29,7 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/home_page2_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/home_page3_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/hone_page1_fragment.xml" value="0.35520833333333335" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/recycler_home_item.xml" value="0.24444444444444444" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/menu/bnv.xml" value="0.35520833333333335" />
       </map>
     </option>
