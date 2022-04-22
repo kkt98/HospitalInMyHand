@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_margin="12dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/pg2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:padding="8dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/pg2_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="adress"
+            android:paddingLeft="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="8dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_below="@+id/pg2_title"/>
+
+        <TextView
+            android:id="@+id/pg2_tell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg2_address"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="tell"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/pg2_tell2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg2_tell"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="tell2"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <ToggleButton
+            android:id="@+id/pg2_fav"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_baseline_star_border_24"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

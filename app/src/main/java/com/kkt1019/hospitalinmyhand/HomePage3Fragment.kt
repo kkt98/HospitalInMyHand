@@ -11,9 +11,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage3Binding
 
 class HomePage3Fragment:Fragment() {
+
+    val recycler:RecyclerView by lazy { binding.recycler }
+
+    var items = mutableListOf<HomePage3Item>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,10 +28,26 @@ class HomePage3Fragment:Fragment() {
 
         binding.btn.setOnClickListener { spinner() }
 
+        datas()
+
         return binding.root
     }
 
     val binding:FragmentHomePage3Binding by lazy { FragmentHomePage3Binding.inflate(layoutInflater) }
+
+    fun datas(){
+
+        items.add( HomePage3Item("약국 이름", "약국 주소", "야국 전화번호"))
+        items.add( HomePage3Item("약국 이름", "약국 주소", "야국 전화번호"))
+        items.add( HomePage3Item("약국 이름", "약국 주소", "야국 전화번호"))
+        items.add( HomePage3Item("약국 이름", "약국 주소", "야국 전화번호"))
+        items.add( HomePage3Item("약국 이름", "약국 주소", "야국 전화번호"))
+        items.add( HomePage3Item("약국 이름", "약국 주소", "야국 전화번호"))
+
+        recycler.adapter = HomePage3Adapter(activity as Context, items)
+
+
+    }
 
     fun spinner(){
 

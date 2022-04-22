@@ -16,7 +16,7 @@ class HomePage1Fragment:Fragment() {
 
     val recycler:RecyclerView by lazy { binding.recycler }
 
-    var items = mutableListOf<HomeItem>()
+    var items = mutableListOf<HomePage1Item>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +34,13 @@ class HomePage1Fragment:Fragment() {
 
     fun datas(){
 
-        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        items.add( HomeItem("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        recycler.adapter = HomeAdapter(activity as Context, items)
+        items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
+        recycler.adapter = HomePage1Adapter(activity as Context, items)
 
     }
 

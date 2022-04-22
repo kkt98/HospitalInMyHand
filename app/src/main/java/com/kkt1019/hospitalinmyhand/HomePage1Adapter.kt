@@ -4,11 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class HomeAdapter constructor(val context:Context, var items:MutableList<HomeItem>) : RecyclerView.Adapter<HomeAdapter.VH>(){
+class HomePage1Adapter constructor(val context:Context, var page1Items:MutableList<HomePage1Item>) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -16,20 +15,18 @@ class HomeAdapter constructor(val context:Context, var items:MutableList<HomeIte
         val tvAddress : TextView by lazy { itemView.findViewById(R.id.address) }
         val tvTime : TextView by lazy { itemView.findViewById(R.id.time) }
         val tvTell : TextView by lazy { itemView.findViewById(R.id.tell) }
-//        val ivLight : ImageView by lazy { itemView.findViewById(R.id.light) }
-//        val ivFav : ImageView by lazy { itemView.findViewById(R.id.fav) }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val inflater: LayoutInflater = LayoutInflater.from(context)
-        val itemView = inflater.inflate(R.layout.recycler_home_item, parent,false)
+        val itemView = inflater.inflate(R.layout.recycler_homepage1_item, parent,false)
 
         return VH(itemView)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val item = items.get(position)
+        val item = page1Items.get(position)
 
         holder.tvTitle.setText(item.dutyName)
         holder.tvAddress.setText(item.dutyAddr)
@@ -38,5 +35,5 @@ class HomeAdapter constructor(val context:Context, var items:MutableList<HomeIte
 
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = page1Items.size
 }

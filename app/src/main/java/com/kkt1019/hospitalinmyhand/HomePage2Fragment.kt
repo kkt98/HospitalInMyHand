@@ -11,10 +11,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage2Binding
 
 class HomePage2Fragment:Fragment() {
 
+    val recycler:RecyclerView by lazy { binding.recycler }
+
+    var items = mutableListOf<HomePage2Item>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,10 +28,23 @@ class HomePage2Fragment:Fragment() {
 
         binding.btn.setOnClickListener { spinner() }
 
+        datas()
+
         return binding.root
     }
 
     val binding:FragmentHomePage2Binding by lazy { FragmentHomePage2Binding.inflate(layoutInflater) }
+
+    fun datas(){
+
+        items.add( HomePage2Item("응급실 주소", "응급실 이름", "대표번호", "응급실 번호"))
+        items.add( HomePage2Item("응급실 주소", "응급실 이름", "대표번호", "응급실 번호"))
+        items.add( HomePage2Item("응급실 주소", "응급실 이름", "대표번호", "응급실 번호"))
+        items.add( HomePage2Item("응급실 주소", "응급실 이름", "대표번호", "응급실 번호"))
+        items.add( HomePage2Item("응급실 주소", "응급실 이름", "대표번호", "응급실 번호"))
+
+        recycler.adapter = HomePage2Adapter(activity as Context, items)
+    }
 
     fun spinner(){
 
