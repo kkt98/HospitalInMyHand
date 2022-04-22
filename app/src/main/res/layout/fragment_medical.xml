@@ -4,18 +4,27 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:ems="15"
+        android:padding="8dp"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:text="검색"
+        android:layout_toRightOf="@+id/edit"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Medical"
-        android:textSize="60dp"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@+id/edit"/>
 
 </RelativeLayout>
