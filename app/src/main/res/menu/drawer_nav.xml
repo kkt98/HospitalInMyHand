@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--  group을 묶으면 구분선이 그어짐 group id 필수 -->
+    <group android:id="@+id/g1">
+
+        <item android:id="@+id/menu_aa"
+            android:title="로그아웃"
+            android:icon="@drawable/ic_baseline_logout_24"/>
+
+        <item android:id="@+id/menu_bb"
+            android:title="내가 쓴 글 보기"
+            android:icon="@drawable/ic_baseline_create_24"/>
+
+    </group>
+
+
+</menu>

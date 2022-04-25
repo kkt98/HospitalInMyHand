@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_margin="12dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/koala" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="id"
+        android:textSize="13sp"
+        android:layout_toRightOf="@+id/profile"/>
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:text="상호명"
+        android:textColor="#FF333333"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <kr.co.prnd.readmore.ReadMoreTextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_alignLeft="@id/title"
+        android:text="내용"
+        android:textSize="13sp"
+        android:padding="4dp"
+        app:readMoreMaxLine="3"
+        app:readMoreText="…더보기"/>
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/message"
+        android:src="@drawable/frog"
+        android:layout_marginTop="5dp"/>
+
+    <View
+        android:background="#7D7E7D"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/iv"
+        android:layout_marginTop="8dp"/>
+
+</RelativeLayout>

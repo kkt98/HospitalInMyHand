@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HospitalInMyHand">
         <activity
+            android:name=".MyReview"
+            android:exported="false" />
+        <activity
+            android:name=".RevieEdit"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -26,7 +32,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCaAMy_bNVUWMbdAM_ObJjqCIuCdGaKw14" />
     </application>
 
 </manifest>

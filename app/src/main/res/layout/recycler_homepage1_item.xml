@@ -58,12 +58,15 @@
 
         <ToggleButton
             android:id="@+id/fav"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="2dp"
             android:background="@drawable/ic_baseline_star_border_24"
             android:paddingTop="8dp"
-            android:paddingRight="8dp" />
+            android:paddingRight="8dp"
+            android:textOff=" "
+            android:textOn=" " />
 
         <ImageView
             android:id="@+id/light"

@@ -1,8 +1,16 @@
 package com.kkt1019.hospitalinmyhand
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -58,7 +66,73 @@ class MainActivity : AppCompatActivity() {
             }
             tran.commit()
 
+            drawlayout()
+
             true
         }
+
+        //동적퍼미션
+        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+        val checkResult = checkSelfPermission(permissions[0])
+        if (checkResult == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(permissions, 10)
+        }
+
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == 10){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "위치정보 사용 가능", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this, "위치정보 사용 불가능", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
+    var drawerToggle: ActionBarDrawerToggle? = null
+
+    fun drawlayout(){
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        val drawerLayout = findViewById<DrawerLayout>(R.id.layout_drawer)
+
+        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
+        drawerToggle!!.syncState()
+        drawerLayout.addDrawerListener(drawerToggle!!)
+
+        val nav = findViewById<NavigationView>(R.id.nav)
+        //네비게이션부의 아이템이 선택되었을때 반응하는 리스너
+        //네비게이션부의 아이템이 선택되었을때 반응하는 리스너
+        nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_aa -> Toast.makeText(this@MainActivity, "aa", Toast.LENGTH_SHORT).show()
+
+
+                R.id.menu_bb -> {
+
+                    val intent = Intent(this, MyReview::class.java)
+
+                    this?.startActivity(intent)
+
+                }
+            }
+
+            //Drawer 뷰를 닫기
+            drawerLayout.closeDrawer(nav, true)
+            false
+        })
+
+    }
+
+
 }

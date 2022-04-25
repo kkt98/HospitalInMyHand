@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HospitalInMyHand</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="drawer_open">사이드 메뉴 열렸음</string>
+    <string name="drawer_close">사이드 메뉴 닫혔음</string>
 </resources>

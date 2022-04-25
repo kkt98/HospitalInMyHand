@@ -1,5 +1,6 @@
 package com.kkt1019.hospitalinmyhand
 
+import android.app.ActionBar
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,17 +17,6 @@ class HomeFragment: Fragment() {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
 
-    companion object {
-        fun newInstance(): HomeFragment = HomeFragment()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,10 +49,6 @@ class HomeFragment: Fragment() {
         })
 
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
 //    var tabTitle = arrayOf("병원", "응급실", "약국")

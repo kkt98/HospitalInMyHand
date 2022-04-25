@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class HomePage1Adapter constructor(val context:Context, var page1Items:MutableList<HomePage1Item>) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePage1Item>) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
 
