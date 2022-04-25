@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePage1Item>) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePage1Item>,val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -34,6 +36,13 @@ class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePag
         holder.tvAddress.setText(item.dutyAddr)
         holder.tvTime.setText(item.dutyTime1c)
         holder.tvTell.setText(item.dutyTell)
+
+        holder.itemView.setOnClickListener {
+
+            val bottomSheetDialogFragment = HomePage1BottomSheet()
+            bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
+
+        }
 
     }
 

@@ -41,7 +41,7 @@ class HomePage1Fragment:Fragment() {
         items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
         items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
         items.add( HomePage1Item("주소", "병원이름", "전화번호", "8시30분", "18시 30분"))
-        recycler.adapter = HomePage1Adapter(activity as Context, items)
+        recycler.adapter = fragmentManager?.let { HomePage1Adapter(activity as Context, items, it) }
 
     }
 
