@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.kkt1019.hospitalinmyhand.databinding.RecyclerHomepage1ItemBinding
 
 class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePage1Item>,val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
@@ -17,8 +16,9 @@ class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePag
 
         val tvTitle : TextView by lazy { itemView.findViewById(R.id.title) }
         val tvAddress : TextView by lazy { itemView.findViewById(R.id.address) }
-        val tvTime : TextView by lazy { itemView.findViewById(R.id.time) }
+        val tvTimeS : TextView by lazy { itemView.findViewById(R.id.timeS) }
         val tvTell : TextView by lazy { itemView.findViewById(R.id.tell) }
+        val tvTimeC : TextView by lazy { itemView.findViewById(R.id.timeC) }
 
     }
 
@@ -34,8 +34,9 @@ class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePag
 
         holder.tvTitle.setText(item.dutyName)
         holder.tvAddress.setText(item.dutyAddr)
-        holder.tvTime.setText(item.dutyTime1c)
+        holder.tvTimeS.setText(item.dutyTime1s)
         holder.tvTell.setText(item.dutyTell)
+        holder.tvTimeC.setText(item.dutyTime1c)
 
         holder.itemView.setOnClickListener {
 

@@ -15,10 +15,11 @@
             android:id="@+id/pg3_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
             android:padding="8dp"
+            android:text="Title"
+            android:textColor="@color/black"
             android:textSize="15sp"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/pg3_address"

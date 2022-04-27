@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    var drawerToggle: ActionBarDrawerToggle? = null
+    lateinit var drawerToggle: ActionBarDrawerToggle
 
     fun drawlayout(){
 
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.layout_drawer)
 
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
-        drawerToggle!!.syncState()
+        drawerToggle.syncState()
         drawerLayout.addDrawerListener(drawerToggle!!)
 
         val nav = findViewById<NavigationView>(R.id.nav)
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
                     val intent = Intent(this, MyReview::class.java)
 
-                    this?.startActivity(intent)
+                    this.startActivity(intent)
 
                 }
             }

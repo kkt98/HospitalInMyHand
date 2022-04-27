@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1084194424820",
+    "project_id": "hospital-26565",
+    "storage_bucket": "hospital-26565.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084194424820:android:94e4ac17092d24e8265ba1",
+        "android_client_info": {
+          "package_name": "com.kkt1019.hospitalinmyhand"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084194424820-sql1h067qv5ee6b77bibc3ljtabkisqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kkt1019.hospitalinmyhand",
+            "certificate_hash": "7ddfc6a887e1c81daf05014b191c67185253775f"
+          }
+        },
+        {
+          "client_id": "1084194424820-55a06q11ov703tpimbh70meunjh5epmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9-wd_3ThCweTiVnQ7yuFpoG_g6J87x_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084194424820-55a06q11ov703tpimbh70meunjh5epmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

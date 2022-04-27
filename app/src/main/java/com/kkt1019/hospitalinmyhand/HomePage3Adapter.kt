@@ -31,6 +31,7 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
         holder.tvTitle.setText(item.yadmNm)
         holder.tvAddr.setText(item.addr)
         holder.tvTell.setText(item.telno)
+
     }
 
     override fun getItemCount(): Int = page3Items.size

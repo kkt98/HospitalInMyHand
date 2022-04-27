@@ -15,10 +15,11 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
             android:padding="8dp"
+            android:text="Title"
+            android:textColor="@color/black"
             android:textSize="15sp"
-            android:textColor="@color/black"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/address"
@@ -33,16 +34,29 @@
             android:layout_below="@+id/title"/>
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/timeS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="time"
-            android:textSize="15sp"
-            android:textColor="@color/black"
             android:layout_below="@+id/address"
             android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:paddingBottom="8dp"
-            android:paddingRight="8dp"/>
+            android:text="time"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/timeC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/address"
+            android:layout_toRightOf="@+id/timeS"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="time"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tell"
@@ -51,7 +65,7 @@
             android:text="tell"
             android:textSize="15sp"
             android:textColor="@color/black"
-            android:layout_below="@+id/time"
+            android:layout_below="@+id/timeS"
             android:paddingLeft="8dp"
             android:paddingBottom="8dp"
             android:paddingRight="8dp"/>
