@@ -51,30 +51,6 @@ class HomeFragment: Fragment() {
         return view
     }
 
-//    var tabTitle = arrayOf("병원", "응급실", "약국")
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//
-//        var layoutTab = binding.layoutTab.findViewById<TabLayout>(R.id.layout_tab)
-//        var pager = binding.layoutTab.findViewById<ViewPager2>(R.id.pager)
-//
-//
-//        //뷰 페이저와 TabLayout 을 연동하기******************
-//        //연동을 하면 자동으로 뷰페이저의 페이지 개수만큼 Tab버튼이 만들어짐********************
-//        //ViewPager 와 TabLayout 와 중재자 역할의 객체 생성
-//        TabLayoutMediator(layoutTab, pager)
-//
-//            { tab, position -> //페이지 개수만큼 이 메소드가 발동함.
-//            //첫번쨰 파라미터 : 자동으로 만들어질 Tab객체
-//            //두번째 파라미터 : 만들번째 위치 position
-//            tab.setText(tabTitle.get(position))
-//
-//        }.attach() // .attach() 를 잊지말고 호출
-//
-//
-//        super.onViewCreated(view, savedInstanceState)
-//    }
-
     val binding: FragmentHomeBinding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
 
 }

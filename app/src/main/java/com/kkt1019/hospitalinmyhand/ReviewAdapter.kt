@@ -16,7 +16,6 @@ class ReviewAdapter constructor(val context: Context, var items:MutableList<Revi
         val ivProfile : ImageView by lazy { itemView.findViewById(R.id.profile) }
         val ivId : TextView by lazy { itemView.findViewById(R.id.id) }
         val ivIv : ImageView by lazy { itemView.findViewById(R.id.iv) }
-        val tvTitle : TextView by lazy { itemView.findViewById(R.id.title) }
         val tvMessage : TextView by lazy { itemView.findViewById(R.id.message) }
 
     }
@@ -36,7 +35,6 @@ class ReviewAdapter constructor(val context: Context, var items:MutableList<Revi
         holder.ivProfile.setImageResource(item.profile)
         holder.ivId.text = item.nickname
         holder.ivIv.setImageResource(item.image)
-        holder.tvTitle.text = item.title
         holder.tvMessage.text = item.message
 
 

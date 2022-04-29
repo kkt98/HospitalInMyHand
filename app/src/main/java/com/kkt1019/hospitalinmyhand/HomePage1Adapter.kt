@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kkt1019.hospitalinmyhand.databinding.RecyclerHomepage1ItemBinding
 
-class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePage1Item>,val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+class HomePage1Adapter(val context: Context, private val page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -30,18 +29,21 @@ class HomePage1Adapter(val context: Context, val page1Items: MutableList<HomePag
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val item = page1Items.get(position)
+        val item = page1Items[position]
 
-        holder.tvTitle.setText(item.dutyName)
-        holder.tvAddress.setText(item.dutyAddr)
-        holder.tvTimeS.setText(item.dutyTime1s)
-        holder.tvTell.setText(item.dutyTell)
-        holder.tvTimeC.setText(item.dutyTime1c)
+        holder.tvTitle.text = item.dutyName
+        holder.tvAddress.text = item.dutyAddr
+        holder.tvTimeS.text = item.dutyTime1s
+        holder.tvTell.text = item.dutyTell
+        holder.tvTimeC.text = item.dutyTime1c
 
         holder.itemView.setOnClickListener {
 
             val bottomSheetDialogFragment = HomePage1BottomSheet()
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
+
+//            val mActivity = context as MainActivity
+//            mActivity.setDataFragment(HomePage1BottomSheet(), item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c)
 
         }
 

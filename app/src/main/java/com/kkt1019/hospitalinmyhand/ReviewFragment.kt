@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.databinding.FragmentBookmarkBinding
+import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
 import com.kkt1019.hospitalinmyhand.databinding.FragmentReviewBinding
 
 class ReviewFragment : Fragment() {
@@ -27,29 +28,28 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.btn.setOnClickListener {
-
-            val intent = Intent(context, RevieEdit::class.java)
-
-            context?.startActivity(intent)
-
-        }
+//        binding.btn.setOnClickListener {
+//
+//            val intent = Intent(context, RevieEdit::class.java)
+//
+//            context?.startActivity(intent)
+//
+//        }
 
         datas()
 
         return binding.root
     }
 
-
-    val binding:FragmentReviewBinding by lazy { FragmentReviewBinding.inflate(layoutInflater) }
+    val binding:FragmentHomepage1BottomsheetBinding by lazy { FragmentHomepage1BottomsheetBinding.inflate(layoutInflater) }
 
     fun datas(){
 
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "병원 이름", "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "병원 이름", "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "병원 이름", "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "병원 이름", "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "병원 이름", "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
 
         recycler.adapter = ReviewAdapter(activity as Context, items)
 
