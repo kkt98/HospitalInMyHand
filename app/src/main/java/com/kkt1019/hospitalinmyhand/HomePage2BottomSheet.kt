@@ -1,0 +1,74 @@
+package com.kkt1019.hospitalinmyhand
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
+import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
+import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage2BottomsheetBinding
+
+class HomePage2BottomSheet : BottomSheetDialogFragment() {
+
+    val recycler : RecyclerView by lazy { binding.recycler }
+
+    var items = mutableListOf<ReviewItem>()
+
+    lateinit var name : String
+    lateinit var addr : String
+    lateinit var tell1 : String
+    lateinit var tell2: String
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        datas()
+
+        binding.title.text = name
+        binding.address.text = addr
+        binding.tell1.text = tell1
+        binding.tell2.text = tell2
+
+    }
+
+    val binding: FragmentHomepage2BottomsheetBinding by lazy { FragmentHomepage2BottomsheetBinding.inflate(layoutInflater) }
+
+    fun detail(name: String, addr:String, tell1:String, tell2:String){
+
+        this.name = name
+        this.addr = addr
+        this.tell1 = tell1
+        this.tell2 = tell2
+
+    }
+
+
+
+    fun datas(){
+
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+
+        recycler.adapter = ReviewAdapter(activity as Context, items)
+
+    }
+}

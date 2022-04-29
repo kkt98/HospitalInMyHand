@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
-class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableList<HomePage2Item>): RecyclerView.Adapter<HomePage2Adapter.VH>() {
+class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableList<HomePage2Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage2Adapter.VH>() {
 
     inner class VH(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -28,12 +29,20 @@ class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableL
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val item = page2Items.get(position)
+        val item = page2Items[position]
 
-        holder.tvTitle.setText(item.dutyName)
-        holder.tvAddr.setText(item.dutyAddr)
-        holder.tvTell.setText(item.dutyTel1)
-        holder.tvTell2.setText(item.dutyTel3)
+        holder.tvTitle.text = item.dutyName
+        holder.tvAddr.text = item.dutyAddr
+        holder.tvTell.text = item.dutyTel1
+        holder.tvTell2.text = item.dutyTel3
+
+        holder.itemView.setOnClickListener {
+
+            val bottomSheetDialogFragment = HomePage2BottomSheet()
+            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3)
+            bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
+
+        }
     }
 
 

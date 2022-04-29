@@ -33,7 +33,7 @@ class HomePage3Fragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.recycler.adapter = HomePage3Adapter(activity as Context, items)
+        binding.recycler.adapter = childFragmentManager?.let { HomePage3Adapter(activity as Context, items, it) }
 
         binding.btn.setOnClickListener { spinner() }
 

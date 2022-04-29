@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
-class HomePage3Adapter constructor(val context:Context, var page3Items: MutableList<HomePage3Item>): RecyclerView.Adapter<HomePage3Adapter.VH>() {
+class HomePage3Adapter constructor(val context:Context, var page3Items: MutableList<HomePage3Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage3Adapter.VH>() {
 
     inner class VH(itemView: View):RecyclerView.ViewHolder(itemView){
 
@@ -31,6 +32,14 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
         holder.tvTitle.setText(item.yadmNm)
         holder.tvAddr.setText(item.addr)
         holder.tvTell.setText(item.telno)
+
+        holder.itemView.setOnClickListener {
+
+            val bottomSheetDialogFragment = HomePage3BottomSheet()
+            bottomSheetDialogFragment.detail(item.yadmNm, item.addr, item.telno,)
+            bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
+
+        }
 
     }
 
