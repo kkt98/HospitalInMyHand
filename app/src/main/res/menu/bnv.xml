@@ -13,10 +13,6 @@
         android:title="Medical"
         android:icon="@drawable/ic_medical"/>
 
-    <item android:id="@+id/bnv_review"
-        android:title="Review"
-        android:icon="@drawable/ic_review"/>
-
     <item android:id="@+id/bnv_map"
         android:title="Map"
         android:icon="@drawable/ic_map"/>

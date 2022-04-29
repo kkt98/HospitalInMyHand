@@ -13,7 +13,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         fragment.add(HomeFragment())
         fragment.add(BookMarkFragment())
         fragment.add(MedicalFragment())
-        fragment.add(ReviewFragment())
         fragment.add(MapFragment())
 
         supportFragmentManager.beginTransaction().add(R.id.container, fragment[0]).commit()
@@ -55,15 +53,10 @@ class MainActivity : AppCompatActivity() {
                         tran.add(R.id.container, fragment[2])
                     tran.show(fragment[2])
                 }
-                R.id.bnv_review -> {
+                R.id.bnv_map -> {
                     if (!supportFragmentManager.fragments.contains(fragment[3]))
                         tran.add(R.id.container, fragment[3])
                     tran.show(fragment[3])
-                }
-                R.id.bnv_map -> {
-                    if (!supportFragmentManager.fragments.contains(fragment[4]))
-                        tran.add(R.id.container, fragment[4])
-                    tran.show(fragment[4])
                 }
             }
             tran.commit()

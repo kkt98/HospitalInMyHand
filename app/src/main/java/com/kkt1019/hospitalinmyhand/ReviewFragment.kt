@@ -28,20 +28,12 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-//        binding.btn.setOnClickListener {
-//
-//            val intent = Intent(context, RevieEdit::class.java)
-//
-//            context?.startActivity(intent)
-//
-//        }
-
         datas()
 
         return binding.root
     }
 
-    val binding:FragmentHomepage1BottomsheetBinding by lazy { FragmentHomepage1BottomsheetBinding.inflate(layoutInflater) }
+    val binding:FragmentReviewBinding by lazy { FragmentReviewBinding.inflate(layoutInflater) }
 
     fun datas(){
 

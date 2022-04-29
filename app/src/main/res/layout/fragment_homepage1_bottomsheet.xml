@@ -65,6 +65,15 @@
         android:layout_below="@+id/iv"
         android:layout_marginTop="8dp"/>
 
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="글쓰기"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:background="#00ff0000"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

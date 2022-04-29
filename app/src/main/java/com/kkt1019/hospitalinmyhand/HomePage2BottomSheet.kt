@@ -1,7 +1,9 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +32,12 @@ class HomePage2BottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding.btn.setOnClickListener {
 
+            val intent = Intent(context as Activity, RevieEdit::class.java)
+            startActivity(intent)
+
+        }
 
         return binding.root
     }

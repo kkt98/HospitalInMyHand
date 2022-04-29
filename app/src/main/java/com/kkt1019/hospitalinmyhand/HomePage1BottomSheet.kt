@@ -1,14 +1,14 @@
 package com.kkt1019.hospitalinmyhand
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
 
 class HomePage1BottomSheet : BottomSheetDialogFragment() {
@@ -29,7 +29,12 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding.btn.setOnClickListener {
 
+            val intent = Intent(context as Activity, RevieEdit::class.java)
+            startActivity(intent)
+
+        }
 
         return binding.root
     }

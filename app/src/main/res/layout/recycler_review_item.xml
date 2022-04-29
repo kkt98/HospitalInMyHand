@@ -27,11 +27,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/id"
         android:layout_alignLeft="@id/id"
+        android:padding="4dp"
         android:text="내용"
         android:textSize="13sp"
-        android:padding="4dp"
         app:readMoreMaxLine="2"
-        app:readMoreText="…더보기"/>
+        app:readMoreText="…더보기" />
 
     <ImageView
         android:id="@+id/iv"
