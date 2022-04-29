@@ -40,10 +40,8 @@ class HomePage1Adapter(val context: Context, private val page1Items: MutableList
         holder.itemView.setOnClickListener {
 
             val bottomSheetDialogFragment = HomePage1BottomSheet()
+            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c)
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
-
-//            val mActivity = context as MainActivity
-//            mActivity.setDataFragment(HomePage1BottomSheet(), item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c)
 
         }
 

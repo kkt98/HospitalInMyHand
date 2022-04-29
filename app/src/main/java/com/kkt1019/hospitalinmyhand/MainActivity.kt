@@ -82,29 +82,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    fun setDataFragment(fragment: Fragment , name: String, addr:String, tell:String, timeS:String, timeC:String) {
-//
-//        val bundle = Bundle()
-//        bundle.putString("name", name)
-//        bundle.putString("addr", addr)
-//        bundle.putString("tell", tell)
-//        bundle.putString("timeS", timeS)
-//        bundle.putString("timeC", timeC)
-//
-//        fragment.arguments = bundle
-//        setFragment(fragment)
-//
-//    }
-//
-//    @SuppressLint("ResourceType")
-//    fun setFragment(fragment: Fragment) {
-//
-//        val transaction = supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.recycler, fragment)
-//        transaction.commit()
-//
-//    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
