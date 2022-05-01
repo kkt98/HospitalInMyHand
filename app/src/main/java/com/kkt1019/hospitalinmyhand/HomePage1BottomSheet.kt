@@ -86,7 +86,7 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
             val marker = MarkerOptions()
             marker.title(name)
             marker.position(seoul)
-            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.mark)) //벡터이미지는 안됨. .png or .jpg만 됨
+            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)) //벡터이미지는 안됨. .png or .jpg만 됨
 
             marker.anchor(0.5f, 1.0f) //x축, y축
 

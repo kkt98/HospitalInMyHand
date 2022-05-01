@@ -31,17 +31,16 @@ class HomePage1Adapter(val context: Context, private val page1Items: MutableList
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = page1Items[position]
 
-        holder.tvTitle.text = item.dutyName
-        holder.tvAddress.text = item.dutyAddr
-        holder.tvTimeS.text = item.dutyTime1s
-        holder.tvTell.text = item.dutyTell
+        holder.tvTitle.text = "병원이름 : " + item.dutyName
+        holder.tvAddress.text = "병원주소 : " + item.dutyAddr
+        holder.tvTimeS.text = "운영시간 : " + item.dutyTime1s + " ~ "
+        holder.tvTell.text ="전화번호 : " + item.dutyTell
         holder.tvTimeC.text = item.dutyTime1c
 
         holder.itemView.setOnClickListener {
 
             val bottomSheetDialogFragment = HomePage1BottomSheet()
-            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c,
-                item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
+            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
         }

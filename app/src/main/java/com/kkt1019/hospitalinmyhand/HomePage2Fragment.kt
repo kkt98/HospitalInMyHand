@@ -171,6 +171,7 @@ class HomePage2Fragment:Fragment() {
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
+
                     }
                     1 -> {
 
@@ -207,6 +208,8 @@ class HomePage2Fragment:Fragment() {
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_busan)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
+
+
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

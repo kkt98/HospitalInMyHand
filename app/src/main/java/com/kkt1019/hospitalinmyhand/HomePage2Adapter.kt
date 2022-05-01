@@ -31,15 +31,15 @@ class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableL
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = page2Items[position]
 
-        holder.tvTitle.text = item.dutyName
-        holder.tvAddr.text = item.dutyAddr
-        holder.tvTell.text = item.dutyTel1
-        holder.tvTell2.text = item.dutyTel3
+        holder.tvTitle.text = "응급실이름 : " + item.dutyName
+        holder.tvAddr.text = "주소 : " + item.dutyAddr
+        holder.tvTell.text = "대표 전화 : " + item.dutyTel1
+        holder.tvTell2.text = "응급실 전화 : " + item.dutyTel3
 
         holder.itemView.setOnClickListener {
 
             val bottomSheetDialogFragment = HomePage2BottomSheet()
-            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3)
+            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
         }

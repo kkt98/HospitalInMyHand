@@ -72,7 +72,9 @@
         android:text="글쓰기"
         android:textSize="13sp"
         android:textColor="@color/black"
-        android:background="#00ff0000"/>
+        android:background="#00ff0000"
+        android:layout_marginLeft="300dp"
+        android:drawableLeft="@drawable/ic_baseline_create_24"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

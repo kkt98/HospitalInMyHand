@@ -29,14 +29,14 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = page3Items.get(position)
 
-        holder.tvTitle.setText(item.yadmNm)
-        holder.tvAddr.setText(item.addr)
-        holder.tvTell.setText(item.telno)
+        holder.tvTitle.text ="약국 이름 : " + item.yadmNm
+        holder.tvAddr.text ="주소 : " + item.addr
+        holder.tvTell.text ="전화번호 : " + item.telno
 
         holder.itemView.setOnClickListener {
 
             val bottomSheetDialogFragment = HomePage3BottomSheet()
-            bottomSheetDialogFragment.detail(item.yadmNm, item.addr, item.telno,)
+            bottomSheetDialogFragment.detail(item.yadmNm, item.addr, item.telno, item.xPos.toDouble(), item.yPos.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
         }

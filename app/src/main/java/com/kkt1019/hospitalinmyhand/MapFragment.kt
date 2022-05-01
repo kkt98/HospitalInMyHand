@@ -1,15 +1,27 @@
 package com.kkt1019.hospitalinmyhand
 
-import android.R
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.kkt1019.hospitalinmyhand.databinding.FragmentMapBinding
 
-
 class MapFragment : Fragment() {
+
+    var providerClient: FusedLocationProviderClient? = null
+
+    var mGoogleMap: GoogleMap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,6 +30,62 @@ class MapFragment : Fragment() {
     ): View? {
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        //위치정보 제공자 객체얻어오기
+        providerClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        //위치 정보 요청 객체 생성 및 설정
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
+
+        locationRequest.interval = 5000 //5000ms[5초]간격으로 갱신
+
+        //내 위치 실시간 갱신 요청
+        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) { return }
+        providerClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
+        )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        providerClient?.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //xml에 만들 지도프레그먼트 찾아오기
+        val fragmentManager = childFragmentManager
+        val mapFragment = fragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment!!.getMapAsync(OnMapReadyCallback { googleMap ->
+            val seoul = LatLng(37.5663, 126.9779)
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul, 16f)) //줌 1~25
+            mGoogleMap = googleMap
+            val settings = googleMap.uiSettings
+            settings.isZoomControlsEnabled = true
+            settings.isMyLocationButtonEnabled = true
+
+            //내 위치 표시하기
+            if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                    (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            ) { return@OnMapReadyCallback }
+            googleMap.isMyLocationEnabled = true
+        })
+    }
+
+    var locationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+            val location = locationResult.lastLocation
+        }
     }
 
     val binding:FragmentMapBinding by lazy { FragmentMapBinding.inflate(layoutInflater) }
