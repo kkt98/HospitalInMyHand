@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     val fragment:MutableList<Fragment> by lazy { mutableListOf() }
+
+    var auth : FirebaseAuth ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var drawerToggle: ActionBarDrawerToggle
 
+
     fun drawlayout(){
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -101,9 +107,15 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.layout_drawer)
 
+        val name = drawerLayout.findViewById<TextView>(R.id.header_tv_name)
+
+
+
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
         drawerToggle.syncState()
         drawerLayout.addDrawerListener(drawerToggle!!)
+
+
 
         val nav = findViewById<NavigationView>(R.id.nav)
         //네비게이션부의 아이템이 선택되었을때 반응하는 리스너
@@ -128,6 +140,5 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-
 
 }

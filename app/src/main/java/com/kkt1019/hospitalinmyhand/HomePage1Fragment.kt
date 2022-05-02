@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.CheckBox
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 import org.xmlpull.v1.XmlPullParser
@@ -23,6 +20,7 @@ import java.net.URL
 class HomePage1Fragment:Fragment() {
 
     var items = mutableListOf<HomePage1Item>()
+    var items2 = mutableListOf<HomePage1Item>()
     var allitems = mutableListOf<HomePage1Item>()
 
     override fun onCreateView(
@@ -31,7 +29,7 @@ class HomePage1Fragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.recycler.adapter = childFragmentManager?.let { HomePage1Adapter(activity as Context, items, it) }
+        binding.recycler.adapter = childFragmentManager?.let { HomePage1Adapter(activity as Context, items2, it) }
 
         binding.btn.setOnClickListener { spinner() }
 
@@ -168,6 +166,9 @@ class HomePage1Fragment:Fragment() {
                 activity?.runOnUiThread {
 //                    Toast.makeText(context, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
                     items.addAll(allitems)
+                    items2.addAll(allitems)
+                    Toast.makeText(context, "aaa"+items.size, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "bbb"+items2.size, Toast.LENGTH_SHORT).show()
                     binding.recycler.adapter?.notifyDataSetChanged()
                 }
 
@@ -228,6 +229,16 @@ class HomePage1Fragment:Fragment() {
                     }
                     1 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[1])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
+                        binding.recycler.adapter?.notifyDataSetChanged()
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_seoul)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -235,13 +246,15 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_seoul)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        Log.i("ggg", "abc")
+                                        items2.add(HomePage1Item)
+
                                     }
                                 }
                             }
@@ -650,9 +663,11 @@ class HomePage1Fragment:Fragment() {
 
         mBuilder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
             binding.recycler.adapter?.notifyDataSetChanged()
+            Toast.makeText(context, "aaa", Toast.LENGTH_SHORT).show()
         }
         mBuilder.setNegativeButton("취소", null)
         mBuilder.show()
+
     }
 }
 
