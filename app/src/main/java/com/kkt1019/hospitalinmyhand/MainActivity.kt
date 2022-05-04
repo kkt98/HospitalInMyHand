@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -120,11 +121,14 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.layout_drawer)
 
-        val drawer = LayoutInflater.from(this).inflate(R.layout.drawer_nav_header,null,false)
-        var name = drawer.findViewById<TextView>(R.id.header_tv_name)
-        name.text = G.nickname
+        val navi = findViewById<NavigationView>(R.id.nav)
+        var tvName = navi.getHeaderView(0).findViewById<TextView>(R.id.header_tv_name)
+        tvName.text = G.nickname
 
-        Toast.makeText(this, "aaa"+G.nickname, Toast.LENGTH_SHORT).show()
+
+//        var builder = AlertDialog.Builder(this)
+//        builder.setMessage(""+name).show()
+//        Toast.makeText(this, "aaa"+name, Toast.LENGTH_SHORT).show()
         Toast.makeText(this, "aaa"+G.profileUrl, Toast.LENGTH_SHORT).show()
 
 

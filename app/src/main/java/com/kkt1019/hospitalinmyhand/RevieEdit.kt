@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AlertDialog
@@ -48,15 +47,15 @@ class RevieEdit : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val uri = result.data!!.data
             Glide.with(this).load(uri).into(binding.iv)
-            imgPath = getRealPathFromUri(uri)
+            imgPath = getRealPathFromUri(uri!!)
             //확인
             AlertDialog.Builder(this).setMessage(imgPath).create().show()
         }
     }
 
-    fun getRealPathFromUri(uri: Uri?): String? {
+    fun getRealPathFromUri(uri: Uri): String? {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val loader = CursorLoader(this, uri!!, proj, null, null, null)
+        val loader = CursorLoader(this, uri, proj, null, null, null)
         val cursor = loader.loadInBackground()
         val column_index = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         cursor.moveToFirst()
@@ -68,23 +67,17 @@ class RevieEdit : AppCompatActivity() {
 
     private fun saveClick(){
 
-//        val hpid = intent.getStringExtra("hpid")
-//        val ykiho = intent.getStringExtra("ykiho")
-
-
-
         val message = binding.etMsg.text.toString()
         val useremail = G.nickname
         val uniqueid = G.uniqueid
-
-//        Log.i("tlqkf", G.nickname)
-
+//        val profile = G.profileUrl
 
         //레트로핏 작업
         val retrofit: Retrofit? = RetrofitHelper.getRetrofitInstanceScalars()
         val retrofitService = retrofit?.create(RetrofitService::class.java)
 
 
+        //1) 이미지파일을 MultiPartBody.Part 로 포장 : @Part
         var filePart: MultipartBody.Part? = null
         if (imgPath != null) {
             val file = File(imgPath)
@@ -94,8 +87,11 @@ class RevieEdit : AppCompatActivity() {
 
         val dataPart = HashMap<String, String>()
         dataPart.put("message", message)
-        dataPart.put("useremail", useremail)
+        if (useremail != null) {
+            dataPart.put("useremail", useremail)
+        }
         dataPart.put("uniqueid", uniqueid.toString())
+//        dataPart.put("profile", profile.toString())
 
         val call = retrofitService!!.postDataToServer(dataPart, filePart)
         call!!.enqueue(object : Callback<String?> {

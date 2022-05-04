@@ -55,6 +55,7 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    ////////////////////////////////상세정보///////////////////////////
     override fun onResume() {
         super.onResume()
 
@@ -66,6 +67,20 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
 
     }
 
+    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double){
+
+        this.name = name
+        this.addr = addr
+        this.tell = tell
+        this.timeS = timeS
+        this.timeC = timeC
+        this.Xpos = Xpos
+        this.Ypos = Ypos
+    }
+    ////////////////////////////////상세정보///////////////////////////
+
+
+    ////////////////////////////지도///////////////////////////////
     var mGoogleMap: GoogleMap? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,33 +109,35 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
             mGoogleMap!!.addMarker(marker)
         })
     }
+    ////////////////////////////지도///////////////////////////////
 
     val binding: FragmentHomepage1BottomsheetBinding by lazy { FragmentHomepage1BottomsheetBinding.inflate(layoutInflater) }
 
 
 
-
-    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double){
-
-        this.name = name
-        this.addr = addr
-        this.tell = tell
-        this.timeS = timeS
-        this.timeC = timeC
-        this.Xpos = Xpos
-        this.Ypos = Ypos
-
-    }
-
-
-
     fun datas(){
 
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
+        val retrofitService = retrofit?.create(RetrofitService::class.java)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
 
         recycler.adapter = ReviewAdapter(activity as Context, items)
 
