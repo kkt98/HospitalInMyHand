@@ -3,8 +3,9 @@ package com.kkt1019.hospitalinmyhand
 class G {
     companion object{
 
-        var nickname: String? = null
+        lateinit var nickname: String
         var profileUrl: String? = null
+        var uniqueid:String? = null
 
     }
 }

@@ -1,10 +1,10 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,8 +13,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +20,6 @@ class MainActivity : AppCompatActivity() {
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     val fragment:MutableList<Fragment> by lazy { mutableListOf() }
-
-    var auth : FirebaseAuth ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         fragment.add(BookMarkFragment())
         fragment.add(MedicalFragment())
         fragment.add(MapFragment())
+
+        drawlayout()
 
         supportFragmentManager.beginTransaction().add(R.id.container, fragment[0]).commit()
 
@@ -66,8 +64,6 @@ class MainActivity : AppCompatActivity() {
             }
             tran.commit()
 
-            drawlayout()
-
             true
         }
 
@@ -78,12 +74,20 @@ class MainActivity : AppCompatActivity() {
             requestPermissions(permissions, 10)
         }
 
+
+        //동적퍼미션
+        val permissionsImage = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (checkSelfPermission(permissionsImage[0]) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(permissionsImage, 0)
+        }else{
+//            requestImagePermissons()
+        }
+
     }
 
+
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -94,10 +98,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "위치정보 사용 불가능", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
     lateinit var drawerToggle: ActionBarDrawerToggle
+
+    override fun onResume() {
+        super.onResume()
+
+//        drawlayout()
+
+
+    }
+
+
 
 
     fun drawlayout(){
@@ -107,7 +120,12 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.layout_drawer)
 
-        val name = drawerLayout.findViewById<TextView>(R.id.header_tv_name)
+        val drawer = LayoutInflater.from(this).inflate(R.layout.drawer_nav_header,null,false)
+        var name = drawer.findViewById<TextView>(R.id.header_tv_name)
+        name.text = G.nickname
+
+        Toast.makeText(this, "aaa"+G.nickname, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "aaa"+G.profileUrl, Toast.LENGTH_SHORT).show()
 
 
 

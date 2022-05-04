@@ -1,14 +1,16 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
-class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableList<HomePage2Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage2Adapter.VH>() {
+class HomePage2Adapter constructor(val context:Context, var page2Items:MutableList<HomePage2Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage2Adapter.VH>() {
 
     inner class VH(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -21,7 +23,7 @@ class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
 
-        val inflater: LayoutInflater = LayoutInflater.from(context2)
+        val inflater: LayoutInflater = LayoutInflater.from(context)
         val itemView = inflater.inflate(R.layout.recycler_homepage2_item, parent, false)
 
         return VH(itemView)
@@ -42,6 +44,9 @@ class HomePage2Adapter constructor(val context2:Context, var page2Items:MutableL
             bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
+            G.uniqueid = item.hpid
+
+            Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
         }
     }
 

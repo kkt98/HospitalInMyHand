@@ -1,10 +1,12 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -43,6 +45,13 @@ class HomePage1Adapter(val context: Context, private val page1Items: MutableList
             bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
+            if (G.uniqueid != null){
+
+            }
+            G.uniqueid = item.hpid
+
+
+            Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
         }
 
     }

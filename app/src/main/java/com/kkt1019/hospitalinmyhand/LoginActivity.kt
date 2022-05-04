@@ -2,17 +2,16 @@ package com.kkt1019.hospitalinmyhand
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.kkt1019.hospitalinmyhand.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -39,8 +38,44 @@ class LoginActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
+
+        //구글 로그인 액티비티를 실행하는 Intnent 객체 얻어오기
+        val intent = GoogleSignIn.getClient(this, gso).signInIntent
+
+        resultLauncher.launch(intent)
+
+
         setContentView(binding.root)
     }
+
+    var resultLauncher = registerForActivityResult(
+        StartActivityForResult()
+    ) { result -> //로그인 결과를 가져온 Intent 객체 소환
+        val intent = result.data
+        //Intent로 부터 구글 계정 정보를 가져오는 작업 객체 생성
+        val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
+        val account = task.result
+        val email = account.email
+
+        if (email != null) {
+            G.nickname = email
+        }
+
+        val profile = account.photoUrl
+        if (profile != null){
+            G.profileUrl = profile.toString()
+        }
+
+    }
+
+//    public override fun onStart() {
+//        super.onStart()
+//        val account = GoogleSignIn.getLastSignedInAccount(this)
+//        if(account!==null){ // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//    } //onStart End
 
     fun gest(){
 
@@ -54,27 +89,21 @@ class LoginActivity : AppCompatActivity() {
         var signInIntent = googleSignInClient?.signInIntent
         startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
 
-
-        //구글 로그인 액티비티를 실행하는 Intnent 객체 얻어오기
-
     } // googleLogin
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == GOOGLE_LOGIN_CODE) {
             var result = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
-            if (result != null) {
-                if(result.isSuccess) {
+                if(result?.isSuccess == true) {
                     Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                     startActivity(Intent (this, MainActivity::class.java))
                 }else{
                     Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }
-            }
+
         } //if
     } // onActivityResult
-
-
     //**********************구글로그인 끝**************************
 
 }

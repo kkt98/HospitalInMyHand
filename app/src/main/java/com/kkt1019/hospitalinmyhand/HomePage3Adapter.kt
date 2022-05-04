@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -38,6 +39,10 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
             val bottomSheetDialogFragment = HomePage3BottomSheet()
             bottomSheetDialogFragment.detail(item.yadmNm, item.addr, item.telno, item.xPos.toDouble(), item.yPos.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
+
+            G.uniqueid = item.ykiho
+
+            Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
 
         }
 

@@ -110,6 +110,10 @@ class HomePage3Fragment:Fragment() {
                                 xpp.next()
                                 if (item != null) item.yPos = xpp.text
 
+                            }else if (tagName.equals("ykiho")){
+                                xpp.next()
+                                if (item != null) item.ykiho = xpp.text
+
                             }
                         }
                         XmlPullParser.END_TAG -> {

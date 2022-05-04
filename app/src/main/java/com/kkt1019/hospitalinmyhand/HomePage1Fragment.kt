@@ -149,6 +149,10 @@ class HomePage1Fragment:Fragment() {
                                 xpp.next()
                                 if (item != null) item.wgs84Lon = xpp.text
 
+                            }else if (tagName.equals("hpid")){
+                                xpp.next()
+                                if (item != null) item.hpid = xpp.text
+
                             }
                         }
                         XmlPullParser.END_TAG -> {
