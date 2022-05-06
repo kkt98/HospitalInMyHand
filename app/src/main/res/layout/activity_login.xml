@@ -9,18 +9,29 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/kakao_login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sign_in_button"
+        android:src="@drawable/kakao_login_large_wide"
+        android:adjustViewBounds="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/gest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="게스트 모드"
-        android:layout_below="@+id/sign_in_button"
+        android:layout_below="@+id/kakao_login"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/black"/>
+        android:backgroundTint="@color/black"
+        android:layout_marginTop="10dp"/>
 
 
 </RelativeLayout>

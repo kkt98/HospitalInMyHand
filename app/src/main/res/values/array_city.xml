@@ -311,5 +311,34 @@
         <item>제주시</item>
     </string-array>
 
+    <string-array name="medical_id">
+        <item>전체</item>
+        <item>내과</item>
+        <item>소아청소년과</item>
+        <item>신경과</item>
+        <item>정신건강의학과</item>
+        <item>피부과</item>
+        <item>외과</item>
+        <item>흉부외과</item>
+        <item>정형외과</item>
+        <item>신경외과</item>
+        <item>치과</item>
+        <item>산부인과</item>
+        <item>안과</item>
+        <item>이비인후과</item>
+        <item>비뇨기과</item>
+        <item>재활의학과</item>
+        <item>마취통증의학과</item>
+        <item>영상의학과</item>
+        <item>치료방사선과</item>
+        <item>임상병리과</item>
+        <item>해부병리과</item>
+        <item>가정의학과</item>
+        <item>핵의학과</item>
+        <item>응급의학과</item>
+        <item>성형외과</item>
+        <item>구강악안면외과</item>
+    </string-array>
+
 
 </resources>

@@ -73,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
 //        val account = GoogleSignIn.getLastSignedInAccount(this)
 //        if(account!==null){ // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
 //            val intent = Intent(this, MainActivity::class.java)
+//            Toast.makeText(this, "환영합니다" + G.nickname + "님", Toast.LENGTH_SHORT).show()
 //            startActivity(intent)
 //        }
 //    } //onStart End

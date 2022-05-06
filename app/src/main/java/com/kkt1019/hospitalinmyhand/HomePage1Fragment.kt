@@ -21,6 +21,7 @@ class HomePage1Fragment:Fragment() {
 
     var items = mutableListOf<HomePage1Item>()
     var items2 = mutableListOf<HomePage1Item>()
+    var items3 = mutableListOf<HomePage1Item>()
     var allitems = mutableListOf<HomePage1Item>()
 
     override fun onCreateView(
@@ -29,7 +30,7 @@ class HomePage1Fragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.recycler.adapter = childFragmentManager?.let { HomePage1Adapter(activity as Context, items2, it) }
+        binding.recycler.adapter = childFragmentManager?.let { HomePage1Adapter(activity as Context, items3, it) }
 
         binding.btn.setOnClickListener { spinner() }
 
@@ -153,6 +154,10 @@ class HomePage1Fragment:Fragment() {
                                 xpp.next()
                                 if (item != null) item.hpid = xpp.text
 
+                            }else if (tagName.equals("dgidIdName")){
+                                xpp.next()
+                                if (item != null) item.dgidIdName = xpp.text
+
                             }
                         }
                         XmlPullParser.END_TAG -> {
@@ -170,9 +175,8 @@ class HomePage1Fragment:Fragment() {
                 activity?.runOnUiThread {
 //                    Toast.makeText(context, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
                     items.addAll(allitems)
-                    items2.addAll(allitems)
-                    Toast.makeText(context, "aaa"+items.size, Toast.LENGTH_SHORT).show()
-                    Toast.makeText(context, "bbb"+items2.size, Toast.LENGTH_SHORT).show()
+                    items2.addAll(items)
+                    items3.addAll(items2)
                     binding.recycler.adapter?.notifyDataSetChanged()
                 }
 
@@ -189,8 +193,10 @@ class HomePage1Fragment:Fragment() {
 
         var spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
         var spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
+        var spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
         var checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
         var checkBox2 = mDialogView.findViewById<CheckBox>(R.id.check_light)
+
 
         checkBox.setOnCheckedChangeListener { compoundButton, b ->
 
@@ -782,9 +788,36 @@ class HomePage1Fragment:Fragment() {
                     }
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 Log.d("MyTag", "onNothingSelected")
+            }
+
+        }
+
+        val medical = resources.getStringArray(R.array.medical_id)
+        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, medical)
+        spinner3.adapter = madapter
+
+        spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+                items3.clear()
+
+                if (p2 == 0){
+                    items3.addAll(items2);
+                    binding.recycler.adapter?.notifyDataSetChanged()
+                    return
+                }
+
+                for (HomePage1Item in items2) {
+                    if (HomePage1Item.dgidIdName.contains(medical[p2])) {
+                        items3.add(HomePage1Item())
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
             }
 
         }
