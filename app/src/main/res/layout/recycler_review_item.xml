@@ -31,11 +31,12 @@
         android:layout_marginRight="4dp"/>
 
     <TextView
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/line"
         android:text="2022. 05. 02"
-        android:textSize="10dp"/>
+        android:textSize="10dp" />
 
     <kr.co.prnd.readmore.ReadMoreTextView
         android:id="@+id/message"
@@ -54,10 +55,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/message"
-        android:layout_toRightOf="@+id/profile"
-        android:src="@drawable/frog"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_toRightOf="@+id/profile"
+        android:src="@drawable/frog" />
 
     <View
         android:background="#7D7E7D"

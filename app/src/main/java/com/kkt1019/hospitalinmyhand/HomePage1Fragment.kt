@@ -269,6 +269,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     2 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[2])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_busan)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -276,13 +284,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_busan)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -293,6 +301,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     3 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[3])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_daegu)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -300,14 +316,14 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_seoul)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
 
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -318,6 +334,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     4 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[4])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_incheon)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -325,13 +349,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_incheon)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -342,6 +366,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     5 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[5])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gwangju)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -349,13 +381,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gwangju)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -366,6 +398,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     6 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[6])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_daejeon)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -373,13 +413,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_daejeon)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -390,6 +430,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     7 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[7])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_ulsan)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -397,13 +445,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_ulsan)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -414,6 +462,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     8 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[8])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_sejong)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -421,13 +477,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_sejong)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -438,6 +494,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     9 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[9])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeonggi)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -445,13 +509,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeonggi)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -462,6 +526,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     10 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[10])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gangwon)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -469,13 +541,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gangwon)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -486,6 +558,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     11 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[11])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_chung_buk)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -493,13 +573,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_chung_buk)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -510,6 +590,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     12 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[12])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_chung_nam)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -517,13 +605,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_chung_nam)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -534,6 +622,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     13 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[13])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_jeon_buk)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -541,13 +637,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_jeon_buk)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -558,6 +654,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     14 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[14])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_jeon_nam)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -565,13 +669,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_jeon_nam)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -582,6 +686,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     15 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[15])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeong_buk)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -589,13 +701,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeong_buk)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -606,6 +718,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     16 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[16])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeong_nam)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -613,13 +733,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeong_nam)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }
@@ -630,6 +750,14 @@ class HomePage1Fragment:Fragment() {
                     }
                     17 -> {
 
+                        items.clear()
+
+                        for (HomePage1Item in allitems) {
+                            if (HomePage1Item.dutyAddr.contains(city[17])) {
+                                items.add(HomePage1Item)
+                            }
+                        }
+
                         val spinnerItems = resources.getStringArray(R.array.spinner_jeju)
                         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
@@ -637,13 +765,13 @@ class HomePage1Fragment:Fragment() {
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-                                items.clear()
+                                items2.clear()
 
                                 val arr = resources.getStringArray(R.array.spinner_jeju)
 
-                                for (HomePage1Item in allitems) {
+                                for (HomePage1Item in items) {
                                     if (HomePage1Item.dutyAddr.contains(arr[p2])) {
-                                        items.add(HomePage1Item)
+                                        items2.add(HomePage1Item)
                                     }
                                 }
                             }

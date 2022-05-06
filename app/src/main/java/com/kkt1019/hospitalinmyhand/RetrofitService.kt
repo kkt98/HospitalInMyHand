@@ -13,6 +13,6 @@ public interface RetrofitService {
     ): Call<String?>?
 
     @GET("/hospital/loadDB.php")
-    fun loadDataFromServer(): Call<ArrayList<ItemVO?>?>?
+    fun loadDataFromServer(@Query("uniqueid") uniqueid:String): Call<ArrayList<ItemVO?>>
 
 }

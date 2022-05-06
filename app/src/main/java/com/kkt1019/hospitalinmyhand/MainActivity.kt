@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
+import de.hdodenhof.circleimageview.CircleImageView
 
 class MainActivity : AppCompatActivity() {
 
@@ -123,13 +126,14 @@ class MainActivity : AppCompatActivity() {
 
         val navi = findViewById<NavigationView>(R.id.nav)
         var tvName = navi.getHeaderView(0).findViewById<TextView>(R.id.header_tv_name)
+        val ivProfile = navi.getHeaderView(0).findViewById<CircleImageView>(R.id.header_iv)
         tvName.text = G.nickname
-
+        Glide.with(this).load(G.profileUrl).into(ivProfile)
 
 //        var builder = AlertDialog.Builder(this)
 //        builder.setMessage(""+name).show()
 //        Toast.makeText(this, "aaa"+name, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "aaa"+G.profileUrl, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "aaa"+G.profileUrl, Toast.LENGTH_SHORT).show()
 
 
 
@@ -138,9 +142,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(drawerToggle!!)
 
 
-
         val nav = findViewById<NavigationView>(R.id.nav)
-        //네비게이션부의 아이템이 선택되었을때 반응하는 리스너
         //네비게이션부의 아이템이 선택되었을때 반응하는 리스너
         nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {

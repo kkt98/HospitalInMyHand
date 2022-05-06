@@ -70,7 +70,7 @@ class RevieEdit : AppCompatActivity() {
         val message = binding.etMsg.text.toString()
         val useremail = G.nickname
         val uniqueid = G.uniqueid
-//        val profile = G.profileUrl
+        val profile = G.profileUrl
 
         //레트로핏 작업
         val retrofit: Retrofit? = RetrofitHelper.getRetrofitInstanceScalars()
@@ -91,7 +91,7 @@ class RevieEdit : AppCompatActivity() {
             dataPart.put("useremail", useremail)
         }
         dataPart.put("uniqueid", uniqueid.toString())
-//        dataPart.put("profile", profile.toString())
+        dataPart.put("profile", profile.toString())
 
         val call = retrofitService!!.postDataToServer(dataPart, filePart)
         call!!.enqueue(object : Callback<String?> {

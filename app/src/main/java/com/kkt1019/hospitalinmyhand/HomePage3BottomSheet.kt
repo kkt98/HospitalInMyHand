@@ -1,6 +1,5 @@
 package com.kkt1019.hospitalinmyhand
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -8,6 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,17 +18,17 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage2BottomsheetBinding
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage3BottomsheetBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.properties.Delegates
 
 class HomePage3BottomSheet : BottomSheetDialogFragment() {
 
     val recycler : RecyclerView by lazy { binding.recycler }
 
-    var items = mutableListOf<ReviewItem>()
+    var items = mutableListOf<ItemVO>()
 
     lateinit var name : String
     lateinit var addr : String
@@ -109,11 +110,40 @@ class HomePage3BottomSheet : BottomSheetDialogFragment() {
 
     fun datas(){
 
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
+        val retrofitService = retrofit!!.create(RetrofitService::class.java)
+        val call = retrofitService.loadDataFromServer(G.uniqueid!!)
+        call.enqueue(object : Callback<ArrayList<ItemVO?>> {
+            override fun onResponse(call: Call<ArrayList<ItemVO?>>, response: Response<ArrayList<ItemVO?>>) {
+                items.clear()
+                binding.recycler.adapter?.notifyDataSetChanged()
+
+                val list = response.body()!!
+                for (ItemVO in list) {
+                    if (ItemVO != null) {
+
+                        items.add(0, ItemVO)
+
+                        Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
+
+                    }
+                    binding.recycler.adapter?.notifyItemInserted(0)
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<ItemVO?>>, t: Throwable) {
+//                Toast.makeText(context, "error : " + t.message, Toast.LENGTH_SHORT).show()
+
+                //확인
+                AlertDialog.Builder(context as Activity).setMessage(t.message).create().show()
+            }
+        })
+
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
+//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
 
         recycler.adapter = ReviewAdapter(activity as Context, items)
 

@@ -45,13 +45,8 @@ class HomePage1Adapter(val context: Context, private val page1Items: MutableList
             bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
-            if (G.uniqueid != null){
-
-            }
             G.uniqueid = item.hpid
 
-
-            Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
         }
 
     }
