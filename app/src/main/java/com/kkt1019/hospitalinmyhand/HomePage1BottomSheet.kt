@@ -37,6 +37,9 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
     lateinit var timeC : String
     var  Xpos by Delegates.notNull<Double>()
     var Ypos by Delegates.notNull<Double>()
+    lateinit var medical : String
+    lateinit var time2s : String
+    lateinit var time2c : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,10 +66,14 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         binding.title.text = name
         binding.tell.text = tell
         binding.address.text = addr
+        binding.timeS.text = "평일 : " + timeS+" ~ "
+        binding.timeC.text = timeC
+        binding.time2S.text = "주말 : " + time2s+" ~ "
+        binding.time2C.text = time2c
 
     }
 
-    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double){
+    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double, medical:String, time2S:String, time2c:String){
 
         this.name = name
         this.addr = addr
@@ -75,6 +82,9 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         this.timeC = timeC
         this.Xpos = Xpos
         this.Ypos = Ypos
+        this.medical = medical
+        this.time2s = time2S
+        this.time2c = time2c
     }
     ////////////////////////////////상세정보///////////////////////////
 

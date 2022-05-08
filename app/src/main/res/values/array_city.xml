@@ -31,6 +31,7 @@
     </string-array>
 
     <string-array name="spinner_region_seoul">
+        <item>도시선택</item>
         <item>강남구</item>
         <item>강동구</item>
         <item>강북구</item>
@@ -60,6 +61,7 @@
 
 
     <string-array name="spinner_region_busan">
+        <item>도시선택</item>
         <item>강서구</item>
         <item>금정구</item>
         <item>기장군</item>
@@ -79,6 +81,7 @@
     </string-array>
 
     <string-array name="spinner_region_incheon">
+        <item>도시선택</item>
         <item>강화군</item>
         <item>계양구</item>
         <item>남구</item>
@@ -92,6 +95,7 @@
     </string-array>
 
     <string-array name="spinner_region_daegu">
+        <item>도시선택</item>
         <item>중구</item>
         <item>동구</item>
         <item>서구</item>
@@ -103,6 +107,7 @@
     </string-array>
 
     <string-array name="spinner_region_gwangju">
+        <item>도시선택</item>
         <item>동구</item>
         <item>서구</item>
         <item>남구</item>
@@ -111,6 +116,7 @@
     </string-array>
 
     <string-array name="spinner_region_daejeon">
+        <item>도시선택</item>
         <item>대덕구</item>
         <item>동구</item>
         <item>서구</item>
@@ -119,6 +125,7 @@
     </string-array>
 
     <string-array name="spinner_region_ulsan">
+        <item>도시선택</item>
         <item>남구</item>
         <item>동구</item>
         <item>북구</item>
@@ -131,6 +138,7 @@
     </string-array>
 
     <string-array name="spinner_region_gyeonggi">
+        <item>도시선택</item>
         <item>가평군</item>
         <item>고양시</item>
         <item>과천시</item>
@@ -165,6 +173,7 @@
     </string-array>
 
     <string-array name="spinner_region_gangwon">
+        <item>도시선택</item>
         <item>강릉시</item>
         <item>고성군</item>
         <item>동해시</item>
@@ -186,6 +195,7 @@
     </string-array>
 
     <string-array name="spinner_region_chung_buk">
+        <item>도시선택</item>
         <item>괴산군</item>
         <item>단양군</item>
         <item>보은군</item>
@@ -200,6 +210,7 @@
     </string-array>
 
     <string-array name="spinner_region_chung_nam">
+        <item>도시선택</item>
         <item>계룡시</item>
         <item>공주시</item>
         <item>금산군</item>
@@ -218,6 +229,7 @@
     </string-array>
 
     <string-array name="spinner_region_gyeong_buk">
+        <item>도시선택</item>
         <item>경산시</item>
         <item>경주시</item>
         <item>고령군</item>
@@ -244,6 +256,7 @@
     </string-array>
 
     <string-array name="spinner_region_gyeong_nam">
+        <item>도시선택</item>
         <item>거제시</item>
         <item>거창군</item>
         <item>고성군</item>
@@ -265,6 +278,7 @@
     </string-array>
 
     <string-array name="spinner_region_jeon_buk">
+        <item>도시선택</item>
         <item>고창군</item>
         <item>군산시</item>
         <item>김제시</item>
@@ -282,6 +296,7 @@
     </string-array>
 
     <string-array name="spinner_region_jeon_nam">
+        <item>도시선택</item>
         <item>강진군</item>
         <item>고흥군</item>
         <item>곡성군</item>
@@ -307,6 +322,7 @@
     </string-array>
 
     <string-array name="spinner_jeju">
+        <item>도시선택</item>
         <item>서귀포시</item>
         <item>제주시</item>
     </string-array>

@@ -3,12 +3,14 @@ package com.kkt1019.hospitalinmyhand
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 import org.xmlpull.v1.XmlPullParser
@@ -16,6 +18,7 @@ import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.math.*
 
 class HomePage1Fragment:Fragment() {
 
@@ -173,7 +176,7 @@ class HomePage1Fragment:Fragment() {
                 }
 
                 activity?.runOnUiThread {
-//                    Toast.makeText(context, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(context, "aaaa"+items2.size, Toast.LENGTH_SHORT).show()
                     items.addAll(allitems)
                     items2.addAll(items)
                     items3.addAll(items2)
@@ -203,6 +206,8 @@ class HomePage1Fragment:Fragment() {
             if (checkBox.isChecked) {
                 spinner.visibility = View.GONE
                 spinner2.visibility = View.GONE
+
+
             }
             else {
                 spinner.visibility = View.VISIBLE
@@ -258,6 +263,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_seoul)
 
                                 for (HomePage1Item in items) {
@@ -292,6 +303,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_busan)
 
                                 for (HomePage1Item in items) {
@@ -323,6 +340,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_seoul)
 
@@ -357,6 +380,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_incheon)
 
                                 for (HomePage1Item in items) {
@@ -388,6 +417,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gwangju)
 
@@ -421,6 +456,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_daejeon)
 
                                 for (HomePage1Item in items) {
@@ -452,6 +493,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_ulsan)
 
@@ -485,6 +532,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_sejong)
 
                                 for (HomePage1Item in items) {
@@ -516,6 +569,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeonggi)
 
@@ -549,6 +608,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_gangwon)
 
                                 for (HomePage1Item in items) {
@@ -580,6 +645,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_chung_buk)
 
@@ -613,6 +684,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_chung_nam)
 
                                 for (HomePage1Item in items) {
@@ -644,6 +721,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_jeon_buk)
 
@@ -677,6 +760,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_jeon_nam)
 
                                 for (HomePage1Item in items) {
@@ -708,6 +797,12 @@ class HomePage1Fragment:Fragment() {
                             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                                 items2.clear()
+
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeong_buk)
 
@@ -741,6 +836,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeong_nam)
 
                                 for (HomePage1Item in items) {
@@ -773,6 +874,12 @@ class HomePage1Fragment:Fragment() {
 
                                 items2.clear()
 
+                                if (p2 == 0) {
+                                    items2.addAll(items)
+                                    binding.recycler.adapter?.notifyDataSetChanged()
+                                    return
+                                }
+
                                 val arr = resources.getStringArray(R.array.spinner_jeju)
 
                                 for (HomePage1Item in items) {
@@ -795,29 +902,23 @@ class HomePage1Fragment:Fragment() {
         }
 
         val medical = resources.getStringArray(R.array.medical_id)
-        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, medical)
-        spinner3.adapter = madapter
+        val madapter1 = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, medical)
+        spinner3.adapter = madapter1
 
         spinner3.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
                 items3.clear()
 
-                if (p2 == 0){
-                    items3.addAll(items2);
-                    binding.recycler.adapter?.notifyDataSetChanged()
-                    return
-                }
+        val arr = resources.getStringArray(R.array.medical_id)
 
-                for (HomePage1Item in items2) {
-                    if (HomePage1Item.dgidIdName.contains(medical[p2])) {
-                        items3.add(HomePage1Item())
+                for (item in items2) {
+                    if (item.dgidIdName.contains(arr[p2])) {
+                        items3.add(item)
                     }
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
@@ -828,11 +929,33 @@ class HomePage1Fragment:Fragment() {
 
         mBuilder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
             binding.recycler.adapter?.notifyDataSetChanged()
-            Toast.makeText(context, "aaa", Toast.LENGTH_SHORT).show()
         }
         mBuilder.setNegativeButton("취소", null)
         mBuilder.show()
 
+
+    }
+
+    object DistanceManager {
+
+        private const val R = 6372.8 * 1000
+
+        /**
+         * 두 좌표의 거리를 계산한다.
+         *
+         * @param lat1 위도1
+         * @param lon1 경도1
+         * @param lat2 위도2
+         * @param lon2 경도2
+         * @return 두 좌표의 거리(m)
+         */
+        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Int {
+            val dLat = Math.toRadians(lat2 - lat1)
+            val dLon = Math.toRadians(lon2 - lon1)
+            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
+            val c = 2 * asin(sqrt(a))
+            return (R * c).toInt()
+        }
     }
 }
 

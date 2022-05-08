@@ -19,7 +19,7 @@
         android:layout_toRightOf="@+id/profile"
         android:text="id"
         android:textColor="@color/black"
-        android:textSize="13sp" />
+        android:textSize="13sp"/>
 
     <View
         android:id="@+id/line"
@@ -61,10 +61,10 @@
         android:src="@drawable/frog" />
 
     <View
-        android:background="#7D7E7D"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/iv"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:background="#7D7E7D" />
 
 </RelativeLayout>

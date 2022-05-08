@@ -46,7 +46,6 @@ class ReviewAdapter(val context: Context, var items: MutableList<ItemVO>) : Recy
         holder.tvMessage.text = item.message
         holder.tvDate.text = item.date
 
-
     }
 
     override fun getItemCount(): Int = items.size

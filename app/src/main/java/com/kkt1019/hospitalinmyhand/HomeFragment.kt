@@ -1,13 +1,19 @@
 package com.kkt1019.hospitalinmyhand
 
+import android.Manifest
 import android.app.ActionBar
 import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.location.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomeBinding
@@ -50,6 +56,7 @@ class HomeFragment: Fragment() {
 
         return view
     }
+
 
     val binding: FragmentHomeBinding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
 

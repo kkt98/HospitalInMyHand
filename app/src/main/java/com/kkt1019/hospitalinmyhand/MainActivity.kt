@@ -1,29 +1,31 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 import de.hdodenhof.circleimageview.CircleImageView
-
 class MainActivity : AppCompatActivity() {
 
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     val fragment:MutableList<Fragment> by lazy { mutableListOf() }
+
+    var firebaseAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +91,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -105,17 +106,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     lateinit var drawerToggle: ActionBarDrawerToggle
-
-    override fun onResume() {
-        super.onResume()
-
-//        drawlayout()
-
-
-    }
-
-
-
 
     fun drawlayout(){
 
@@ -146,8 +136,7 @@ class MainActivity : AppCompatActivity() {
         //네비게이션부의 아이템이 선택되었을때 반응하는 리스너
         nav.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.menu_aa -> Toast.makeText(this@MainActivity, "aa", Toast.LENGTH_SHORT).show()
-
+                R.id.menu_aa -> firebaseAuth?.signOut()
 
                 R.id.menu_bb -> {
 

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntroActivity"
-    android:background="@drawable/rainbow">
+    tools:context=".IntroActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/koala"
+        android:src="@drawable/medical_image"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

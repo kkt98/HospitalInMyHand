@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,52 +18,107 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="병원이름"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:paddingTop="10dp"
+        android:layout_below="@+id/map"
+        android:drawableLeft="@drawable/icons8hospital"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingTop="10dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="병원주소"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_below="@+id/title"
+        android:drawableLeft="@drawable/iconslocation25"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="병원 전화번호"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_below="@id/address"
+        android:drawableLeft="@drawable/iconsphone25"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time"
+    <ImageView
+        android:id="@+id/time_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="운영시간"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_below="@id/tell"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingRight="4dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/iconsclock25" />
+
+
+    <TextView
+        android:id="@+id/timeS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tell"
+        android:layout_toRightOf="@id/time_ic"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/timeC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tell"
+        android:layout_toRightOf="@id/timeS"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time2S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeC"
+        android:paddingLeft="40dp"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time2C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeC"
+        android:layout_toRightOf="@id/time2S"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <View
+        android:id="@+id/view"
         android:background="#B5B5B5"
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_below="@+id/iv"
+        android:layout_below="@+id/time2S"
         android:layout_marginTop="8dp"/>
 
     <Button
@@ -75,13 +130,15 @@
         android:textColor="@color/black"
         android:background="#00ff0000"
         android:layout_marginLeft="300dp"
-        android:drawableLeft="@drawable/ic_baseline_create_24"/>
+        android:drawableLeft="@drawable/ic_baseline_create_24"
+        android:layout_below="@id/view"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
+        android:layout_below="@id/btn"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</LinearLayout>
+</RelativeLayout>

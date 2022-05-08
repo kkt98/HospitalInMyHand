@@ -1,12 +1,15 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
@@ -17,9 +20,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.kkt1019.hospitalinmyhand.databinding.FragmentMapBinding
 
+
 class MapFragment : Fragment() {
 
     var providerClient: FusedLocationProviderClient? = null
+
+    private var locationRequest = LocationRequest()
 
     var mGoogleMap: GoogleMap? = null
 
@@ -84,10 +90,28 @@ class MapFragment : Fragment() {
     var locationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
+
+            //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
             val location = locationResult.lastLocation
+            val lat = location.latitude
+            val lng = location.longitude
+
+            G.Xpos = lat
+            G.Ypos = lng
+
+            Toast.makeText(context," " + G.Xpos+" // "+G.Ypos , Toast.LENGTH_SHORT).show()
         }
     }
 
+    fun openMap(lat: Double, lng: Double) {
+        val geouri: Uri = Uri.parse(String.format("geo:%f,%f", lat, lng))
+        val geomap = Intent(Intent.ACTION_VIEW, geouri)
+        geomap.setPackage("com.google.android.apps.maps") // 구글맵으로 열기
+        this.startActivity(geomap)
+    }
+
     val binding:FragmentMapBinding by lazy { FragmentMapBinding.inflate(layoutInflater) }
+
+
 
 }

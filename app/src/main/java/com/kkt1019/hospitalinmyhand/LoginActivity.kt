@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.databinding.ActivityLoginBinding
 
@@ -43,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
         val intent = GoogleSignIn.getClient(this, gso).signInIntent
 
         resultLauncher.launch(intent)
-
 
         setContentView(binding.root)
     }
