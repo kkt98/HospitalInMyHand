@@ -40,7 +40,9 @@ class HomePage1Adapter(val context: Context, private val page1Items: MutableList
         holder.tvTimeS.text = "운영시간 : " + item.dutyTime1s + " ~ "
         holder.tvTell.text ="전화번호 : " + item.dutyTell
         holder.tvTimeC.text = item.dutyTime1c
-        holder.location.text = HomePage1Fragment.DistanceManager.getDistance(G.Xpos * 1000, G.Ypos* 1000, item.wgs84Lat.toDouble()* 1000, item.wgs84Lon.toDouble()* 1000).toString()
+        holder.location.text = G.location
+
+        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Xpos * 1000, G.Ypos* 1000, item.wgs84Lat.toDouble()* 1000, item.wgs84Lon.toDouble()* 1000).toString()
 
         holder.itemView.setOnClickListener {
 

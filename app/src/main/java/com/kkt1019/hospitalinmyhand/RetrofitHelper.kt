@@ -15,6 +15,13 @@ public class RetrofitHelper {
             return builder.build()
         }
 
+        fun getRetrofitInstanceGson2(): Retrofit? {
+            val builder = Retrofit.Builder()
+            builder.baseUrl("http://sux1011.dothome.co.kr")
+            builder.addConverterFactory(GsonConverterFactory.create())
+            return builder.build()
+        }
+
         fun getRetrofitInstanceScalars(): Retrofit? {
             return Retrofit.Builder().baseUrl("http://sux1011.dothome.co.kr").addConverterFactory(ScalarsConverterFactory.create()).build()
         }

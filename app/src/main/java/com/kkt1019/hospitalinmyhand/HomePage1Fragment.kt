@@ -3,6 +3,7 @@ package com.kkt1019.hospitalinmyhand
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -190,6 +191,8 @@ class HomePage1Fragment:Fragment() {
 
     }
 
+    var locationManager: LocationManager? = null
+
     fun spinner(){
 
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog, null)
@@ -206,7 +209,6 @@ class HomePage1Fragment:Fragment() {
             if (checkBox.isChecked) {
                 spinner.visibility = View.GONE
                 spinner2.visibility = View.GONE
-
 
             }
             else {
@@ -911,6 +913,12 @@ class HomePage1Fragment:Fragment() {
                 items3.clear()
 
         val arr = resources.getStringArray(R.array.medical_id)
+
+                if (p2 == 0 ){
+                    items3.addAll(items2)
+                    binding.recycler.adapter?.notifyDataSetChanged()
+                    return
+                }
 
                 for (item in items2) {
                     if (item.dgidIdName.contains(arr[p2])) {

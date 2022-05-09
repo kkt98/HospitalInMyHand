@@ -25,8 +25,6 @@ class MapFragment : Fragment() {
 
     var providerClient: FusedLocationProviderClient? = null
 
-    private var locationRequest = LocationRequest()
-
     var mGoogleMap: GoogleMap? = null
 
     override fun onCreateView(
@@ -98,16 +96,7 @@ class MapFragment : Fragment() {
 
             G.Xpos = lat
             G.Ypos = lng
-
-            Toast.makeText(context," " + G.Xpos+" // "+G.Ypos , Toast.LENGTH_SHORT).show()
         }
-    }
-
-    fun openMap(lat: Double, lng: Double) {
-        val geouri: Uri = Uri.parse(String.format("geo:%f,%f", lat, lng))
-        val geomap = Intent(Intent.ACTION_VIEW, geouri)
-        geomap.setPackage("com.google.android.apps.maps") // 구글맵으로 열기
-        this.startActivity(geomap)
     }
 
     val binding:FragmentMapBinding by lazy { FragmentMapBinding.inflate(layoutInflater) }

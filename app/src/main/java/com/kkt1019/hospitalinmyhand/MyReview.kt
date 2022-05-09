@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,7 @@ class MyReview : AppCompatActivity() {
     fun datas(){
 
         //서버에서 데이터를 불러오는 기능 메소드
-        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
+        val retrofit = RetrofitHelper.getRetrofitInstanceGson2()
         val retrofitService = retrofit!!.create(MyRetrofitService::class.java)
         val call = retrofitService.loadDataFromServer(G.nickname!!)
         call.enqueue(object : Callback<ArrayList<ItemVO?>> {
@@ -45,6 +46,8 @@ class MyReview : AppCompatActivity() {
                 binding.recycler.adapter?.notifyDataSetChanged()
 
                 val list = response.body()!!
+                Log.i("yyy", response.body().toString())
+                //response null? why?
                 for (ItemVO in list) {
                     if (ItemVO != null) {
 
