@@ -3,18 +3,18 @@
 
     <item android:id="@+id/bnv_home"
         android:title="Home"
-        android:icon="@drawable/ic_hospital"/>
+        android:icon="@drawable/icons8doctorsbag64"/>
 
     <item android:id="@+id/bnv_bookmark"
         android:title="Bookmark"
-        android:icon="@drawable/ic_faver"/>
+        android:icon="@drawable/icons8popular64"/>
 
     <item android:id="@+id/bnv_medical"
         android:title="Medical"
-        android:icon="@drawable/ic_medical"/>
+        android:icon="@drawable/icons8pills64"/>
 
     <item android:id="@+id/bnv_map"
         android:title="Map"
-        android:icon="@drawable/ic_map"/>
+        android:icon="@drawable/icons8mapmarker64"/>
 
 </menu>

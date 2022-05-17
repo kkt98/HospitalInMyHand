@@ -95,10 +95,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/timeS"
             android:layout_alignParentEnd="true"
+            android:maxLength="4"
             android:paddingRight="8dp"
             android:text="123"
             android:textSize="18sp"
-            app:drawableLeftCompat="@drawable/iconslocation25" />
+            app:drawableLeftCompat="@drawable/icons8region20" />
 
 
     </RelativeLayout>

@@ -16,6 +16,7 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
         val tvTitle : TextView by lazy { itemView.findViewById(R.id.pg3_title) }
         val tvAddr : TextView by lazy { itemView.findViewById(R.id.pg3_address) }
         val tvTell : TextView by lazy { itemView.findViewById(R.id.pg3_tell) }
+        val tvLocation : TextView by lazy { itemView.findViewById(R.id.pg3_tv_location) }
 
     }
 
@@ -33,6 +34,11 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
         holder.tvTitle.text ="약국 이름 : " + item.yadmNm
         holder.tvAddr.text ="주소 : " + item.addr
         holder.tvTell.text ="전화번호 : " + item.telno
+        holder.tvLocation.text = G.location
+
+        item.location = G.location.toString()
+
+        G.location = HomePage3Fragment.DistanceManager.getDistance(G.Xpos , G.Ypos, item.xPos.toDouble(), item.yPos.toDouble()).toString()
 
         holder.itemView.setOnClickListener {
 

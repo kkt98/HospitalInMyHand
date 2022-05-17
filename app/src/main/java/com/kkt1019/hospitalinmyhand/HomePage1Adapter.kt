@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
-class HomePage1Adapter(val context: Context, private val page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+class HomePage1Adapter(val context: Context,  var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -42,7 +42,9 @@ class HomePage1Adapter(val context: Context, private val page1Items: MutableList
         holder.tvTimeC.text = item.dutyTime1c
         holder.location.text = G.location
 
-        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Xpos * 1000, G.Ypos* 1000, item.wgs84Lat.toDouble()* 1000, item.wgs84Lon.toDouble()* 1000).toString()
+        item.location = G.location.toString()
+
+        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Xpos , G.Ypos, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
 
         holder.itemView.setOnClickListener {
 

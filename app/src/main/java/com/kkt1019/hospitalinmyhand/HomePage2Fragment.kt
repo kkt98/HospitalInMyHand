@@ -1,17 +1,23 @@
 package com.kkt1019.hospitalinmyhand
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.*
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage2Binding
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -23,6 +29,7 @@ import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
+import kotlin.math.*
 
 class HomePage2Fragment:Fragment() {
 
@@ -42,6 +49,8 @@ class HomePage2Fragment:Fragment() {
 
         NetworkThread().start()
 
+        Mylocation()
+
         return binding.root
     }
 
@@ -53,7 +62,7 @@ class HomePage2Fragment:Fragment() {
 
             val address = ("http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytListInfoInqire?service" +
                     "Key=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
-                    "&pageNo=1&numOfRows=100")
+                    "&pageNo=1&numOfRows=3000")
 
             Log.i("abc", "nnn")
 
@@ -764,5 +773,63 @@ class HomePage2Fragment:Fragment() {
 
         spinner.adapter = madapter
     }
+
+    object DistanceManager {
+
+        private const val R = 6372.8
+
+        /**
+         * 두 좌표의 거리를 계산한다.
+         *
+         * @param lat1 위도1
+         * @param lon1 경도1
+         * @param lat2 위도2
+         * @param lon2 경도2
+         * @return 두 좌표의 거리(m)
+         */
+        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+            val dLat = Math.toRadians(lat2 - lat1)
+            val dLon = Math.toRadians(lon2 - lon1)
+            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
+            val c = 2 * asin(sqrt(a))
+            return (R * c).toDouble()
+        }
+    }
+
+    lateinit var providerClient: FusedLocationProviderClient
+
+    fun Mylocation(){
+
+        //위치정보 제공자 객체얻어오기
+        providerClient = LocationServices.getFusedLocationProviderClient(context as Activity)
+
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
+
+        //내 위치 실시간 갱신 요청
+        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) { return }
+        providerClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
+        )
+    }
+
+    var locationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+
+            //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
+            val location = locationResult.lastLocation
+            val lat = location.latitude
+            val lng = location.longitude
+
+            G.Xpos = lat
+            G.Ypos = lng
+
+        }
+    }
+
+
 
 }

@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="DrawerNavigation"
+            app:title="내손안에 병원~"
             style="@style/MyToolBarStyle"
             android:theme="@style/MyToolbarTheme"/>
 

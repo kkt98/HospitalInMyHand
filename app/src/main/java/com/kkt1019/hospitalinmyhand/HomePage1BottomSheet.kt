@@ -67,9 +67,9 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         binding.title.text = name
         binding.tell.text = tell
         binding.address.text = addr
-        binding.timeS.text = "평일 : " + timeS+" ~ "
+        binding.timeS.text = "월 : " + timeS+" ~ "
         binding.timeC.text = timeC
-        binding.time2S.text = "주말 : " + time2s+" ~ "
+        binding.time2S.text = "토 : " + time2s+" ~ "
         binding.time2C.text = time2c
 
     }

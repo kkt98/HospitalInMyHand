@@ -1,24 +1,31 @@
 package com.kkt1019.hospitalinmyhand
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.*
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.*
 import kotlin.math.*
 
 class HomePage1Fragment:Fragment() {
@@ -39,6 +46,8 @@ class HomePage1Fragment:Fragment() {
         binding.btn.setOnClickListener { spinner() }
 
         NetworkThread().start()
+
+        Mylocation()
 
         return binding.root
     }
@@ -197,10 +206,10 @@ class HomePage1Fragment:Fragment() {
 
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog, null)
 
-        var spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
-        var spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
-        var spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
-        var checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
+        val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
+        val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
+        val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
+        val checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
         var checkBox2 = mDialogView.findViewById<CheckBox>(R.id.check_light)
 
 
@@ -209,6 +218,9 @@ class HomePage1Fragment:Fragment() {
             if (checkBox.isChecked) {
                 spinner.visibility = View.GONE
                 spinner2.visibility = View.GONE
+
+//                items3.sortByDescending { it.location }
+//                binding.recycler.adapter?.notifyDataSetChanged()
 
             }
             else {
@@ -946,7 +958,7 @@ class HomePage1Fragment:Fragment() {
 
     object DistanceManager {
 
-        private const val R = 6372.8 * 1000
+        private const val R = 6372.8
 
         /**
          * 두 좌표의 거리를 계산한다.
@@ -957,13 +969,48 @@ class HomePage1Fragment:Fragment() {
          * @param lon2 경도2
          * @return 두 좌표의 거리(m)
          */
-        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Int {
+        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
             val dLat = Math.toRadians(lat2 - lat1)
             val dLon = Math.toRadians(lon2 - lon1)
             val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
             val c = 2 * asin(sqrt(a))
-            return (R * c).toInt()
+            return (R * c).toDouble()
         }
     }
+
+    lateinit var providerClient: FusedLocationProviderClient
+
+    fun Mylocation(){
+
+        //위치정보 제공자 객체얻어오기
+        providerClient = LocationServices.getFusedLocationProviderClient(context as Activity)
+
+        val locationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
+
+        //내 위치 실시간 갱신 요청
+        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) { return }
+        providerClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
+        )
+    }
+
+    var locationCallback: LocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            super.onLocationResult(locationResult)
+
+            //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
+            val location = locationResult.lastLocation
+            val lat = location.latitude
+            val lng = location.longitude
+
+            G.Xpos = lat
+            G.Ypos = lng
+
+        }
+    }
+
 }
 

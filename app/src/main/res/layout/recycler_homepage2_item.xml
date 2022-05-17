@@ -68,6 +68,18 @@
             android:textOff=" "
             android:textOn=" " />
 
+        <TextView
+            android:id="@+id/pg2_tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg2_tell"
+            android:layout_alignParentEnd="true"
+            android:maxLength="4"
+            android:paddingRight="8dp"
+            android:text="123"
+            android:textSize="18sp"
+            app:drawableLeftCompat="@drawable/icons8region20" />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

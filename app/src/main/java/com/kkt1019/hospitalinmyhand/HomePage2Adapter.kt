@@ -18,6 +18,7 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
         val tvAddr : TextView by lazy { itemView.findViewById(R.id.pg2_address) }
         val tvTell : TextView by lazy { itemView.findViewById(R.id.pg2_tell) }
         val tvTell2 : TextView by lazy { itemView.findViewById(R.id.pg2_tell2) }
+        val tvLocation : TextView by lazy { itemView.findViewById(R.id.pg2_tv_location) }
 
     }
 
@@ -37,6 +38,11 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
         holder.tvAddr.text = "주소 : " + item.dutyAddr
         holder.tvTell.text = "대표 전화 : " + item.dutyTel1
         holder.tvTell2.text = "응급실 전화 : " + item.dutyTel3
+        holder.tvLocation.text = G.location
+
+        item.location = G.location.toString()
+
+        G.location = HomePage2Fragment.DistanceManager.getDistance(G.Xpos , G.Ypos, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
 
         holder.itemView.setOnClickListener {
 

@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/map"
-        android:drawableLeft="@drawable/icons8hospital"
+        android:drawableLeft="@drawable/icons8hospitalsign20"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="8dp"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:drawableLeft="@drawable/iconslocation25"
+        android:drawableLeft="@drawable/icons8region20"
         android:paddingLeft="10dp"
         android:paddingRight="8dp"
         android:paddingBottom="10dp"
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/address"
-        android:drawableLeft="@drawable/iconsphone25"
+        android:drawableLeft="@drawable/icons8phone20"
         android:paddingLeft="10dp"
         android:paddingRight="8dp"
         android:paddingBottom="10dp"
@@ -62,7 +62,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="4dp"
         android:paddingBottom="10dp"
-        android:src="@drawable/iconsclock25" />
+        android:src="@drawable/icons8clock20" />
 
 
     <TextView
