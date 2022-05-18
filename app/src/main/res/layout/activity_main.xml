@@ -8,32 +8,181 @@
     tools:context=".MainActivity"
     android:id="@+id/layout_drawer">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            style="@style/MyToolBarStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="내손안에 병원~"
-            style="@style/MyToolBarStyle"
-            android:theme="@style/MyToolbarTheme"/>
+            android:theme="@style/MyToolbarTheme"
+            app:title="내손안에 병원~" />
 
-        <FrameLayout
-            android:id="@+id/container"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hospital"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="30dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/gif_hospital"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="병원, 응급실"
+                android:textSize="20sp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/medical"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/gif_medical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="약 검색"
+                android:textSize="20sp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/map"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_below="@+id/hospital"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/gif_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="지도"
+                android:textSize="20sp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pharmacy"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_below="@+id/hospital"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/gif_pharmacy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="약국찾기"
+                android:textSize="20sp"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fav"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_height="80dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/map"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv"
+            <ImageView
+                android:id="@+id/gif_fav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="즐겨찾기"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/calender"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/bnv"/>
+            android:layout_height="80dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/fav"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/gif_calender"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일정"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav"

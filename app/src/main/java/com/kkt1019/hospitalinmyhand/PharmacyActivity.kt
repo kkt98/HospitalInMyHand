@@ -3,21 +3,22 @@ package com.kkt1019.hospitalinmyhand
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.Spinner
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage3Binding
+import com.kkt1019.hospitalinmyhand.databinding.ActivityPharmacyBinding
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader
@@ -25,8 +26,10 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.math.*
 
-class HomePage3Fragment:Fragment() {
+class PharmacyActivity : AppCompatActivity() {
+    val binding: ActivityPharmacyBinding by lazy { ActivityPharmacyBinding.inflate(layoutInflater) }
 
+    val recycler: RecyclerView by lazy { binding.recycler }
 
     var items = mutableListOf<HomePage3Item>()
     var items2 = mutableListOf<HomePage3Item>()
@@ -34,28 +37,19 @@ class HomePage3Fragment:Fragment() {
 
     var apiKey = "H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D"
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
 
-        binding.recycler.adapter = childFragmentManager?.let { HomePage3Adapter(activity as Context, items2, it) }
+        recycler.adapter = HomePage3Adapter(this, items2, supportFragmentManager)
 
         binding.btn.setOnClickListener { spinner() }
 
         Mylocation()
 
-//        datas()
-
         NetworkThread().start()
 
-
-
-        return binding.root
     }
-
-    val binding:FragmentHomePage3Binding by lazy { FragmentHomePage3Binding.inflate(layoutInflater) }
 
     inner class NetworkThread:Thread(){
 
@@ -137,12 +131,18 @@ class HomePage3Fragment:Fragment() {
                     eventType = xpp.next()
                 }
 
-                activity?.runOnUiThread {
-                    Toast.makeText(context, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
+                runOnUiThread {
                     items.addAll(allitems)
                     items2.addAll(items)
                     binding.recycler.adapter?.notifyDataSetChanged()
                 }
+
+//                activity.runOnUiThread {
+////                    Toast.makeText(this, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
+//                    items.addAll(allitems)
+//                    items2.addAll(items)
+//                    binding.recycler.adapter?.notifyDataSetChanged()
+//                }
 
             }catch (e:Exception){ Log.i("abc", e.toString())}
 
@@ -153,7 +153,7 @@ class HomePage3Fragment:Fragment() {
 
     fun spinner(){
 
-        val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog2, null)
+        val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog2, null)
 
         val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
         val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
@@ -173,7 +173,7 @@ class HomePage3Fragment:Fragment() {
         }
 
         val city = resources.getStringArray(R.array.city)
-        var spinnerAdapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, city)
+        var spinnerAdapter = ArrayAdapter(this as Activity, android.R.layout.simple_spinner_dropdown_item, city)
         spinner.adapter = spinnerAdapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -184,7 +184,7 @@ class HomePage3Fragment:Fragment() {
                     0 -> {
 
                         val spinnerItems = resources.getStringArray(R.array.choice)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         items.clear()
@@ -210,7 +210,7 @@ class HomePage3Fragment:Fragment() {
                         binding.recycler.adapter?.notifyDataSetChanged()
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_seoul)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -244,7 +244,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_busan)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -276,7 +276,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_daegu)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -309,7 +309,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_incheon)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -341,7 +341,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gwangju)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -373,7 +373,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_daejeon)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -405,7 +405,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_ulsan)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -437,7 +437,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_sejong)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -469,7 +469,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeonggi)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -501,7 +501,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gangwon)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -533,7 +533,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_chung_buk)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -565,7 +565,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_chung_nam)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -597,7 +597,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_jeon_buk)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -629,7 +629,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_jeon_nam)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -661,7 +661,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeong_buk)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -693,7 +693,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeong_nam)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -725,7 +725,7 @@ class HomePage3Fragment:Fragment() {
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_jeju)
-                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -755,7 +755,7 @@ class HomePage3Fragment:Fragment() {
 
         }
 
-        val mBuilder = AlertDialog.Builder(context)
+        val mBuilder = AlertDialog.Builder(this)
             .setView(mDialogView)
 
         mBuilder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
@@ -767,7 +767,7 @@ class HomePage3Fragment:Fragment() {
 
         val items = resources.getStringArray(R.array.city)
 
-        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, items)
+        val madapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
 
         spinner.adapter = madapter
     }
@@ -799,15 +799,15 @@ class HomePage3Fragment:Fragment() {
     fun Mylocation(){
 
         //위치정보 제공자 객체얻어오기
-        providerClient = LocationServices.getFusedLocationProviderClient(context as Activity)
+        providerClient = LocationServices.getFusedLocationProviderClient(this)
 
         val locationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
 
         //내 위치 실시간 갱신 요청
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) { return }
         providerClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
         )

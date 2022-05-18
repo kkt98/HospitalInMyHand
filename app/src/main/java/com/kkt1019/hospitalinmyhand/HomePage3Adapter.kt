@@ -38,7 +38,7 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
 
         item.location = G.location.toString()
 
-        G.location = HomePage3Fragment.DistanceManager.getDistance(G.Xpos , G.Ypos, item.xPos.toDouble(), item.yPos.toDouble()).toString()
+        G.location = PharmacyActivity.DistanceManager.getDistance(G.Xpos , G.Ypos, item.xPos.toDouble(), item.yPos.toDouble()).toString()
 
         holder.itemView.setOnClickListener {
 

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -19,11 +20,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 import de.hdodenhof.circleimageview.CircleImageView
+
 class MainActivity : AppCompatActivity() {
 
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
-    val fragment:MutableList<Fragment> by lazy { mutableListOf() }
 
     var firebaseAuth: FirebaseAuth? = null
 
@@ -31,78 +31,45 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        fragment.add(HomeFragment())
-        fragment.add(BookMarkFragment())
-        fragment.add(MedicalFragment())
-        fragment.add(MapFragment())
-
         drawlayout()
 
-        supportFragmentManager.beginTransaction().add(R.id.container, fragment[0]).commit()
+        Glide.with(this).load(R.drawable.mmedical).into(binding.gifHospital)
+        Glide.with(this).load(R.drawable.map).into(binding.gifMap)
+        Glide.with(this).load(R.drawable.medical).into(binding.gifMedical)
+        Glide.with(this).load(R.drawable.favorit).into(binding.gifFav)
+        Glide.with(this).load(R.drawable.hos).into(binding.gifPharmacy)
+        Glide.with(this).load(R.drawable.calendar).into(binding.gifCalender)
 
-        binding.bnv.setOnItemSelectedListener {
-
-            supportFragmentManager.fragments.forEach {
-                supportFragmentManager.beginTransaction().hide(it).commit()
-            }
-
-            val tran =  supportFragmentManager.beginTransaction()
-
-            when(it.itemId){
-                R.id.bnv_home -> {
-                    tran.show(fragment[0])
-                }
-                R.id.bnv_bookmark -> {
-                    if ( !supportFragmentManager.fragments.contains(fragment[1]))
-                        tran.add(R.id.container, fragment[1])
-                    tran.show(fragment[1])
-                }
-                R.id.bnv_medical -> {
-                    if (!supportFragmentManager.fragments.contains(fragment[2]))
-                        tran.add(R.id.container, fragment[2])
-                    tran.show(fragment[2])
-                }
-                R.id.bnv_map -> {
-                    if (!supportFragmentManager.fragments.contains(fragment[3]))
-                        tran.add(R.id.container, fragment[3])
-                    tran.show(fragment[3])
-                }
-            }
-            tran.commit()
-
-            true
+        val cardview_hospital = findViewById<CardView>(R.id.hospital)
+        cardview_hospital.setOnClickListener {
+            val intent = Intent(this, HospitalActivity::class.java)
+            startActivity(intent)
         }
 
-        //동적퍼미션
-        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        val checkResult = checkSelfPermission(permissions[0])
-        if (checkResult == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(permissions, 10)
+        val cardview_medical = findViewById<CardView>(R.id.medical)
+        cardview_medical.setOnClickListener {
+            val intent = Intent(this, MedicalActivity::class.java)
+            startActivity(intent)
         }
 
-
-        //동적퍼미션
-        val permissionsImage = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (checkSelfPermission(permissionsImage[0]) == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(permissionsImage, 0)
-        }else{
-//            requestImagePermissons()
+        val cardview_map = findViewById<CardView>(R.id.map)
+        cardview_map.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
         }
 
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == 10){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "위치정보 사용 가능", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "위치정보 사용 불가능", Toast.LENGTH_SHORT).show()
-            }
+        val cardview_pharmacy = findViewById<CardView>(R.id.pharmacy)
+        cardview_pharmacy.setOnClickListener {
+            val intent = Intent(this, PharmacyActivity::class.java)
+            startActivity(intent)
         }
+
+        val cardview_calender = findViewById<CardView>(R.id.calender)
+        cardview_calender.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     lateinit var drawerToggle: ActionBarDrawerToggle
@@ -119,13 +86,6 @@ class MainActivity : AppCompatActivity() {
         val ivProfile = navi.getHeaderView(0).findViewById<CircleImageView>(R.id.header_iv)
         tvName.text = G.nickname
         Glide.with(this).load(G.profileUrl).into(ivProfile)
-
-//        var builder = AlertDialog.Builder(this)
-//        builder.setMessage(""+name).show()
-//        Toast.makeText(this, "aaa"+name, Toast.LENGTH_SHORT).show()
-//        Toast.makeText(this, "aaa"+G.profileUrl, Toast.LENGTH_SHORT).show()
-
-
 
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
         drawerToggle.syncState()

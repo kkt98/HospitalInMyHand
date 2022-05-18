@@ -12,16 +12,22 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable/ic_baseline_star_border_24.xml" value="0.155" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout-w936dp/fragment_homepage2_bottomsheet.xml" value="0.13333333333333333" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout-w936dp/fragment_homepage3_bottomsheet.xml" value="0.26640625" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_calendar.xml" value="0.1712962962962963" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_favorit.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page1_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page2_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page3_fragment.xml" value="0.2574074074074074" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_hospital.xml" value="0.1712962962962963" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_intro.xml" value="0.17222222222222222" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_login.xml" value="0.18333333333333332" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_login1.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_main.xml" value="0.17962962962962964" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_map.xml" value="0.1712962962962963" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_medical.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_my_review.xml" value="0.18333333333333332" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_pharmacy.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_revie_edit.xml" value="0.22" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_review_detail.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/bg_edit.xml" value="0.35520833333333335" />
@@ -55,6 +61,7 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/recycler_review_item.xml" value="0.1824074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/menu/bnv.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/menu/drawer_nav.xml" value="0.35520833333333335" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/menu/hospital_bnv.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/mipmap-anydpi-v26/hospital_icon.xml" value="0.1215" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/mipmap-anydpi-v26/hospital_icon_round.xml" value="0.1215" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1155" />
