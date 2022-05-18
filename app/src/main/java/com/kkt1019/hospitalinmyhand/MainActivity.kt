@@ -64,6 +64,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val cardview_favorite = findViewById<CardView>(R.id.fav)
+        cardview_favorite.setOnClickListener {
+            val intent = Intent(this, FavoritActivity::class.java)
+            startActivity(intent)
+        }
+
         val cardview_calender = findViewById<CardView>(R.id.calender)
         cardview_calender.setOnClickListener {
             val intent = Intent(this, CalendarActivity::class.java)

@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.databinding.ActivityHospitalBinding
@@ -19,6 +20,11 @@ class HospitalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        toolbar.title = "병원, 응급실"
 
         fragment.add(HomePage1Fragment())
         fragment.add(HomePage2Fragment())

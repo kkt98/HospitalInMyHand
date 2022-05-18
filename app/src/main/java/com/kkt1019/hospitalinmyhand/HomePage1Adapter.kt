@@ -44,7 +44,7 @@ class HomePage1Adapter(val context: Context,  var page1Items: MutableList<HomePa
 
         item.location = G.location.toString()
 
-        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Xpos , G.Ypos, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
+        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Ypos , G.Xpos, item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
 
         holder.itemView.setOnClickListener {
 

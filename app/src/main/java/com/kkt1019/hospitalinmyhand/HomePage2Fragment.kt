@@ -49,9 +49,14 @@ class HomePage2Fragment:Fragment() {
 
         NetworkThread().start()
 
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         Mylocation()
 
-        return binding.root
     }
 
     val binding:FragmentHomePage2Binding by lazy { FragmentHomePage2Binding.inflate(layoutInflater) }
