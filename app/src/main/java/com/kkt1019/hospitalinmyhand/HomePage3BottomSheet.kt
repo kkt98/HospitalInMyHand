@@ -124,8 +124,6 @@ class HomePage3BottomSheet : BottomSheetDialogFragment() {
 
                         items.add(0, ItemVO)
 
-                        Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
-
                     }
                     binding.recycler.adapter?.notifyItemInserted(0)
                 }

@@ -10,7 +10,7 @@ class G {
         var uniqueid:String? = null
         var Xpos by Delegates.notNull<Double>()
         var Ypos by Delegates.notNull<Double>()
-        lateinit var location : String
+        var location : String = ""
 
     }
 }

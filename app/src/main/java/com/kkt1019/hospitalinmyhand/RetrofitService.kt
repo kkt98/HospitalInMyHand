@@ -15,4 +15,7 @@ public interface RetrofitService {
     @GET("/hospital/loadDB.php")
     fun loadDataFromServer(@Query("uniqueid") uniqueid:String): Call<ArrayList<ItemVO?>>
 
+    @GET("/hospital/Delete.php")
+    fun DeleteDataFromServer(@Query("nickname") nickname:String): Call<ArrayList<ItemVO?>>
+
 }

@@ -22,11 +22,6 @@ class MyReview : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        toolbar.title = "내 리뷰"
     }
 
     val binding:ActivityMyReviewBinding by lazy { ActivityMyReviewBinding.inflate(layoutInflater) }
