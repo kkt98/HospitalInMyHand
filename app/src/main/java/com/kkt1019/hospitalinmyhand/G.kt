@@ -11,6 +11,7 @@ class G {
         var Xpos by Delegates.notNull<Double>()
         var Ypos by Delegates.notNull<Double>()
         var location : String = ""
+        var myschedule: String? = null
 
     }
 }

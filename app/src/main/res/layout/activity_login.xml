@@ -18,10 +18,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sign_in_button"
-        android:src="@drawable/kakao_login_large_wide"
-        android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/kakao_login_large_wide"/>
 
     <Button
         android:id="@+id/gest"
