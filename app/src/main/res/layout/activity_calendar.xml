@@ -5,22 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="8dp"
     tools:context=".CalendarActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/MyToolBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/MyToolbarTheme"
+        app:title="내손안에 병원" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp">
+        app:cardElevation="10dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="8dp">
 
         <com.applandeo.materialcalendarview.CalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:headerColor="#CDCDCD"
+            app:headerColor="@color/white"
+            app:forwardButtonSrc="@drawable/ic_chevron_right_black_24dp"
+            app:previousButtonSrc="@drawable/ic_chevron_left_black_24dp"
             app:anotherMonthsDaysLabelsColor="#D5D5D5"
+            app:headerLabelColor="@color/black"
             app:selectionColor="@color/mycolor"
             app:datePicker="true"/>
 
@@ -31,25 +43,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/cardview"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/exThreeAddButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_gravity="end|bottom"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        app:backgroundTint="@color/mycolor"-->
-<!--        app:srcCompat="@drawable/ic_add"-->
-<!--        app:tint="@color/white" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/exThreeAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:backgroundTint="@color/mycolor"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/mycolor2" />
 
 
 

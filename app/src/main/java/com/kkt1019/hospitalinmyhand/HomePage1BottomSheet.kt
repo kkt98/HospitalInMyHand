@@ -39,8 +39,16 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
     var  Xpos by Delegates.notNull<Double>()
     var Ypos by Delegates.notNull<Double>()
     lateinit var medical : String
+    lateinit var time1s : String
+    lateinit var time1c : String
     lateinit var time2s : String
     lateinit var time2c : String
+    lateinit var time3s : String
+    lateinit var time3c : String
+    lateinit var time4s : String
+    lateinit var time4c : String
+    lateinit var time5s : String
+    lateinit var time5c : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,12 +77,21 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         binding.address.text = addr
         binding.timeS.text = "월 : " + timeS+" ~ "
         binding.timeC.text = timeC
-        binding.time2S.text = "토 : " + time2s+" ~ "
-        binding.time2C.text = time2c
+        binding.time1S.text = "화 : " + time1s+" ~ "
+        binding.time1C.text = time1c
+        binding.time3S.text = "수 : " + time2s+" ~ "
+        binding.time3C.text = time2c
+        binding.time2S.text = "목 : " + time3s+" ~ "
+        binding.time2C.text = time3c
+        binding.time4S.text = "금 : " + time4s+" ~ "
+        binding.time4C.text = time4c
+        binding.time5S.text = "토 : " + time5s+" ~ "
+        binding.time5C.text = time5c
 
     }
 
-    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double, medical:String, time2S:String, time2c:String){
+    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double, medical:String, time2S:String, time2c:String,
+               time1S:String, time1C:String, time3S:String, time3C:String, time4S:String, time4C:String, time5S:String, time5C:String){
 
         this.name = name
         this.addr = addr
@@ -84,8 +101,17 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         this.Xpos = Xpos
         this.Ypos = Ypos
         this.medical = medical
+        this.time1s = time1S
+        this.time1c = time1C
         this.time2s = time2S
         this.time2c = time2c
+        this.time3s = time3S
+        this.time3c = time3C
+        this.time4s = time4S
+        this.time4c = time4C
+        this.time5s = time5S
+        this.time5c = time5C
+
     }
     ////////////////////////////////상세정보///////////////////////////
 

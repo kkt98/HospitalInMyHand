@@ -18,46 +18,54 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="병원이름"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:paddingTop="10dp"
+        android:layout_below="@+id/map"
+        android:drawableLeft="@drawable/icons8hospitalsign20"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingTop="10dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="병원주소"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_below="@+id/title"
+        android:drawableLeft="@drawable/icons8region20"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tell1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="대표 전화번호"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_below="@id/address"
+        android:drawableLeft="@drawable/icons8phone20"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tell2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="응급실 전화번호"
-        android:textSize="15sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_below="@id/address"
+        android:drawableLeft="@drawable/icons8phone20"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp"/>
+        android:paddingRight="8dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <View
         android:background="#B5B5B5"

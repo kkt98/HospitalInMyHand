@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.HospitalInMyHand" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/mycolor3</item>
+        <item name="colorPrimaryVariant">@color/mycolor3</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -17,7 +17,7 @@
     <style name="MyToolBarStyle">
 
         <!--    배경색 지정    -->
-        <item name="android:background">@color/mycolor</item>
+        <item name="android:background">@color/mycolor2</item>
         <!--    제목글씨 색상    -->
         <item name="titleTextColor">@color/white</item>
 

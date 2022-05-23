@@ -41,6 +41,11 @@ class PharmacyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        toolbar.title = "약국"
+
         recycler.adapter = HomePage3Adapter(this, items2, supportFragmentManager)
 
         binding.btn.setOnClickListener { spinner() }

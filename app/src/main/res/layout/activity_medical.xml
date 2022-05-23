@@ -6,20 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".MedicalActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/MyToolBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/MyToolbarTheme"
+        app:title="내손안에 병원" />
+
     <EditText
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:ems="15"
         android:padding="8dp"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:layout_below="@+id/toolbar"/>
 
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_toRightOf="@+id/edit"
         android:text="검색"
-        android:layout_toRightOf="@+id/edit"/>
+        android:backgroundTint="@color/mycolor2"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

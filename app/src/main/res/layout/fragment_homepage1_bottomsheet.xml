@@ -25,7 +25,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="10dp"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:paddingRight="8dp"
         android:paddingBottom="10dp"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -51,7 +51,7 @@
         android:paddingRight="8dp"
         android:paddingBottom="10dp"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -74,7 +74,7 @@
         android:paddingBottom="10dp"
         android:text="운영시간"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -86,7 +86,7 @@
         android:paddingBottom="10dp"
         android:text="운영시간"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -94,11 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/timeC"
-        android:paddingLeft="40dp"
+        android:layout_toRightOf="@+id/time_ic"
         android:paddingBottom="10dp"
         android:text="운영시간"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -110,7 +110,107 @@
         android:paddingBottom="10dp"
         android:text="운영시간"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time1S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tell"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/timeC"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time1C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tell"
+        android:layout_toRightOf="@id/time1S"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time3S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tell"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/time1C"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time3C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tell"
+        android:layout_toRightOf="@id/time3S"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time4S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeS"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/time2C"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time4C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeS"
+        android:layout_toRightOf="@id/time4S"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time5S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeS"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/time4C"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/time5C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeS"
+        android:layout_toRightOf="@id/time5S"
+        android:paddingBottom="10dp"
+        android:text="운영시간"
+        android:textColor="@color/black"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <View
@@ -125,13 +225,13 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="글쓰기"
-        android:textSize="13sp"
-        android:textColor="@color/black"
-        android:background="#00ff0000"
+        android:layout_below="@id/view"
         android:layout_marginLeft="300dp"
+        android:background="#00ff0000"
         android:drawableLeft="@drawable/ic_baseline_create_24"
-        android:layout_below="@id/view"/>
+        android:text="글쓰기"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

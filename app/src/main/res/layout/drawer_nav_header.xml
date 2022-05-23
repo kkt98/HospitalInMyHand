@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#3FACD7">
+    android:background="@color/mycolor3">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/header_iv"
