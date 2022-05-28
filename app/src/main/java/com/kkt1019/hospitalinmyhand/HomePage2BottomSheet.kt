@@ -141,12 +141,6 @@ class HomePage2BottomSheet : BottomSheetDialogFragment() {
         })
 
 
-//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "asdasdasdasdasd\nasdasdasdasdasd\nasdasdasdasd\nasdasdasdasd"))
-//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-//        items.add( ReviewItem(R.drawable.koala, "아이디", R.drawable.frog, "후기 내용"))
-
         recycler.adapter = ReviewAdapter(activity as Context, items)
 
     }

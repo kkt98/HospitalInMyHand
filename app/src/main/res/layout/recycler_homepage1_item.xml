@@ -34,34 +34,10 @@
             android:layout_below="@+id/title"/>
 
         <TextView
-            android:id="@+id/timeS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/address"
-            android:paddingLeft="8dp"
-            android:paddingBottom="8dp"
-            android:text="time"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/timeC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/address"
-            android:layout_toRightOf="@+id/timeS"
-
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
-            android:text="time"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
             android:id="@+id/tell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/timeS"
+            android:layout_below="@+id/address"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingBottom="8dp"
@@ -93,7 +69,7 @@
             android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/timeS"
+            android:layout_below="@+id/address"
             android:layout_alignParentEnd="true"
             android:maxLength="4"
             android:paddingRight="8dp"

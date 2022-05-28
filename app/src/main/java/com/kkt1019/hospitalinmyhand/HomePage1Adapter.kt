@@ -1,13 +1,12 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
-import android.location.LocationManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -42,7 +41,14 @@ class HomePage1Adapter(val context: Context,  var page1Items: MutableList<HomePa
 
         item.location = G.location.toString()
 
-        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Ypos , G.Xpos, item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
+//        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Ypos.toDouble() , G.Xpos.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
+
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage(G.location)
+        builder.show()
+
+        G.location = HomePage1Fragment.Distance.distance(G.Xpos.toDouble(), G.Ypos.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
+            .toString()
 
         holder.itemView.setOnClickListener {
 

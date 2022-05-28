@@ -56,7 +56,7 @@ class CalendarActivity : AppCompatActivity() {
                 setView(builderItem.root)
                 setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
                     if(editText.text != null) Toast.makeText(this@CalendarActivity, "일정 : ${editText.text}", Toast.LENGTH_SHORT).show()
-                    G.myschedule = editText.text.toString()
+//                    G.myschedule = editText.text.toString()
                     items.add(Calendar_Item(editText.text) )
 //                    val myEventDay = MyEventDay(binding.calendar.getSelectedDate(),
 //                        R.drawable.btn_dialog, noteEditText.getText().toString()

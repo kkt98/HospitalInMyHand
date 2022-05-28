@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.round
 
 class HomePage3Adapter constructor(val context:Context, var page3Items: MutableList<HomePage3Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage3Adapter.VH>() {
 
@@ -34,11 +35,13 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
         holder.tvTitle.text ="약국 이름 : " + item.yadmNm
         holder.tvAddr.text ="주소 : " + item.addr
         holder.tvTell.text ="전화번호 : " + item.telno
-        holder.tvLocation.text = G.location
+        holder.tvLocation.text = (round((item.location.toDouble() / 1000)*100) / 100).toString()
 
-        item.location = G.location.toString()
+//        val dNum:Double = item.location.toDouble() / 1000
 
-        G.location = PharmacyActivity.DistanceManager.getDistance(G.Xpos , G.Ypos, item.xPos.toDouble(), item.yPos.toDouble()).toString()
+
+
+//        G.location = PharmacyActivity.DistanceManager.getDistance(G.Xpos.toDouble() , G.Ypos.toDouble(), item.xPos.toDouble(), item.yPos.toDouble()).toString()
 
         holder.itemView.setOnClickListener {
 

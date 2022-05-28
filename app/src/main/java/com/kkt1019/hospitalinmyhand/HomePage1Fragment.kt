@@ -13,7 +13,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.Spinner
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
@@ -23,7 +26,6 @@ import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
 import kotlin.math.*
 
 class HomePage1Fragment:Fragment() {
@@ -45,11 +47,16 @@ class HomePage1Fragment:Fragment() {
 
         NetworkThread().start()
 
-        Mylocation()
 
         return binding.root
     }
         val binding: FragmentHomePage1Binding by lazy { FragmentHomePage1Binding.inflate(layoutInflater) }
+
+    override fun onResume() {
+        super.onResume()
+
+        Mylocation()
+    }
 
     inner class NetworkThread:Thread(){
 
@@ -66,7 +73,6 @@ class HomePage1Fragment:Fragment() {
 
                 val conn = url.openConnection() as HttpURLConnection
                 conn.doInput = true
-                Log.i("abc", "ccc")
                 val ips = conn.inputStream
 
                 val isr = InputStreamReader(ips)
@@ -78,10 +84,8 @@ class HomePage1Fragment:Fragment() {
                 var eventType = xpp.eventType
 
                 var item: HomePage1Item? = null
-                Log.i("abc", "bbb")
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
-                    Log.i("abc", "aaa")
 
                     when (eventType) {
 
@@ -991,7 +995,7 @@ class HomePage1Fragment:Fragment() {
             != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
         ) { return }
-        providerClient!!.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
+        providerClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
         )
     }
 
@@ -1004,8 +1008,21 @@ class HomePage1Fragment:Fragment() {
             val lat = location.latitude
             val lng = location.longitude
 
-            G.Xpos = lat
-            G.Ypos = lng
+            G.Xpos = lat.toString()
+            G.Ypos = lng.toString()
+
+        }
+    }
+
+    object Distance{
+
+        fun distance(longitude:Double, latitude:Double, longitude2:Double, latitude2:Double): Float {
+
+            var result = FloatArray(3)
+
+            android.location.Location.distanceBetween(longitude, latitude, longitude2, latitude2, result)
+
+            return result[0]
 
         }
     }

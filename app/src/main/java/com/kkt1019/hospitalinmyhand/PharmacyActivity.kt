@@ -4,26 +4,30 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.CheckBox
-import android.widget.Spinner
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import com.kkt1019.hospitalinmyhand.databinding.ActivityPharmacyBinding
 import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
 import org.xmlpull.v1.XmlPullParserFactory
+import java.io.IOException
 import java.io.InputStreamReader
+import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
+import java.net.MalformedURLException
 import java.net.URL
+import java.net.URLEncoder
 import kotlin.math.*
 
 class PharmacyActivity : AppCompatActivity() {
@@ -56,91 +60,101 @@ class PharmacyActivity : AppCompatActivity() {
 
     }
 
-    inner class NetworkThread:Thread(){
+    fun loadData(x:Double, y:Double){
+        Toast.makeText(this, "$x : $y", Toast.LENGTH_SHORT).show()
 
-        override fun run() {
+        object : Thread() {
+            override fun run() {
 
-            val address = ("http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList"
-                    + "?serviceKey=" + apiKey
-                    + "&pageNo=1&numOfRows=100")
+                val address = ("http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList" +
+                        "?serviceKey=" + apiKey +
+                        "&pageNo=1" +
+                        "&numOfRows=1000" +
+                        "&xPos=" + x +
+                        "&yPos=" + y +
+                        "&radius=10000")
 
-            Log.i("abc", "nnn")
+                Log.i("abc", "nnn")
 
-            try {
-                val url = URL(address)
+                try {
+                    val url = URL(address)
 
-                val conn = url.openConnection() as HttpURLConnection
-                conn.doInput = true
-                Log.i("abc", "fff")
-                val ips = conn.inputStream
+                    val conn = url.openConnection() as HttpURLConnection
+                    conn.doInput = true
+                    Log.i("abc", "fff")
+                    val ips = conn.inputStream
 
-                val isr = InputStreamReader(ips)
+                    val isr = InputStreamReader(ips)
 
-                val factory = XmlPullParserFactory.newInstance()
-                val xpp = factory.newPullParser()
-                xpp.setInput(isr)
+                    val factory = XmlPullParserFactory.newInstance()
+                    val xpp = factory.newPullParser()
+                    xpp.setInput(isr)
 
-                var eventType = xpp.eventType
+                    var eventType = xpp.eventType
 
-                var item: HomePage3Item? = null
-                Log.i("abc", "bbb")
+                    var item: HomePage3Item? = null
+                    Log.i("abc", "bbb")
 
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    Log.i("abc", "aaa")
+                    while (eventType != XmlPullParser.END_DOCUMENT) {
+                        Log.i("abc", "aaa")
 
-                    when (eventType) {
+                        when (eventType) {
 
-                        XmlPullParser.START_DOCUMENT -> {
-                        }
-                        XmlPullParser.START_TAG -> {
-                            val tagName = xpp.name
-
-                            if (tagName.equals("item")) {
-                                item = HomePage3Item()
-
-                            }else if (tagName.equals("addr")){
-                                xpp.next()
-                                if (item != null) item.addr = xpp.text
-
-                            }else if (tagName.equals("yadmNm")){
-                                xpp.next()
-                                if (item != null) item.yadmNm = xpp.text
-
-                            }else if (tagName.equals("telno")){
-                                xpp.next()
-                                if (item != null) item.telno = xpp.text
-
-                            }else if (tagName.equals("XPos")){
-                                xpp.next()
-                                if (item != null) item.xPos = xpp.text
-
-                            }else if (tagName.equals("YPos")){
-                                xpp.next()
-                                if (item != null) item.yPos = xpp.text
-
-                            }else if (tagName.equals("ykiho")){
-                                xpp.next()
-                                if (item != null) item.ykiho = xpp.text
-
+                            XmlPullParser.START_DOCUMENT -> {
                             }
-                        }
-                        XmlPullParser.END_TAG -> {
-                            val tagName2: String = xpp.name
-                            if (tagName2 == "item") {
-                                if (item != null) {
-                                    allitems.add(item)
+                            XmlPullParser.START_TAG -> {
+                                val tagName = xpp.name
+
+                                if (tagName.equals("item")) {
+                                    item = HomePage3Item()
+
+                                }else if (tagName.equals("addr")){
+                                    xpp.next()
+                                    if (item != null) item.addr = xpp.text
+
+                                }else if (tagName.equals("yadmNm")){
+                                    xpp.next()
+                                    if (item != null) item.yadmNm = xpp.text
+
+                                }else if (tagName.equals("telno")){
+                                    xpp.next()
+                                    if (item != null) item.telno = xpp.text
+
+                                }else if (tagName.equals("XPos")){
+                                    xpp.next()
+                                    if (item != null) item.xPos = xpp.text
+
+                                }else if (tagName.equals("YPos")){
+                                    xpp.next()
+                                    if (item != null) item.yPos = xpp.text
+
+                                }else if (tagName.equals("ykiho")){
+                                    xpp.next()
+                                    if (item != null) item.ykiho = xpp.text
+
+                                }else if (tagName.equals("distance")){
+                                    xpp.next()
+                                    if (item != null) item.location = xpp.text
+
+                                }
+                            }
+                            XmlPullParser.END_TAG -> {
+                                val tagName2: String = xpp.name
+                                if (tagName2 == "item") {
+                                    if (item != null) {
+                                        allitems.add(item)
+                                    }
                                 }
                             }
                         }
+                        eventType = xpp.next()
                     }
-                    eventType = xpp.next()
-                }
 
-                runOnUiThread {
-                    items.addAll(allitems)
-                    items2.addAll(items)
-                    binding.recycler.adapter?.notifyDataSetChanged()
-                }
+                    runOnUiThread {
+                        items.addAll(allitems)
+                        items2.addAll(items)
+                        binding.recycler.adapter?.notifyDataSetChanged()
+                    }
 
 //                activity.runOnUiThread {
 ////                    Toast.makeText(this, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
@@ -149,7 +163,21 @@ class PharmacyActivity : AppCompatActivity() {
 //                    binding.recycler.adapter?.notifyDataSetChanged()
 //                }
 
-            }catch (e:Exception){ Log.i("abc", e.toString())}
+                }catch (e:Exception){ Log.i("abc", e.toString())}
+
+            }
+
+        }.start()
+
+    }
+
+    inner class NetworkThread():Thread(){
+
+        override fun run() {
+
+
+
+
 
 
         }
@@ -169,6 +197,8 @@ class PharmacyActivity : AppCompatActivity() {
             if (checkBox.isChecked) {
                 spinner.visibility = View.GONE
                 spinner2.visibility = View.GONE
+
+
             }
             else {
                 spinner.visibility = View.VISIBLE
@@ -777,27 +807,27 @@ class PharmacyActivity : AppCompatActivity() {
         spinner.adapter = madapter
     }
 
-    object DistanceManager {
-
-        private const val R = 6372.8
-
-        /**
-         * 두 좌표의 거리를 계산한다.
-         *
-         * @param lat1 위도1
-         * @param lon1 경도1
-         * @param lat2 위도2
-         * @param lon2 경도2
-         * @return 두 좌표의 거리(m)
-         */
-        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-            val dLat = Math.toRadians(lat2 - lat1)
-            val dLon = Math.toRadians(lon2 - lon1)
-            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
-            val c = 2 * asin(sqrt(a))
-            return (R * c).toDouble()
-        }
-    }
+//    object DistanceManager {
+//
+//        private const val R = 6372.8
+//
+//        /**
+//         * 두 좌표의 거리를 계산한다.
+//         *
+//         * @param lat1 위도1
+//         * @param lon1 경도1
+//         * @param lat2 위도2
+//         * @param lon2 경도2
+//         * @return 두 좌표의 거리(m)
+//         */
+//        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+//            val dLat = Math.toRadians(lat2 - lat1)
+//            val dLon = Math.toRadians(lon2 - lon1)
+//            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
+//            val c = 2 * asin(sqrt(a))
+//            return (R * c).toDouble()
+//        }
+//    }
 
     lateinit var providerClient: FusedLocationProviderClient
 
@@ -827,8 +857,9 @@ class PharmacyActivity : AppCompatActivity() {
             val lat = location.latitude
             val lng = location.longitude
 
-            G.Xpos = lat
-            G.Ypos = lng
+            loadData(lng, lat)
+
+
 
         }
     }

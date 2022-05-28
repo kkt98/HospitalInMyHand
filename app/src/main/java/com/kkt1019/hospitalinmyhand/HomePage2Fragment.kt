@@ -829,8 +829,8 @@ class HomePage2Fragment:Fragment() {
             val lat = location.latitude
             val lng = location.longitude
 
-            G.Xpos = lat
-            G.Ypos = lng
+            G.Xpos = lat.toString()
+            G.Ypos = lng.toString()
 
         }
     }

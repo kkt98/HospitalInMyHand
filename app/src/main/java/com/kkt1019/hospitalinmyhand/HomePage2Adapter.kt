@@ -2,6 +2,7 @@ package com.kkt1019.hospitalinmyhand
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,13 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
 
         item.location = G.location.toString()
 
-        G.location = HomePage2Fragment.DistanceManager.getDistance(G.Xpos , G.Ypos, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
+        var handler = Handler()
+        handler.postDelayed({
+
+            G.location = HomePage2Fragment.DistanceManager.getDistance(G.Ypos.toDouble() , G.Xpos.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
+
+        } , 100)
+
 
         holder.itemView.setOnClickListener {
 

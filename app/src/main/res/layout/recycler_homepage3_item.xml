@@ -61,12 +61,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pg3_address"
-            android:layout_alignParentEnd="true"
-            android:maxLength="4"
-            android:paddingRight="8dp"
+            android:layout_toLeftOf="@id/pg3_tv_km"
             android:text="123"
             android:textSize="18sp"
             app:drawableLeftCompat="@drawable/icons8region20" />
+
+        <TextView
+            android:id="@+id/pg3_tv_km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg3_address"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="8dp"
+            android:text="km"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 

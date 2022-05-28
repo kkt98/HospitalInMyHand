@@ -41,9 +41,7 @@ class RevieEdit : AppCompatActivity() {
 
     var imgPath: String? = null
 
-    var resultLauncher = registerForActivityResult(
-        StartActivityForResult()
-    ) { result ->
+    var resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val uri = result.data!!.data
             Glide.with(this).load(uri).into(binding.iv)
