@@ -8,14 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.kkt1019.hospitalinmyhand.databinding.RecyclerMedicalItemBinding
 
-class MedicalAdapter constructor(val context:Context, var medicalItem:MutableList<MedicalItem>) : RecyclerView.Adapter<MedicalAdapter.VH>() {
+class MedicalAdapter(val context:Context, var items: MutableList<MedicalItems>) : RecyclerView.Adapter<MedicalAdapter.VH>() {
 
     inner class VH(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        val ivImage : ImageView by lazy { itemView.findViewById(R.id.image) }
-        val tvMaker : TextView by lazy { itemView.findViewById(R.id.maker) }
-        val tvName : TextView by lazy { itemView.findViewById(R.id.name) }
+        val binding:RecyclerMedicalItemBinding = RecyclerMedicalItemBinding.bind(itemView)
 
     }
 
@@ -30,13 +29,12 @@ class MedicalAdapter constructor(val context:Context, var medicalItem:MutableLis
 
     override fun onBindViewHolder(holder: VH, position: Int) {
 
-        val item = medicalItem.get(position)
+        holder.binding.maker.text = items[position].entpName
+        holder.binding.name.text = items[position].itemName
 
-        holder.ivImage.setImageResource(item.itemImage)
-        holder.tvMaker.setText(item.entpName)
-        holder.tvName.setText(item.itemName)
+        Glide.with(context).load(items[position].itemImage).into(holder.binding.image)
 
     }
 
-    override fun getItemCount(): Int = medicalItem.size
+    override fun getItemCount(): Int = items.size
 }

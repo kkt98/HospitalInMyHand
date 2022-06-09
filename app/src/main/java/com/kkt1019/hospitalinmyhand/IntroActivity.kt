@@ -10,11 +10,12 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
-        var handler = Handler()
+        val handler = Handler()
         handler.postDelayed({
-            var intent = Intent(this, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        } , 3000)
+            finish()
+        } , 5000)
     }
 
     override fun onPause() {
