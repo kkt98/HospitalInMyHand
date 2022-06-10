@@ -18,8 +18,8 @@ interface RetrofitService {
     @GET("/hospital/Delete.php")
     fun DeleteDataFromServer(@Query("nickname") nickname:String): Call<ArrayList<ItemVO?>>
 
-    @GET("/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList")
-    fun MedicalData(@Query("ServiceKey") serviceKey:String, @Query("pageNo") pageNo:Int, @Query("numOfRows") numOfRows:Int, @Query("type") type:String):Call<MedicalItemVO>
+    @GET("1471000/DrugPrdtPrmsnInfoService02")
+    fun MedicalData(@Query("ServiceKey") serviceKey:String, @Query("pageNo") pageNo:Int, @Query("numOfRows") numOfRows:Int, @Query("type") type:String, @Query("item_name") item_name:String):Call<MedicalItemVO>
 
     @GET("1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==&pageNo=1&numOfRows=3&type=json")
     fun aaa() :Call<MedicalItemVO>

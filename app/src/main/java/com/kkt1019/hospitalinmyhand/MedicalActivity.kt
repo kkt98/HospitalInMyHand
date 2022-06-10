@@ -1,10 +1,9 @@
 package com.kkt1019.hospitalinmyhand
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMedicalBinding
 import retrofit2.Call
@@ -22,69 +21,65 @@ class MedicalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
-        toolbar.title = "약 검색"
+        binding.toolbar.title = "약 검색"
 
-        datas()
+
+
+        binding.btn.setOnClickListener { datas() }
     }
+
+    var items1 = mutableListOf<MedicalItems>()
+    var items2 = mutableListOf<MedicalItems>()
 
     fun datas(){
 
+        var edit = binding.edit.text.toString()
+
         val retrofit = RetrofitHelper.getRetrofitInstance()
         val retrofitService = retrofit.create(RetrofitService::class.java)
-//        val call = retrofitService.MedicalData("H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==", 1, 10, "json")
-////        val call = retrofitService.aaa()
-////        val call = retrofitService.bbb(1,3,"json")
-//
-//        call.enqueue(object : Callback<MedicalItemVO> {
-//            override fun onResponse(call: Call<MedicalItemVO>, response: Response<MedicalItemVO>) {
-//
-//                val medicalResponse: MedicalItemVO? = response.body()
-//                Log.i("ccc", medicalResponse?.items?.size.toString())
-//
-//                medicalResponse?.items?.let {
-//                    Log.i("ccc", it.size.toString())
-//                    binding.recycler.adapter = MedicalAdapter(this@MedicalActivity, it)
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<MedicalItemVO>, t: Throwable) {
-//                AlertDialog.Builder(this@MedicalActivity).setMessage("error : ${t.message}").create().show()
-//            }
-//
-//
-//        })
-        val call2 = retrofitService.MedicalDataString("H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==", 1, 10, "json")
-//        val call2 = retrofitService.aaa()
-//        val call2 = retrofitService.bbb(1, 5, "json")
+        val call = retrofitService.MedicalData("H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==", 1, 100, "json", "$edit")
 
-        call2.enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+        call.enqueue(object : Callback<MedicalItemVO> {
+            override fun onResponse(call: Call<MedicalItemVO>, response: Response<MedicalItemVO>) {
 
-                AlertDialog.Builder(this@MedicalActivity).setMessage("${response.body()}").create().show()
+                val medicalResponse: MedicalItemVO? = response.body()
+                Log.i("ccc", medicalResponse?.body?.items?.size.toString())
 
+                medicalResponse?.body?.items?.let {
+
+                    items1.addAll(it)
+
+                    Log.i("jjj", items1.toString())
+
+                    binding.recycler.adapter = MedicalAdapter(this@MedicalActivity, items1)
+
+                }
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<MedicalItemVO>, t: Throwable) {
                 AlertDialog.Builder(this@MedicalActivity).setMessage("error : ${t.message}").create().show()
             }
 
         })
 
-
-
-
-
-
-//        items.add( MedicalItem("제조사", "약 이름", R.drawable.frog))
-//        items.add( MedicalItem("제조사", "약 이름", R.drawable.frog))
-//        items.add( MedicalItem("제조사", "약 이름", R.drawable.frog))
-//        items.add( MedicalItem("제조사", "약 이름", R.drawable.frog))
-//        items.add( MedicalItem("제조사", "약 이름", R.drawable.frog))
-//
-//        recycler.adapter = MedicalAdapter(this, items)
-
     }
+
+//    fun searchMedical(){
+//
+//        var etname =  binding.edit.text.toString()
+//
+//        for (item in items1) {
+//            Log.i("aaa", item.itemName)
+//            if (item.itemName.contains(etname)) {
+//                items2.add(item)
+//            }
+//        }
+//
+//        binding.edit.text.clear()
+//
+//        binding.recycler.adapter = MedicalAdapter(this@MedicalActivity, items2)
+//
+//    }
 }

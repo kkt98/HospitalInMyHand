@@ -1,8 +1,10 @@
 package com.kkt1019.hospitalinmyhand
 
-data class MedicalItemVO( val header:aaa, val items:MutableList<MedicalItems>)
+data class MedicalItemVO(val body:ItemsBody )
 
-data class aaa(val resultCod:String)
+//data class aaa(val resultCod:String)
+
+data class ItemsBody(var items:MutableList<MedicalItems>)
 
 data class MedicalItems(
     val entpName:String,

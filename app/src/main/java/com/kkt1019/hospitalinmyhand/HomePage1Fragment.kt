@@ -1005,8 +1005,8 @@ class HomePage1Fragment:Fragment() {
 
             //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
             val location = locationResult.lastLocation
-            val lat = location.latitude
-            val lng = location.longitude
+            val lat = location?.latitude
+            val lng = location?.longitude
 
             G.Xpos = lat.toString()
             G.Ypos = lng.toString()

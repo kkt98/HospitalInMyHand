@@ -17,8 +17,7 @@
             android:layout_height="80dp"
             android:paddingRight="8dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/koala"
-            android:padding="4dp"/>
+            android:src="@drawable/koala" />
 
         <TextView
             android:id="@+id/maker"
@@ -28,7 +27,7 @@
             android:padding="8dp"
             android:text="제조사"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/name"
@@ -36,12 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/maker"
             android:layout_toRightOf="@+id/image"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
+            android:padding="8dp"
             android:text="약이름"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
 
     </RelativeLayout>

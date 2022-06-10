@@ -29,8 +29,9 @@
         android:layout_height="55dp"
         android:layout_below="@+id/toolbar"
         android:layout_toRightOf="@+id/edit"
-        android:text="검색"
-        android:backgroundTint="@color/mycolor2"/>
+        android:backgroundTint="@color/mycolor2"
+        android:paddingRight="8dp"
+        android:text="검색" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
