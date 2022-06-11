@@ -46,7 +46,7 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
         var handler = Handler()
         handler.postDelayed({
 
-            G.location = HomePage2Fragment.DistanceManager.getDistance(G.Ypos.toDouble() , G.Xpos.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
+            G.location = HomePage2Fragment.DistanceManager.getDistance(G.Ypos!!.toDouble() , G.Xpos!!.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
 
         } , 100)
 

@@ -3,6 +3,9 @@ package com.kkt1019.hospitalinmyhand
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,12 +46,8 @@ class HomePage1Adapter(val context: Context,  var page1Items: MutableList<HomePa
 
 //        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Ypos.toDouble() , G.Xpos.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
 
-        val builder = AlertDialog.Builder(context)
-        builder.setMessage(G.location)
-        builder.show()
-
-        G.location = HomePage1Fragment.Distance.distance(G.Ypos.toDouble(), G.Xpos.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble())
-            .toString()
+            G.location = HomePage1Fragment.Distance.distance(G.Xpos.toDouble(), G.Ypos.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
+                .toString()
 
         holder.itemView.setOnClickListener {
 

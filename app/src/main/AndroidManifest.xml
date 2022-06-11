@@ -20,9 +20,6 @@
             android:name=".MedicalMoreActivity"
             android:exported="false" />
         <activity
-            android:name=".BaseActivity"
-            android:exported="false" />
-        <activity
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity

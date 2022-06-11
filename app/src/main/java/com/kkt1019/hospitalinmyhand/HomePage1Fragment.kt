@@ -41,7 +41,7 @@ class HomePage1Fragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.recycler.adapter = childFragmentManager?.let { HomePage1Adapter(activity as Context, items3, it) }
+        binding.recycler.adapter = HomePage1Adapter(activity as Context, items3, childFragmentManager)
 
         binding.btn.setOnClickListener { spinner() }
 
@@ -958,27 +958,27 @@ class HomePage1Fragment:Fragment() {
 
     }
 
-    object DistanceManager {
-
-        private const val R = 6372.8
-
-        /**
-         * 두 좌표의 거리를 계산한다.
-         *
-         * @param lat1 위도1
-         * @param lon1 경도1
-         * @param lat2 위도2
-         * @param lon2 경도2
-         * @return 두 좌표의 거리(m)
-         */
-        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-            val dLat = Math.toRadians(lat2 - lat1)
-            val dLon = Math.toRadians(lon2 - lon1)
-            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
-            val c = 2 * asin(sqrt(a))
-            return (R * c).toDouble()
-        }
-    }
+//    object DistanceManager {
+//
+//        private const val R = 6372.8
+//
+//        /**
+//         * 두 좌표의 거리를 계산한다.
+//         *
+//         * @param lat1 위도1
+//         * @param lon1 경도1
+//         * @param lat2 위도2
+//         * @param lon2 경도2
+//         * @return 두 좌표의 거리(m)
+//         */
+//        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+//            val dLat = Math.toRadians(lat2 - lat1)
+//            val dLon = Math.toRadians(lon2 - lon1)
+//            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
+//            val c = 2 * asin(sqrt(a))
+//            return (R * c).toDouble()
+//        }
+//    }
 
     lateinit var providerClient: FusedLocationProviderClient
 
@@ -1016,11 +1016,11 @@ class HomePage1Fragment:Fragment() {
 
     object Distance{
 
-        fun distance(longitude:Double, latitude:Double, longitude2:Double, latitude2:Double): Float {
+        fun distance(latitude:Double, longitude:Double, latitude2:Double, longitude2:Double): Float {
 
             var result = FloatArray(3)
 
-            android.location.Location.distanceBetween(longitude, latitude, longitude2, latitude2, result)
+            android.location.Location.distanceBetween(latitude, longitude, latitude2, longitude2, result)
 
             return result[0]
 

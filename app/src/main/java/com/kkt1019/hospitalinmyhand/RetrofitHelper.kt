@@ -42,6 +42,16 @@ class RetrofitHelper {
             return retrofit
         }
 
+        fun getRetrofitInstance2() : Retrofit{
+            val retrofit: Retrofit = Retrofit.Builder()
+                .baseUrl("http://apis.data.go.kr/")
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+
+            return retrofit
+        }
+
     }
 
 

@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/address"
             android:layout_alignParentEnd="true"
-            android:maxLength="4"
+            android:maxLength="3"
             android:paddingRight="8dp"
             android:text="123"
             android:textSize="18sp"

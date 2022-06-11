@@ -18,10 +18,11 @@
         android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:ems="15"
-        android:padding="8dp"
+        android:layout_below="@+id/toolbar"
+        android:ems="14"
         android:inputType="text"
-        android:layout_below="@+id/toolbar"/>
+        android:hint="의약품명을 입력하세요."
+        android:padding="8dp" />
 
     <Button
         android:id="@+id/btn"
@@ -30,7 +31,6 @@
         android:layout_below="@+id/toolbar"
         android:layout_toRightOf="@+id/edit"
         android:backgroundTint="@color/mycolor2"
-        android:paddingRight="8dp"
         android:text="검색" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,5 +40,13 @@
         android:layout_below="@+id/edit"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>
