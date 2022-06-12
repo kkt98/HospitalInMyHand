@@ -24,12 +24,12 @@ class MedicalMoreActivity : AppCompatActivity() {
         val useMethodQesitm =intent.getStringExtra("useMethodQesitm")
         val itemImage =intent.getStringExtra("itemImage")
 
-        binding.atpnQesitm.text =atpnQesitm
-        binding.efcyQesitm.text = efcyQesitm
-        binding.entpName.text = entpName
-        binding.itemName.text = itemName
-        binding.seQesitm.text = seQesitm
-        binding.useMethod.text = useMethodQesitm
+        binding.atpnQesitm.text = "주의사항 : " + atpnQesitm
+        binding.efcyQesitm.text = "효능 : " + efcyQesitm
+        binding.entpName.text = "제조사 : " + entpName
+        binding.itemName.text = "제품명 : " + itemName
+        binding.seQesitm.text = "부작용 : " + seQesitm
+        binding.useMethod.text = "복용법 : " + useMethodQesitm
 
         Glide.with(this).load(itemImage).into(binding.ivDetail)
 

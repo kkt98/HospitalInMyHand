@@ -20,17 +20,6 @@
         android:padding="10dp"
         android:text="내 위치 중심" />
 
-    <CheckBox
-        android:id="@+id/check_light"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/check_my"
-        android:padding="10dp"
-        android:layout_marginRight="10dp"
-        android:text="운영중 병원 보기" />
-
     <Spinner
 
         android:id="@+id/spinner"

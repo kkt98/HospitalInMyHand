@@ -57,13 +57,6 @@
             android:textOff=" "
             android:textOn=" " />
 
-        <ImageView
-            android:id="@+id/light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/fav"
-            android:paddingRight="8dp"
-            android:src="@drawable/ic_light_on" />
 
         <TextView
             android:id="@+id/tv_location"
@@ -71,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/address"
             android:layout_alignParentEnd="true"
-            android:maxLength="3"
+            android:maxLength="4"
             android:paddingRight="8dp"
             android:text="123"
             android:textSize="18sp"

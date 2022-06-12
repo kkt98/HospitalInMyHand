@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/bg_choice.xml" value="0.1275" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/bg_choice_select.xml" value="0.1275" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/bg_round_rect.xml" value="0.1275" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.162" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_baseline_image_40.xml" value="0.1095" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_map.xml" value="0.12" />
@@ -39,6 +42,7 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/alertdialog_edittext.xml" value="0.17962962962962964" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/bg_edit.xml" value="0.35520833333333335" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/bottomsheet_homepage1.xml" value="0.18888888888888888" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/choice_list.xml" value="0.1935185185185185" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/dialog.xml" value="0.2324074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/dialog2.xml" value="0.2324074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/drawer_nav_header.xml" value="0.17962962962962964" />

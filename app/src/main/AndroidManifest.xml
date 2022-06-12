@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/hospital_icon"
         android:label="@string/app_name"
@@ -69,6 +70,23 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCaAMy_bNVUWMbdAM_ObJjqCIuCdGaKw14" />
+
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="beb29a3a8bb38a001c5f2da0f105f101"/>
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakaobeb29a3a8bb38a001c5f2da0f105f101" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

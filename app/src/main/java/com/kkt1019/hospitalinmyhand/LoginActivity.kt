@@ -13,6 +13,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
+import com.kakao.util.maps.helper.Utility
 import com.kkt1019.hospitalinmyhand.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -30,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.signInButton.setOnClickListener { googleLogin() }
 
+        binding.kakaoLogin.setOnClickListener { kakaoLogin() }
+
         auth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) //기본 로그인 방식 사용
@@ -44,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
         val intent = GoogleSignIn.getClient(this, gso).signInIntent
 
         resultLauncher.launch(intent)
+
+        //카카오 로그인 키해시값 얻어오기
+        val keyHash = Utility.getKeyHash(this)
+        Log.i("keyHash", keyHash)
 
         setContentView(binding.root)
     }
@@ -67,16 +76,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
-//    public override fun onStart() {
-//        super.onStart()
-//        val account = GoogleSignIn.getLastSignedInAccount(this)
-//        if(account!==null){ // 이미 로그인 되어있을시 바로 메인 액티비티로 이동
-//            val intent = Intent(this, MainActivity::class.java)
-//            Toast.makeText(this, "환영합니다" + G.nickname + "님", Toast.LENGTH_SHORT).show()
-//            startActivity(intent)
-//        }
-//    } //onStart End
 
     fun gest(){
 
@@ -106,5 +105,41 @@ class LoginActivity : AppCompatActivity() {
         } //if
     } // onActivityResult
     //**********************구글로그인 끝**************************
+
+    fun kakaoLogin(){
+
+        //카카오 로그인 성공했을때 반응하는 callback 객체 생성
+        val callback : (OAuthToken?, Throwable?)->Unit = { token, error ->
+            if (error != null) {
+                Toast.makeText(this, "카카오 로그인 실패😥", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this, "카카오 로그인 성공😊", Toast.LENGTH_SHORT).show()
+
+                //사용자의 정보 요청
+                UserApiClient.instance.me { user, error ->
+                    if (user != null){
+                        var nickname:String = user.kakaoAccount?.profile?.nickname.toString()
+//                        var email:String = user.kakaoAccount?.email ?:"" //앨비스 연산자
+                        var profile = user.kakaoAccount?.profile?.thumbnailImageUrl
+
+                        G.profileUrl = profile
+                        G.nickname = nickname
+//                        G.nickname = email
+
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
+                }
+            }
+        }
+
+        //카카오톡이 설치되어 있으면 카카오톡로그인, 없으면 카카오계정 로그인
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)){
+            UserApiClient.instance.loginWithKakaoTalk(this, callback = callback)
+        }else{
+            UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+        }
+
+    }
 
 }

@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/kakao_login_large_wide"/>
+        android:src="@drawable/kakao_login_large_wide" />
 
     <Button
         android:id="@+id/gest"

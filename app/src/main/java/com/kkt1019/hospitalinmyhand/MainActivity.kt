@@ -1,7 +1,12 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.content.pm.Signature
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +18,9 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 import de.hdodenhof.circleimageview.CircleImageView
+import okhttp3.internal.Util
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
@@ -113,5 +121,6 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
 
 }

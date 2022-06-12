@@ -7,6 +7,6 @@
 
     <item android:id="@+id/bnv_hospital2"
         android:title="응급실"
-        android:icon="@drawable/icons8doctorsbag64"/>
+        android:icon="@drawable/emergency"/>
 
 </menu>

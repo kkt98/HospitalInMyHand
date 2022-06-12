@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -34,6 +35,11 @@ class MedicalAdapter(val context:Context, var items: MutableList<MedicalItems>) 
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VH, position: Int) {
+
+//        var atpnQesitm = HtmlCompat.fromHtml(items[position].atpnQesitm, HtmlCompat.FROM_HTML_MODE_COMPACT)
+//        var efcyQesitm = HtmlCompat.fromHtml(items[position].efcyQesitm, HtmlCompat.FROM_HTML_MODE_COMPACT)
+//        var seQesitm = HtmlCompat.fromHtml(items[position].seQesitm, HtmlCompat.FROM_HTML_MODE_COMPACT)
+//        var useMethodQesitm = HtmlCompat.fromHtml(items[position].useMethodQesitm, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
         holder.binding.maker.text = "업체명 : " + items[position].entpName
         holder.binding.name.text = "제품명 : " + items[position].itemName
