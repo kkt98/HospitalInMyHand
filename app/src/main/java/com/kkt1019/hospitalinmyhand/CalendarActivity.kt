@@ -7,11 +7,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
-import com.google.android.material.drawable.DrawableUtils
+import com.kkt1019.hospitalinmyhand.G.Companion.events
 import com.kkt1019.hospitalinmyhand.databinding.ActivityCalendarBinding
 import com.kkt1019.hospitalinmyhand.databinding.AlertdialogEdittextBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 
 
@@ -23,28 +28,24 @@ class CalendarActivity : AppCompatActivity() {
 
     var items = mutableListOf<Calendar_Item>()
 
-    val events: MutableList<EventDay> = ArrayList()
+    lateinit var cc : CalendarItemVO
+
+    var calendr = Calendar.getInstance()
+    val calender:CalendarView by lazy { binding.calendar }
+
+    val retrofit: Retrofit = RetrofitHelper.calendarRetrofit()
+    val retrofitService = retrofit.create(RetrofitService::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+      //  var calendr = Calendar.getInstance()
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         toolbar.title = "일정"
-
-
-        binding.calendar.setOnDayClickListener {
-
-            var size = binding.calendar.selectedDates.size-1
-            Log.i("ddd", binding.calendar.selectedDates[size].toString())
-
-            val calendar = Calendar.getInstance()
-            events.add(EventDay(calendar, com.kkt1019.hospitalinmyhand.DrawableUtils.getCircleDrawableWithText(this, "M")))
-            binding.calendar.setEvents(events)
-        }
 
         binding.exThreeAddButton.setOnClickListener {
 
@@ -55,17 +56,19 @@ class CalendarActivity : AppCompatActivity() {
                 setMessage("일정 입력")
                 setView(builderItem.root)
                 setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+
+
                     if(editText.text != null) Toast.makeText(this@CalendarActivity, "일정 : ${editText.text}", Toast.LENGTH_SHORT).show()
-//                    G.myschedule = editText.text.toString()
-                    items.add(Calendar_Item(editText.text) )
-//                    val myEventDay = MyEventDay(binding.calendar.getSelectedDate(),
-//                        R.drawable.btn_dialog, noteEditText.getText().toString()
-//                    )
+                    G.myschedule = editText.text.toString()
+                    items.add(Calendar_Item(editText.text))
 
-//                    val calendar1 = Calendar.getInstance()
-//                    events.add(EventDay(calendar1, R.drawable.ic_dot))
-//
+                    //확인버튼을 누르면, 서버DB로 정보를 전송하는 메소드
+                    insertDB()
 
+                    events.add(EventDay(calendr, R.drawable.ic_light_off))
+                    calender.setEvents(events)
+
+//                    CalendarItemVO()
 
                 }
                 setNegativeButton("취소"){dialogInterface: DialogInterface, i: Int ->
@@ -79,12 +82,68 @@ class CalendarActivity : AppCompatActivity() {
 
 
         binding.calendar.setOnDayClickListener(OnDayClickListener { eventDay: EventDay ->
-            Toast.makeText(this, eventDay.calendar.time.toString() + " " + eventDay.isEnabled, Toast.LENGTH_SHORT).show()
+            var size = binding.calendar.selectedDates.size-1
+            Log.i("ddd", binding.calendar.selectedDates[size].toString())
+
+            G.days = eventDay.calendar.time.toString()
+
+
+            Toast.makeText(this, eventDay.calendar.time.toString() + ", " + eventDay.isEnabled, Toast.LENGTH_SHORT).show()
+
+            Log.i("dddddddddddddddd",calendr.toString() )
+            Log.i("dddddddddddddddd",calendr.time.toString() )
+
+            calendr=eventDay.calendar
+
         })
+
+        // 달력뷰의 날짜 클릭시, 서버DB에 저장된 일정들을 불러오는 메소드
+        loadDB()
 
         recycler.adapter = CalendarAdapter(this, items)
 
     }
+
+
+
+    private fun insertDB() {
+
+        val email = G.nickname.toString()
+        val message = G.myschedule.toString()
+        val date = G.days.toString()
+
+        val dataPart = HashMap<String, String>()
+        dataPart.put("email", email)
+        dataPart.put("message", message)
+        dataPart.put("date", date)
+
+        //확인버튼을 누르면, 서버DB로 정보를 전송하는 메소드
+        val call: Call<String> = retrofitService.calendarinsert(dataPart)
+        call.enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Log.i("잘 올라갔나", response.body() + "")
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.i("왜 안올라갔어", t.message + "")
+            }
+
+        })
+
+
+    }
+    private fun loadDB(){
+
+        //달력뷰의 날짜 클릭시, 서버DB에 저장된 일정들을 불러오는 메소드
+
+
+    }
+
+
+
+
+
+
 
 
 }

@@ -21,5 +21,9 @@ interface RetrofitService {
     @GET("/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList")
     fun MedicalData(@Query("ServiceKey") serviceKey:String, @Query("itemName") itemName:String, @Query("type") type:String):Call<MedicalItemVO>
 
+    @Multipart
+    @POST("/hospital/insertDB_cal.php")
+    fun calendarinsert(@PartMap date: Map<String, String>):Call<String>
+
 }
 

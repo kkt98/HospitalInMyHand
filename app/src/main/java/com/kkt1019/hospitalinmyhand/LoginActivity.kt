@@ -5,14 +5,21 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.util.maps.helper.Utility
@@ -22,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
 
     val binding:ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
 
-    var auth : FirebaseAuth ? = null
-    var googleSignInClient : GoogleSignInClient ? = null
-    var GOOGLE_LOGIN_CODE = 9001
+//    lateinit var firebaseAuth:FirebaseAuth
+//    var googleSignInClient : GoogleSignInClient ? = null
+//    var GOOGLE_LOGIN_CODE = 9001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,27 +42,33 @@ class LoginActivity : AppCompatActivity() {
 
         binding.kakaoLogin.setOnClickListener { kakaoLogin() }
 
-        auth = FirebaseAuth.getInstance()
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) //기본 로그인 방식 사용
-            .requestIdToken("1084194424820-55a06q11ov703tpimbh70meunjh5epmd.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-
-        //구글 로그인 액티비티를 실행하는 Intnent 객체 얻어오기
-        val intent = GoogleSignIn.getClient(this, gso).signInIntent
-
-        resultLauncher.launch(intent)
-
         //카카오 로그인 키해시값 얻어오기
         val keyHash = Utility.getKeyHash(this)
         Log.i("keyHash", keyHash)
 
         setContentView(binding.root)
     }
+
+    fun gest(){
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+
+    }
+
+//    //*********************구글로그인*******************8*
+    fun googleLogin() {
+
+        val gso:GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("1084194424820-55a06q11ov703tpimbh70meunjh5epmd.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+
+        //구글 로그인 화면 액티비티를 실행시켜주는 Intent 객체 얻어오기
+        val intent = GoogleSignIn.getClient(this, gso).signInIntent
+        resultLauncher.launch(intent)
+
+    } // googleLogin
 
     var resultLauncher = registerForActivityResult(
         StartActivityForResult()
@@ -75,36 +88,11 @@ class LoginActivity : AppCompatActivity() {
             G.profileUrl = profile.toString()
         }
 
-    }
-
-    fun gest(){
-
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent (this, MainActivity::class.java))
+        finish()
 
     }
-
-    //*********************구글로그인*******************8*
-    fun googleLogin() {
-        var signInIntent = googleSignInClient?.signInIntent
-        startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
-
-    } // googleLogin
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == GOOGLE_LOGIN_CODE) {
-            var result = Auth.GoogleSignInApi.getSignInResultFromIntent(data!!)
-                if(result?.isSuccess == true) {
-                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent (this, MainActivity::class.java))
-                }else{
-                    Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-                }
-
-        } //if
-    } // onActivityResult
-    //**********************구글로그인 끝**************************
+//    //**********************구글로그인 끝**************************
 
     fun kakaoLogin(){
 

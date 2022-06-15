@@ -40,7 +40,6 @@ class MapActivity : AppCompatActivity() {
 
         binding.etSearch.setOnEditorActionListener { textView, i, keyEvent ->
 
-            searchQurey = binding.etSearch.text.toString()
             //카카오 장소검색 API 작업요청
             searchPlaces()
 

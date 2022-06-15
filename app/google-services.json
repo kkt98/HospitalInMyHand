@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1084194424820-olvrvnjopchcvnj5f69l1hho6qhrptgo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kkt1019.hospitalinmyhand",
+            "certificate_hash": "cbd76aea661fd373c276a34a5acf825b9fa4045d"
+          }
+        },
+        {
           "client_id": "1084194424820-sql1h067qv5ee6b77bibc3ljtabkisqg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

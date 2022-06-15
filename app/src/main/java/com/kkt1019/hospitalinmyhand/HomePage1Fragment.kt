@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
@@ -34,6 +35,8 @@ class HomePage1Fragment:Fragment() {
     var items2 = mutableListOf<HomePage1Item>()
     var items3 = mutableListOf<HomePage1Item>()
     var allitems = mutableListOf<HomePage1Item>()
+    lateinit var mylocation: Location
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -163,13 +163,10 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
                 binding.recycler.adapter?.notifyDataSetChanged()
 
                 val list = response.body()!!
-                Log.i("yyy", response.body().toString())
                 for (ItemVO in list) {
                     if (ItemVO != null) {
 
                         items.add(0, ItemVO)
-
-                        Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
 
                     }
                     binding.recycler.adapter?.notifyItemInserted(0)

@@ -33,6 +33,7 @@
             app:previousButtonSrc="@drawable/ic_chevron_left_black_24dp"
             app:anotherMonthsDaysLabelsColor="#D5D5D5"
             app:headerLabelColor="@color/black"
+            app:eventsEnabled="true"
             app:selectionColor="@color/mycolor"
             app:datePicker="true"/>
 

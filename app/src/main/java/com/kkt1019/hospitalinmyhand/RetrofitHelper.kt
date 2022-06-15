@@ -28,6 +28,10 @@ class RetrofitHelper {
             return Retrofit.Builder().baseUrl("http://sux1011.dothome.co.kr").addConverterFactory(ScalarsConverterFactory.create()).build()
         }
 
+        fun calendarRetrofit(): Retrofit {
+            return Retrofit.Builder().baseUrl("http://sux1011.dothome.co.kr").addConverterFactory(ScalarsConverterFactory.create()).build()
+        }
+
         val gson : Gson = GsonBuilder()
             .setLenient()
             .create()

@@ -8,6 +8,7 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/bg_round_rect.xml" value="0.1275" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.162" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_baseline_image_40.xml" value="0.1095" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_light_off.xml" value="0.1" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-anydpi/ic_map.xml" value="0.12" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-hdpi/ic_add.xml" value="0.1155" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/drawable-mdpi/sample_circle.xml" value="0.1155" />
@@ -29,7 +30,7 @@
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_home_page3_fragment.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_hospital.xml" value="0.1712962962962963" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_intro.xml" value="0.17222222222222222" />
-        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_login.xml" value="0.18333333333333332" />
+        <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_login1.xml" value="0.2574074074074074" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_main.xml" value="0.17962962962962964" />
         <entry key="..\:/Study/Android/AndroidTP/HospitalInMyHand/app/src/main/res/layout/activity_map.xml" value="0.1712962962962963" />
