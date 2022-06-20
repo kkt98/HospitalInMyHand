@@ -24,15 +24,11 @@ class CalendarAdapter(val context: Context,  var calendaritems: MutableList<Cale
         return VH(itemView)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = calendaritems[position]
 
-        holder.tvschedule.setText(calendaritems[position].schedule)
+        holder.tvschedule.text = item.schedule
 
-        holder.itemView.setOnClickListener {
-
-        }
 
     }
 

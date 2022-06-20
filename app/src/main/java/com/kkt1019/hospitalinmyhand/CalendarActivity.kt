@@ -74,7 +74,7 @@ class CalendarActivity : AppCompatActivity() {
                 setNegativeButton("취소"){dialogInterface: DialogInterface, i: Int ->
                     return@setNegativeButton
                 }
-                builder.setOnDismissListener { binding.calendarRecycler.adapter?.notifyDataSetChanged() }
+//                builder.setOnDismissListener { binding.calendarRecycler.adapter?.notifyDataSetChanged() }
                 show()
             }
 
@@ -95,16 +95,14 @@ class CalendarActivity : AppCompatActivity() {
 
             calendr=eventDay.calendar
 
-        })
+            // 달력뷰의 날짜 클릭시, 서버DB에 저장된 일정들을 불러오는 메소드
+            loadDB()
 
-        // 달력뷰의 날짜 클릭시, 서버DB에 저장된 일정들을 불러오는 메소드
-        loadDB()
+        })
 
         recycler.adapter = CalendarAdapter(this, items)
 
     }
-
-
 
     private fun insertDB() {
 
@@ -135,7 +133,35 @@ class CalendarActivity : AppCompatActivity() {
     private fun loadDB(){
 
         //달력뷰의 날짜 클릭시, 서버DB에 저장된 일정들을 불러오는 메소드
+        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
+        val retrofitService = retrofit!!.create(RetrofitService::class.java)
+        val call = retrofitService.calendarLoad(G.nickname.toString(), G.days.toString())
+        call.enqueue(object : Callback<ArrayList<Calendar_Item>>{
+            override fun onResponse(
+                call: Call<ArrayList<Calendar_Item>>,
+                response: Response<ArrayList<Calendar_Item>>
+            ) {
+                items.clear()
+                binding.calendarRecycler.adapter?.notifyDataSetChanged()
 
+                val list = response.body()!!
+                for (itemm in list) {
+                    if (itemm != null) {
+
+                        items.add(0, itemm)
+
+                    }
+
+                    Toast.makeText(this@CalendarActivity, "$itemm", Toast.LENGTH_SHORT).show()
+                    binding.calendarRecycler.adapter?.notifyItemInserted(0)
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<Calendar_Item>>, t: Throwable) {
+                Toast.makeText(this@CalendarActivity, "error : $t", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
     }
 

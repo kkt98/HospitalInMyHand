@@ -46,11 +46,11 @@ class RetrofitHelper {
             return retrofit
         }
 
-        fun getRetrofitInstance2() : Retrofit{
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://apis.data.go.kr/")
+        fun getRetrofitKakaoLocation() : Retrofit{
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://dapi.kakao.com")
                 .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
             return retrofit

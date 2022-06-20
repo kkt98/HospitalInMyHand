@@ -14,28 +14,11 @@
         android:theme="@style/MyToolbarTheme"
         app:title="내손안에 병원" />
 
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/bg_round_rect"
-        android:gravity="center"
-        android:hint="검색어 입력"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:padding="8dp"
-        android:textColor="@color/black" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/choice_hospital"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@id/et_search"
+        android:layout_below="@id/toolbar"
         android:layout_marginStart="8dp"
         android:layout_margin="8dp"
         android:backgroundTint="@color/white"
@@ -47,7 +30,7 @@
         android:id="@+id/choice_emergency"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@id/et_search"
+        android:layout_below="@id/toolbar"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -61,7 +44,7 @@
         android:id="@+id/choice_pill"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_below="@id/et_search"
+        android:layout_below="@id/toolbar"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -75,6 +58,6 @@
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/et_search" />
+        android:layout_below="@+id/toolbar" />
 
 </RelativeLayout>

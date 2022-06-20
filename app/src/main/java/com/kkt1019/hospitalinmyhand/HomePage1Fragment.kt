@@ -35,8 +35,6 @@ class HomePage1Fragment:Fragment() {
     var items2 = mutableListOf<HomePage1Item>()
     var items3 = mutableListOf<HomePage1Item>()
     var allitems = mutableListOf<HomePage1Item>()
-    lateinit var mylocation: Location
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,12 +52,6 @@ class HomePage1Fragment:Fragment() {
         return binding.root
     }
         val binding: FragmentHomePage1Binding by lazy { FragmentHomePage1Binding.inflate(layoutInflater) }
-
-    override fun onResume() {
-        super.onResume()
-
-        Mylocation()
-    }
 
     inner class NetworkThread:Thread(){
 
@@ -205,7 +197,6 @@ class HomePage1Fragment:Fragment() {
 
     }
 
-    var locationManager: LocationManager? = null
 
     fun spinner(){
 
@@ -973,60 +964,26 @@ class HomePage1Fragment:Fragment() {
          * @return 두 좌표의 거리(m)
          */
         fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-            val dLat = Math.toRadians(lat2 - lat1)
-            val dLon = Math.toRadians(lon2 - lon1)
+            val dLat = Math.toRadians(lat1 - lat2)
+            val dLon = Math.toRadians(lon1 - lon2)
             val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
             val c = 2 * asin(sqrt(a))
-            return (R * c).toDouble()
+            return (round((R * c)*100) / 100)
         }
     }
 
-    lateinit var providerClient: FusedLocationProviderClient
-
-    fun Mylocation(){
-
-        //위치정보 제공자 객체얻어오기
-        providerClient = LocationServices.getFusedLocationProviderClient(context as Activity)
-
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
-
-        //내 위치 실시간 갱신 요청
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        ) { return }
-        providerClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
-        )
-    }
-
-    var locationCallback: LocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            super.onLocationResult(locationResult)
-
-            //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
-            val location = locationResult.lastLocation
-            val lat = location?.latitude
-            val lng = location?.longitude
-
-            G.Xpos = lat.toString()
-            G.Ypos = lng.toString()
-
-        }
-    }
-
-    object Distance{
-
-        fun distance(latitude:Double, longitude:Double, latitude2:Double, longitude2:Double): Float {
-
-            var result = FloatArray(3)
-
-            android.location.Location.distanceBetween(latitude, longitude, latitude2, longitude2, result)
-
-            return result[0] / 10
-
-        }
-    }
+//    object Distance{
+//
+//        fun distance(latitude:Double, longitude:Double, latitude2:Double, longitude2:Double): Float {
+//
+//            var result = FloatArray(3)
+//
+//            android.location.Location.distanceBetween(latitude, longitude, latitude2, longitude2, result)
+//
+//            return result[0] / 10
+//
+//        }
+//    }
 
 }
 

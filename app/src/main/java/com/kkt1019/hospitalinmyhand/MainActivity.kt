@@ -4,16 +4,21 @@ import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.Signature
+import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.util.Base64
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
+import com.google.android.gms.location.*
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
@@ -27,6 +32,10 @@ class MainActivity : AppCompatActivity() {
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     var firebaseAuth: FirebaseAuth? = null
+
+    val providerClient: FusedLocationProviderClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
+
+    var mylocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,8 +86,72 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //위치 받아오기 퍼미션
+        val permissions:Array<String> = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        if (checkSelfPermission(permissions[0]) == PackageManager.PERMISSION_DENIED){
+
+            //퍼미션 요청 다이얼로그 보이기
+            requestPermissions(permissions, 10)
+        }else{
+            //내위치 탐색 요청하는 기능 호출
+            requestMyLocation()
+        }
+
     }
 
+    private fun requestMyLocation(){
+        // 내위치 정보를 얻어오는 기능코드
+
+        //위치검색 기준 설정값 객체
+        val request: LocationRequest = LocationRequest.create()
+        request.interval = 1000
+        request.priority = Priority.PRIORITY_HIGH_ACCURACY //높은 정확도 우선
+
+        //실시간 위치정보갱신을 요청
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        providerClient.requestLocationUpdates(request, locationCallback, Looper.getMainLooper() )
+
+    }
+
+    //위치정보 검색결과 콜백객체
+    private val locationCallback: LocationCallback = object : LocationCallback(){
+        override fun onLocationResult(p0: LocationResult) {
+            super.onLocationResult(p0)
+
+            //갱신된 위치정보결과 객체에게 위치정보 얻어오기
+            mylocation = p0.lastLocation
+
+            G.Xpos = mylocation?.latitude.toString()
+            G.Ypos = mylocation?.longitude.toString()
+
+            //위치탐색이 끝났으니 내 위치 정보 업데이트 종료
+            providerClient.removeLocationUpdates(this) //this : locationCallback객체
+
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == 10 && grantResults[0] == PackageManager.PERMISSION_GRANTED) requestMyLocation()
+        else Toast.makeText(this, "내 위치정보를 제공하지않아 검색기능 사용불가😥", Toast.LENGTH_SHORT).show()
+    }
+
+
+    //네비게이션뷰
     lateinit var drawerToggle: ActionBarDrawerToggle
 
     fun drawlayout(){

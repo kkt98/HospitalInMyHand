@@ -52,6 +52,10 @@ class ReviewAdapter(val context: Context, var items: MutableList<ItemVO>) : Recy
         holder.tvMessage.text = item.message
         holder.tvDate.text = item.date
 
+
+
+
+        //리뷰 삭제부분 다시 확인해야됨
         holder.ivOption.setOnClickListener { it ->
 
             val popup = PopupMenu(holder.ivOption.context, it)
@@ -62,7 +66,6 @@ class ReviewAdapter(val context: Context, var items: MutableList<ItemVO>) : Recy
 
                    R.id.delete -> {
 
-                       val num = items[position].no
                        val nickname = G.nickname
 
                        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
@@ -87,16 +90,6 @@ class ReviewAdapter(val context: Context, var items: MutableList<ItemVO>) : Recy
 
                            override fun onFailure(call: Call<ArrayList<ItemVO?>>, t: Throwable) {}
                        })
-
-//                       val builder = AlertDialog.Builder(context)
-//                       builder.setMessage("삭제하시겠습니까?")
-//                       builder.setPositiveButton("삭제", DialogInterface.OnClickListener { _, _ ->
-//
-//                       })
-//
-//                       builder.setNegativeButton("취소", DialogInterface.OnClickListener { _, _ ->
-//                           return@OnClickListener
-//                       })
 
                    }
 
