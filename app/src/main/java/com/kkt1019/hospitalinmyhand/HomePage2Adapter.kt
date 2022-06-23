@@ -44,7 +44,7 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
         item.location = G.location.toString()
 
 
-        G.location = HomePage2Fragment.DistanceManager.getDistance(G.Ypos!!.toDouble() , G.Xpos!!.toDouble(), item.wgs84Lon.toDouble(), item.wgs84Lat.toDouble()).toString()
+        G.location = HomePage2Fragment.DistanceManager.getDistance(G.Xpos!!.toDouble() , G.Ypos!!.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
 
 
 

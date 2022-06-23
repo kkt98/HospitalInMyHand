@@ -37,12 +37,6 @@ class HomePage3Adapter constructor(val context:Context, var page3Items: MutableL
         holder.tvTell.text ="전화번호 : " + item.telno
         holder.tvLocation.text = (round((item.location.toDouble() / 1000)*100) / 100).toString()
 
-//        val dNum:Double = item.location.toDouble() / 1000
-
-
-
-//        G.location = PharmacyActivity.DistanceManager.getDistance(G.Xpos.toDouble() , G.Ypos.toDouble(), item.xPos.toDouble(), item.yPos.toDouble()).toString()
-
         holder.itemView.setOnClickListener {
 
             val bottomSheetDialogFragment = HomePage3BottomSheet()

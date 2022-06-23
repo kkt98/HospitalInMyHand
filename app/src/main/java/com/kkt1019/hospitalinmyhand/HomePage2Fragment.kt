@@ -54,9 +54,6 @@ class HomePage2Fragment:Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        Mylocation()
-
     }
 
     val binding:FragmentHomePage2Binding by lazy { FragmentHomePage2Binding.inflate(layoutInflater) }
@@ -800,41 +797,5 @@ class HomePage2Fragment:Fragment() {
             return (R * c).toDouble()
         }
     }
-
-    lateinit var providerClient: FusedLocationProviderClient
-
-    fun Mylocation(){
-
-        //위치정보 제공자 객체얻어오기
-        providerClient = LocationServices.getFusedLocationProviderClient(context as Activity)
-
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
-
-        //내 위치 실시간 갱신 요청
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        ) { return }
-        providerClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
-        )
-    }
-
-    var locationCallback: LocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            super.onLocationResult(locationResult)
-
-            //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
-            val location = locationResult.lastLocation
-            val lat = location?.latitude
-            val lng = location?.longitude
-
-            G.Xpos = lat.toString()
-            G.Ypos = lng.toString()
-
-        }
-    }
-
-
 
 }

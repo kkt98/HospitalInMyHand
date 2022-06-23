@@ -55,13 +55,10 @@ class PharmacyActivity : AppCompatActivity() {
         binding.btn.setOnClickListener { spinner() }
 
         Mylocation()
-
-        NetworkThread().start()
-
     }
 
     fun loadData(x:Double, y:Double){
-        Toast.makeText(this, "$x : $y", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "$x : $y", Toast.LENGTH_SHORT).show()
 
         object : Thread() {
             override fun run() {
@@ -156,31 +153,11 @@ class PharmacyActivity : AppCompatActivity() {
                         binding.recycler.adapter?.notifyDataSetChanged()
                     }
 
-//                activity.runOnUiThread {
-////                    Toast.makeText(this, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
-//                    items.addAll(allitems)
-//                    items2.addAll(items)
-//                    binding.recycler.adapter?.notifyDataSetChanged()
-//                }
-
                 }catch (e:Exception){ Log.i("abc", e.toString())}
 
             }
 
         }.start()
-
-    }
-
-    inner class NetworkThread():Thread(){
-
-        override fun run() {
-
-
-
-
-
-
-        }
 
     }
 
@@ -807,28 +784,6 @@ class PharmacyActivity : AppCompatActivity() {
         spinner.adapter = madapter
     }
 
-//    object DistanceManager {
-//
-//        private const val R = 6372.8
-//
-//        /**
-//         * 두 좌표의 거리를 계산한다.
-//         *
-//         * @param lat1 위도1
-//         * @param lon1 경도1
-//         * @param lat2 위도2
-//         * @param lon2 경도2
-//         * @return 두 좌표의 거리(m)
-//         */
-//        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-//            val dLat = Math.toRadians(lat2 - lat1)
-//            val dLon = Math.toRadians(lon2 - lon1)
-//            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
-//            val c = 2 * asin(sqrt(a))
-//            return (R * c).toDouble()
-//        }
-//    }
-
     lateinit var providerClient: FusedLocationProviderClient
 
     fun Mylocation(){
@@ -858,8 +813,6 @@ class PharmacyActivity : AppCompatActivity() {
             val lng = location?.longitude
 
             loadData(lng!!, lat!!)
-
-
 
         }
     }
