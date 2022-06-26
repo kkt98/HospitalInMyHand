@@ -9,8 +9,8 @@ class G {
         var nickname: String? = null
         var profileUrl: String? = null
         var uniqueid:String? = null
-        var Xpos : String? = null
-        var Ypos : String? = null
+        lateinit var Xpos : String
+        lateinit var Ypos : String
         var location: String? = null
         var myschedule: String? = null
         var days:String? = null

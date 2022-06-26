@@ -57,35 +57,35 @@ class HospitalActivity : AppCompatActivity() {
             true
         }
 
-        //동적퍼미션
-        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        val checkResult = checkSelfPermission(permissions[0])
-        if (checkResult == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(permissions, 10)
-        }
-
-
-        //동적퍼미션
-        val permissionsImage = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (checkSelfPermission(permissionsImage[0]) == PackageManager.PERMISSION_DENIED) {
-            requestPermissions(permissionsImage, 0)
-        }else{
-//            requestImagePermissons()
-        }
+//        //동적퍼미션
+//        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+//        val checkResult = checkSelfPermission(permissions[0])
+//        if (checkResult == PackageManager.PERMISSION_DENIED) {
+//            requestPermissions(permissions, 10)
+//        }
+//
+//
+//        //동적퍼미션
+//        val permissionsImage = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//        if (checkSelfPermission(permissionsImage[0]) == PackageManager.PERMISSION_DENIED) {
+//            requestPermissions(permissionsImage, 0)
+//        }else{
+////            requestImagePermissons()
+//        }
 
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == 10){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "위치정보 사용 가능", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(this, "위치정보 사용 불가능", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//
+//        if (requestCode == 10){
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                Toast.makeText(this, "위치정보 사용 가능", Toast.LENGTH_SHORT).show()
+//            }else{
+//                Toast.makeText(this, "위치정보 사용 불가능", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 }

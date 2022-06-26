@@ -47,6 +47,8 @@ class MapActivity : AppCompatActivity() {
 
         binding.mapView.addView(mapView)
 
+        kakaoMapMaker()
+
     }
 
     private fun searchPlaces(){
@@ -72,11 +74,35 @@ class MapActivity : AppCompatActivity() {
 
             })
 
-        kakaoMapMaker()
+        kakaoMakers()
 
     }
 
     val markers = MapPOIItem()
+
+    fun kakaoMakers(){
+        val documents = searchPlaceResponse?.documents
+
+        documents?.forEach {
+
+            val point:MapPoint = MapPoint.mapPointWithGeoCoord(it.y.toDouble(), it.x.toDouble())
+
+            //마커객체 생성
+            markers.apply {
+
+                itemName = it.place_name
+
+                mapPoint = point
+                markerType = MapPOIItem.MarkerType.YellowPin
+
+                selectedMarkerType = MapPOIItem.MarkerType.RedPin
+
+            }
+
+            mapView.addPOIItem(markers)
+
+        }
+    }
 
     fun kakaoMapMaker(){
 
@@ -103,29 +129,6 @@ class MapActivity : AppCompatActivity() {
 
         }
         mapView.addPOIItem(marker)
-
-        val documents = searchPlaceResponse?.documents
-
-        documents?.forEach {
-
-            val point:MapPoint = MapPoint.mapPointWithGeoCoord(it.y.toDouble(), it.x.toDouble())
-
-            //마커객체 생성
-            markers.apply {
-
-                itemName = it.place_name
-
-                mapPoint = point
-                markerType = MapPOIItem.MarkerType.YellowPin
-
-                selectedMarkerType = MapPOIItem.MarkerType.RedPin
-
-            }
-
-            mapView.addPOIItem(markers)
-
-        }
-
     }
 
     private fun setChoiceButtonsListener(){

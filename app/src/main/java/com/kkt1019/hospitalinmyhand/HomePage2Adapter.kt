@@ -3,6 +3,7 @@ package com.kkt1019.hospitalinmyhand
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,10 +42,11 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
         holder.tvTell2.text = "응급실 전화 : " + item.dutyTel3
         holder.tvLocation.text = G.location
 
-        item.location = G.location.toString()
+//        item.location = G.location.toString()
 
+        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Xpos.toDouble(), G.Ypos.toDouble(), item.wgs84Lat.toDouble() ?: 37.5663, item.wgs84Lon.toDouble() ?: 126.9779)
+            .toString()
 
-        G.location = HomePage2Fragment.DistanceManager.getDistance(G.Xpos!!.toDouble() , G.Ypos!!.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
 
 
 
@@ -60,8 +62,6 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
             Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
     override fun getItemCount(): Int = page2Items.size
 }

@@ -54,6 +54,9 @@ class HomePage2Fragment:Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+//        Mylocation()
+
     }
 
     val binding:FragmentHomePage2Binding by lazy { FragmentHomePage2Binding.inflate(layoutInflater) }
@@ -62,8 +65,8 @@ class HomePage2Fragment:Fragment() {
 
         override fun run() {
 
-            val address = ("http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytListInfoInqire?service" +
-                    "Key=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
+            val address = ("http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytBassInfoInqire?" +
+                    "serviceKey=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
                     "&pageNo=1&numOfRows=3000")
 
             Log.i("abc", "nnn")
@@ -129,6 +132,10 @@ class HomePage2Fragment:Fragment() {
                                 if (item != null) item.hpid = xpp.text
 
                             }
+
+                            if (item != null) {
+                                Log.i("aaa", "${item.wgs84Lat}, ${item.wgs84Lon}")
+                            }
                         }
                         XmlPullParser.END_TAG -> {
                             val tagName2: String = xpp.name
@@ -145,7 +152,6 @@ class HomePage2Fragment:Fragment() {
                 activity?.runOnUiThread {
                     items.addAll(allitems)
                     items2.addAll(items)
-//                    Toast.makeText(context, "aaaa"+items.size, Toast.LENGTH_SHORT).show()
                     binding.recycler.adapter?.notifyDataSetChanged()
                 }
 
@@ -774,28 +780,6 @@ class HomePage2Fragment:Fragment() {
         val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, items)
 
         spinner.adapter = madapter
-    }
-
-    object DistanceManager {
-
-        private const val R = 6372.8
-
-        /**
-         * 두 좌표의 거리를 계산한다.
-         *
-         * @param lat1 위도1
-         * @param lon1 경도1
-         * @param lat2 위도2
-         * @param lon2 경도2
-         * @return 두 좌표의 거리(m)
-         */
-        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-            val dLat = Math.toRadians(lat2 - lat1)
-            val dLon = Math.toRadians(lon2 - lon1)
-            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
-            val c = 2 * asin(sqrt(a))
-            return (R * c).toDouble()
-        }
     }
 
 }

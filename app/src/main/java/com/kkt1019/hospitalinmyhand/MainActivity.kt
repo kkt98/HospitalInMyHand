@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             G.Ypos = mylocation?.longitude.toString()
 
             //위치탐색이 끝났으니 내 위치 정보 업데이트 종료
-            providerClient.removeLocationUpdates(this) //this : locationCallback객체
+//            providerClient.removeLocationUpdates(this) //this : locationCallback객체
 
         }
     }
