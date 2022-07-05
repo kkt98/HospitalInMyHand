@@ -26,7 +26,7 @@ interface RetrofitService {
     fun calendarinsert(@PartMap date: Map<String, String>):Call<String>
 
     @GET("/hospital/loadDB_cal.php")
-    fun calendarLoad(@Query("email") email:String, @Query("date") date:String): Call<ArrayList<Calendar_Item>>
+    fun calendarLoad(@Query("email") email:String, @Query("date") date:String): Call<ArrayList<CalendarItemVO>>
 
     @Headers("Authorization: KakaoAK 786a8f8eb066b98df93f703ee0e7615e")
     @GET("/v2/local/search/keyword.json")

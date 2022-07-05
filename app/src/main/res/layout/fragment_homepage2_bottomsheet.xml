@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,17 +8,25 @@
     android:orientation="vertical"
     android:background="@drawable/bottomback">
 
-    <fragment
-        android:id="@+id/map"
+    <View
+        android:id="@+id/view_top"
+        android:layout_width="100dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:background="#B5B5B5" />
+
+    <RelativeLayout
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map"
+        android:layout_below="@+id/map_view"
         android:drawableLeft="@drawable/icons8hospitalsign20"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
@@ -58,7 +66,7 @@
         android:id="@+id/tell2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/address"
+        android:layout_below="@id/tell1"
         android:drawableLeft="@drawable/icons8phone20"
         android:paddingLeft="10dp"
         android:paddingRight="8dp"
@@ -68,10 +76,11 @@
         android:textStyle="bold" />
 
     <View
+        android:id="@+id/view"
         android:background="#B5B5B5"
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_below="@+id/iv"
+        android:layout_below="@+id/tell2"
         android:layout_marginTop="8dp"/>
 
     <Button
@@ -83,13 +92,15 @@
         android:textColor="@color/black"
         android:background="#00ff0000"
         android:layout_marginLeft="300dp"
-        android:drawableLeft="@drawable/ic_baseline_create_24"/>
+        android:drawableLeft="@drawable/ic_baseline_create_24"
+        android:layout_below="@id/view"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
+        android:layout_below="@id/btn"/>
 
-</LinearLayout>
+</RelativeLayout>

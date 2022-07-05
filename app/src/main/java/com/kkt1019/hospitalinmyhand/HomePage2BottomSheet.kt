@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage2BottomsheetBinding
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +33,8 @@ class HomePage2BottomSheet : BottomSheetDialogFragment() {
     val recycler : RecyclerView by lazy { binding.recycler }
 
     var items = mutableListOf<ItemVO>()
+
+    val mapView: MapView by lazy { MapView(context) }
 
     lateinit var name : String
     lateinit var addr : String
@@ -63,6 +69,8 @@ class HomePage2BottomSheet : BottomSheetDialogFragment() {
         binding.tell1.text = tell1
         binding.tell2.text = tell2
 
+        binding.mapView.addView(mapView)
+
     }
 
     val binding: FragmentHomepage2BottomsheetBinding by lazy { FragmentHomepage2BottomsheetBinding.inflate(layoutInflater) }
@@ -78,33 +86,30 @@ class HomePage2BottomSheet : BottomSheetDialogFragment() {
 
     }
 
-    var mGoogleMap: GoogleMap? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //위치 찾아오기
-        val fragmentManager = childFragmentManager
-        val mapFragment = fragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment!!.getMapAsync(OnMapReadyCallback { googleMap ->
-            val seoul = LatLng(Xpos, Ypos)
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul, 16f)) //줌 1~25
-            mGoogleMap = googleMap
-            val settings = googleMap.uiSettings
-            settings.isZoomControlsEnabled = true
-            settings.isMyLocationButtonEnabled = true
+        val lat: Double = Xpos
+        val lng: Double = Ypos
 
-            //마커 표시
-            val marker = MarkerOptions()
-            marker.title(name)
-            marker.position(seoul)
-            marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)) //벡터이미지는 안됨. .png or .jpg만 됨
-
-            marker.anchor(0.5f, 1.0f) //x축, y축
+        var myMapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
+        mapView.setMapCenterPointAndZoomLevel(myMapPoint, 4, true)
+        mapView.zoomIn(true)
+        mapView.zoomOut(true)
+        Log.i("kim", "qweqweqe")
 
 
-            mGoogleMap!!.addMarker(marker)
-        })
+        val marker = MapPOIItem()
+
+        Log.i("kim", "asdasdasdad")
+
+        marker.apply {
+            itemName = name
+            mapPoint = myMapPoint
+            markerType= MapPOIItem.MarkerType.BluePin
+            Log.i("kim", "fghfghfgh")
+        }
+        mapView.addPOIItem(marker)
     }
 
 

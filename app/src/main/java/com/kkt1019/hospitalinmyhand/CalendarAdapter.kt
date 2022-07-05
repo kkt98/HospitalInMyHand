@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 
-class CalendarAdapter(val context: Context,  var calendaritems: MutableList<Calendar_Item>) : RecyclerView.Adapter<CalendarAdapter.VH>(){
+class CalendarAdapter(val context: Context,  var calendaritems: MutableList<CalendarItemVO>) : RecyclerView.Adapter<CalendarAdapter.VH>(){
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -27,7 +27,7 @@ class CalendarAdapter(val context: Context,  var calendaritems: MutableList<Cale
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = calendaritems[position]
 
-        holder.tvschedule.text = item.schedule
+        holder.tvschedule.text = item.message
 
 
     }

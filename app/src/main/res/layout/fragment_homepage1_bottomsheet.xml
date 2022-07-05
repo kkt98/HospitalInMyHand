@@ -7,18 +7,25 @@
     tools:context=".HomePage1BottomSheet"
     android:background="@drawable/bottomback">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <View
+        android:id="@+id/view_top"
+        android:layout_width="100dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:background="#B5B5B5" />
+
+    <RelativeLayout
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map"
+        android:layout_below="@+id/map_view"
         android:drawableLeft="@drawable/icons8hospitalsign20"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
@@ -215,11 +222,11 @@
 
     <View
         android:id="@+id/view"
-        android:background="#B5B5B5"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:layout_below="@+id/time2S"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:background="#B5B5B5" />
 
     <Button
         android:id="@+id/btn"

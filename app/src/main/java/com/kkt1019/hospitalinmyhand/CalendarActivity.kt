@@ -26,9 +26,7 @@ class CalendarActivity : AppCompatActivity() {
 
     val recycler: RecyclerView by lazy { binding.calendarRecycler }
 
-    var items = mutableListOf<Calendar_Item>()
-
-    lateinit var cc : CalendarItemVO
+    var items = mutableListOf<CalendarItemVO>()
 
     var calendr = Calendar.getInstance()
     val calender:CalendarView by lazy { binding.calendar }
@@ -60,7 +58,7 @@ class CalendarActivity : AppCompatActivity() {
 
                     if(editText.text != null) Toast.makeText(this@CalendarActivity, "일정 : ${editText.text}", Toast.LENGTH_SHORT).show()
                     G.myschedule = editText.text.toString()
-                    items.add(Calendar_Item(editText.text))
+//                    items.add(Calendar_Item(editText.text))
 
                     //확인버튼을 누르면, 서버DB로 정보를 전송하는 메소드
                     insertDB()
@@ -88,7 +86,7 @@ class CalendarActivity : AppCompatActivity() {
             G.days = eventDay.calendar.time.toString()
 
 
-            Toast.makeText(this, eventDay.calendar.time.toString() + ", " + eventDay.isEnabled, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, eventDay.calendar.time.toString() + ", " + eventDay.isEnabled, Toast.LENGTH_SHORT).show()
 
             Log.i("dddddddddddddddd",calendr.toString() )
             Log.i("dddddddddddddddd",calendr.time.toString() )
@@ -136,10 +134,10 @@ class CalendarActivity : AppCompatActivity() {
         val retrofit = RetrofitHelper.getRetrofitInstanceGson()
         val retrofitService = retrofit!!.create(RetrofitService::class.java)
         val call = retrofitService.calendarLoad(G.nickname.toString(), G.days.toString())
-        call.enqueue(object : Callback<ArrayList<Calendar_Item>>{
+        call.enqueue(object : Callback<ArrayList<CalendarItemVO>>{
             override fun onResponse(
-                call: Call<ArrayList<Calendar_Item>>,
-                response: Response<ArrayList<Calendar_Item>>
+                call: Call<ArrayList<CalendarItemVO>>,
+                response: Response<ArrayList<CalendarItemVO>>
             ) {
                 items.clear()
                 binding.calendarRecycler.adapter?.notifyDataSetChanged()
@@ -152,12 +150,12 @@ class CalendarActivity : AppCompatActivity() {
 
                     }
 
-                    Toast.makeText(this@CalendarActivity, "$itemm", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@CalendarActivity, "$itemm", Toast.LENGTH_SHORT).show()
                     binding.calendarRecycler.adapter?.notifyItemInserted(0)
                 }
             }
 
-            override fun onFailure(call: Call<ArrayList<Calendar_Item>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<CalendarItemVO>>, t: Throwable) {
                 Toast.makeText(this@CalendarActivity, "error : $t", Toast.LENGTH_SHORT).show()
             }
 
