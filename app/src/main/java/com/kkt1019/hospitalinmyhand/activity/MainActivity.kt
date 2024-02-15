@@ -1,14 +1,10 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.activity
 
 import android.content.Intent
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.pm.Signature
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
-import android.util.Base64
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -21,11 +17,11 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.kkt1019.hospitalinmyhand.G
+import com.kkt1019.hospitalinmyhand.MyReview
+import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 import de.hdodenhof.circleimageview.CircleImageView
-import okhttp3.internal.Util
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
@@ -168,7 +164,10 @@ class MainActivity : AppCompatActivity() {
         tvName.text = G.nickname
         Glide.with(this).load(G.profileUrl).into(ivProfile)
 
-        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close)
+        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
+            R.string.drawer_open,
+            R.string.drawer_close
+        )
         drawerToggle.syncState()
         drawerLayout.addDrawerListener(drawerToggle!!)
 

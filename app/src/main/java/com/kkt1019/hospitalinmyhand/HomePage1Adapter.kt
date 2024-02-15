@@ -1,9 +1,7 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
 
 class HomePage1Adapter(val context: Context,  var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 

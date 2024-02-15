@@ -1,4 +1,4 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

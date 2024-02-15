@@ -1,7 +1,8 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityFavoritBinding
 
 class FavoritActivity : AppCompatActivity() {

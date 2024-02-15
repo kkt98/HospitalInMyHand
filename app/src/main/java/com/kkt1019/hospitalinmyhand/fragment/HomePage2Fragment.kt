@@ -1,181 +1,169 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.fragment
 
-import android.Manifest
-import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.location.*
-import com.kkt1019.hospitalinmyhand.databinding.ActivityPharmacyBinding
+import androidx.fragment.app.Fragment
+import com.kkt1019.hospitalinmyhand.HomePage2Adapter
+import com.kkt1019.hospitalinmyhand.HomePage2Item
+import com.kkt1019.hospitalinmyhand.R
+import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage2Binding
 import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserException
 import org.xmlpull.v1.XmlPullParserFactory
-import java.io.IOException
 import java.io.InputStreamReader
-import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
-import java.net.MalformedURLException
 import java.net.URL
-import java.net.URLEncoder
-import kotlin.math.*
 
-class PharmacyActivity : AppCompatActivity() {
-    val binding: ActivityPharmacyBinding by lazy { ActivityPharmacyBinding.inflate(layoutInflater) }
+class HomePage2Fragment:Fragment() {
 
-    val recycler: RecyclerView by lazy { binding.recycler }
+    var items = mutableListOf<HomePage2Item>()
+    var items2 = mutableListOf<HomePage2Item>()
+    var allitems = mutableListOf<HomePage2Item>()
 
-    var items = mutableListOf<HomePage3Item>()
-    var items2 = mutableListOf<HomePage3Item>()
-    var allitems = mutableListOf<HomePage3Item>()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-    var apiKey = "H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        toolbar.title = "약국"
-
-        recycler.adapter = HomePage3Adapter(this, items2, supportFragmentManager)
+        binding.recycler.adapter = childFragmentManager?.let { HomePage2Adapter(activity as Context, items2, it) }
 
         binding.btn.setOnClickListener { spinner() }
 
-        Mylocation()
+        NetworkThread().start()
+
+        return binding.root
     }
 
-    fun loadData(x:Double, y:Double){
-//        Toast.makeText(this, "$x : $y", Toast.LENGTH_SHORT).show()
+    override fun onResume() {
+        super.onResume()
 
-        object : Thread() {
-            override fun run() {
+//        Mylocation()
 
-                val address = ("http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList" +
-                        "?serviceKey=" + apiKey +
-                        "&pageNo=1" +
-                        "&numOfRows=1000" +
-                        "&xPos=" + x +
-                        "&yPos=" + y +
-                        "&radius=10000")
+    }
 
-                Log.i("abc", "nnn")
+    val binding:FragmentHomePage2Binding by lazy { FragmentHomePage2Binding.inflate(layoutInflater) }
 
-                try {
-                    val url = URL(address)
+    inner class NetworkThread:Thread(){
 
-                    val conn = url.openConnection() as HttpURLConnection
-                    conn.doInput = true
-                    Log.i("abc", "fff")
-                    val ips = conn.inputStream
+        override fun run() {
 
-                    val isr = InputStreamReader(ips)
+            val address = ("http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytBassInfoInqire?" +
+                    "serviceKey=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
+                    "&pageNo=1&numOfRows=3000")
 
-                    val factory = XmlPullParserFactory.newInstance()
-                    val xpp = factory.newPullParser()
-                    xpp.setInput(isr)
+            Log.i("abc", "nnn")
 
-                    var eventType = xpp.eventType
+            try {
+                val url = URL(address)
 
-                    var item: HomePage3Item? = null
-                    Log.i("abc", "bbb")
+                val conn = url.openConnection() as HttpURLConnection
+                conn.doInput = true
+                Log.i("abc", "ccc")
+                val ips = conn.inputStream
 
-                    while (eventType != XmlPullParser.END_DOCUMENT) {
-                        Log.i("abc", "aaa")
+                val isr = InputStreamReader(ips)
 
-                        when (eventType) {
+                val factory = XmlPullParserFactory.newInstance()
+                val xpp = factory.newPullParser()
+                xpp.setInput(isr)
 
-                            XmlPullParser.START_DOCUMENT -> {
+                var eventType = xpp.eventType
+
+                var item: HomePage2Item? = null
+                Log.i("abc", "bbb")
+
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    Log.i("abc", "aaa")
+
+                    when (eventType) {
+
+                        XmlPullParser.START_DOCUMENT -> {
+                        }
+                        XmlPullParser.START_TAG -> {
+                            val tagName = xpp.name
+
+                            if (tagName.equals("item")) {
+                                item = HomePage2Item()
+
+                            }else if (tagName.equals("dutyAddr")){
+                                xpp.next()
+                                if (item != null) item.dutyAddr = xpp.text
+
+                            }else if (tagName.equals("dutyName")){
+                                xpp.next()
+                                if (item != null) item.dutyName = xpp.text
+
+                            }else if (tagName.equals("dutyTel1")){
+                                xpp.next()
+                                if (item != null) item.dutyTel1 = xpp.text
+
+                            }else if (tagName.equals("dutyTel3")){
+                                xpp.next()
+                                if (item != null) item.dutyTel3 = xpp.text
+
+                            }else if (tagName.equals("wgs84Lat")){
+                                xpp.next()
+                                if (item != null) item.wgs84Lat = xpp.text
+
+                            }else if (tagName.equals("wgs84Lon")){
+                                xpp.next()
+                                if (item != null) item.wgs84Lon = xpp.text
+
+                            }else if (tagName.equals("hpid")){
+                                xpp.next()
+                                if (item != null) item.hpid = xpp.text
+
                             }
-                            XmlPullParser.START_TAG -> {
-                                val tagName = xpp.name
 
-                                if (tagName.equals("item")) {
-                                    item = HomePage3Item()
-
-                                }else if (tagName.equals("addr")){
-                                    xpp.next()
-                                    if (item != null) item.addr = xpp.text
-
-                                }else if (tagName.equals("yadmNm")){
-                                    xpp.next()
-                                    if (item != null) item.yadmNm = xpp.text
-
-                                }else if (tagName.equals("telno")){
-                                    xpp.next()
-                                    if (item != null) item.telno = xpp.text
-
-                                }else if (tagName.equals("XPos")){
-                                    xpp.next()
-                                    if (item != null) item.xPos = xpp.text
-
-                                }else if (tagName.equals("YPos")){
-                                    xpp.next()
-                                    if (item != null) item.yPos = xpp.text
-
-                                }else if (tagName.equals("ykiho")){
-                                    xpp.next()
-                                    if (item != null) item.ykiho = xpp.text
-
-                                }else if (tagName.equals("distance")){
-                                    xpp.next()
-                                    if (item != null) item.location = xpp.text
-
-                                }
+                            if (item != null) {
+                                Log.i("aaa", "${item.wgs84Lat}, ${item.wgs84Lon}")
                             }
-                            XmlPullParser.END_TAG -> {
-                                val tagName2: String = xpp.name
-                                if (tagName2 == "item") {
-                                    if (item != null) {
-                                        allitems.add(item)
-                                    }
+                        }
+                        XmlPullParser.END_TAG -> {
+                            val tagName2: String = xpp.name
+                            if (tagName2 == "item") {
+                                if (item != null) {
+                                    allitems.add(item)
                                 }
                             }
                         }
-                        eventType = xpp.next()
                     }
+                    eventType = xpp.next()
+                }
 
-                    runOnUiThread {
-                        items.addAll(allitems)
-                        items2.addAll(items)
-                        binding.recycler.adapter?.notifyDataSetChanged()
-                    }
+                activity?.runOnUiThread {
+                    items.addAll(allitems)
+                    items2.addAll(items)
+                    binding.recycler.adapter?.notifyDataSetChanged()
+                }
 
-                }catch (e:Exception){ Log.i("abc", e.toString())}
+            }catch (e:Exception){ Log.i("abc", e.toString())}
 
-            }
 
-        }.start()
+        }
 
     }
 
     fun spinner(){
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog2, null)
+        val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog2, null)
 
-        val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
-        val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
-        val checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
+        var spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
+        var spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
+        var checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
 
         checkBox.setOnCheckedChangeListener { compoundButton, b ->
 
             if (checkBox.isChecked) {
                 spinner.visibility = View.GONE
                 spinner2.visibility = View.GONE
-
-
             }
             else {
                 spinner.visibility = View.VISIBLE
@@ -185,9 +173,8 @@ class PharmacyActivity : AppCompatActivity() {
         }
 
         val city = resources.getStringArray(R.array.city)
-        var spinnerAdapter = ArrayAdapter(this as Activity, android.R.layout.simple_spinner_dropdown_item, city)
+        var spinnerAdapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, city)
         spinner.adapter = spinnerAdapter
-
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
@@ -196,7 +183,7 @@ class PharmacyActivity : AppCompatActivity() {
                     0 -> {
 
                         val spinnerItems = resources.getStringArray(R.array.choice)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         items.clear()
@@ -213,16 +200,16 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[1])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[1])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         binding.recycler.adapter?.notifyDataSetChanged()
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_seoul)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -232,10 +219,10 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_seoul)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
                                         Log.i("ggg", "abc")
-                                        items2.add(HomePage3Item)
+                                        items2.add(HomePage2Item)
 
                                     }
                                 }
@@ -249,14 +236,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[2])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[2])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_busan)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -266,9 +253,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_busan)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -281,14 +268,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[3])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[3])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_daegu)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -298,10 +285,10 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_seoul)
 
-                                for (HomePage3Item in items) {
+                                for (HomePage2Item in items) {
 
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -314,14 +301,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[4])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[4])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_incheon)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -331,9 +318,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_incheon)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -346,14 +333,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[5])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[5])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gwangju)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -363,9 +350,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gwangju)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -378,14 +365,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[6])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[6])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_daejeon)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -395,9 +382,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_daejeon)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -410,14 +397,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[7])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[7])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_ulsan)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -427,9 +414,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_ulsan)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -442,14 +429,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[8])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[8])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_sejong)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -459,9 +446,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_sejong)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -474,14 +461,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[9])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[9])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeonggi)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -491,9 +478,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeonggi)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -506,14 +493,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[10])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[10])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gangwon)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -523,9 +510,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gangwon)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -538,14 +525,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[11])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[11])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_chung_buk)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -555,9 +542,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_chung_buk)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -570,14 +557,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[12])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[12])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_chung_nam)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -587,9 +574,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_chung_nam)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -602,14 +589,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[13])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[13])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_jeon_buk)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -619,9 +606,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_jeon_buk)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -634,14 +621,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[14])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[14])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_jeon_nam)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -651,9 +638,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_jeon_nam)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -666,14 +653,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[15])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[15])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeong_buk)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -683,9 +670,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeong_buk)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -698,14 +685,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[16])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[16])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_region_gyeong_nam)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -715,9 +702,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_region_gyeong_nam)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -730,14 +717,14 @@ class PharmacyActivity : AppCompatActivity() {
 
                         items.clear()
 
-                        for (HomePage3Item in allitems) {
-                            if (HomePage3Item.addr.contains(city[17])) {
-                                items.add(HomePage3Item)
+                        for (HomePage2Item in allitems) {
+                            if (HomePage2Item.dutyAddr.contains(city[17])) {
+                                items.add(HomePage2Item)
                             }
                         }
 
                         val spinnerItems = resources.getStringArray(R.array.spinner_jeju)
-                        val madapter = ArrayAdapter(this@PharmacyActivity, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+                        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
                         spinner2.adapter = madapter
 
                         spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
@@ -747,9 +734,9 @@ class PharmacyActivity : AppCompatActivity() {
 
                                 val arr = resources.getStringArray(R.array.spinner_jeju)
 
-                                for (HomePage3Item in items) {
-                                    if (HomePage3Item.addr.contains(arr[p2])) {
-                                        items2.add(HomePage3Item)
+                                for (HomePage2Item in items) {
+                                    if (HomePage2Item.dutyAddr.contains(arr[p2])) {
+                                        items2.add(HomePage2Item)
                                     }
                                 }
                             }
@@ -767,7 +754,7 @@ class PharmacyActivity : AppCompatActivity() {
 
         }
 
-        val mBuilder = AlertDialog.Builder(this)
+        val mBuilder = AlertDialog.Builder(context)
             .setView(mDialogView)
 
         mBuilder.setPositiveButton("확인") { dialogInterface: DialogInterface, i: Int ->
@@ -779,41 +766,9 @@ class PharmacyActivity : AppCompatActivity() {
 
         val items = resources.getStringArray(R.array.city)
 
-        val madapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
+        val madapter = ArrayAdapter(activity as Context, android.R.layout.simple_spinner_dropdown_item, items)
 
         spinner.adapter = madapter
     }
 
-    lateinit var providerClient: FusedLocationProviderClient
-
-    fun Mylocation(){
-
-        //위치정보 제공자 객체얻어오기
-        providerClient = LocationServices.getFusedLocationProviderClient(this)
-
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도 우선시..[gps]
-
-        //내 위치 실시간 갱신 요청
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        ) { return }
-        providerClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper()
-        )
-    }
-
-    var locationCallback: LocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            super.onLocationResult(locationResult)
-
-            //파라미터로 전달된 위치정보결과 객체에게 위치정보를 얻어오기
-            val location = locationResult.lastLocation
-            val lat = location?.latitude
-            val lng = location?.longitude
-
-            loadData(lng!!, lat!!)
-
-        }
-    }
 }

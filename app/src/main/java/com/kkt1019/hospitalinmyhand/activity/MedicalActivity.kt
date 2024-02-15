@@ -1,13 +1,15 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.kkt1019.hospitalinmyhand.MedicalAdapter
+import com.kkt1019.hospitalinmyhand.MedicalItemVO
+import com.kkt1019.hospitalinmyhand.RetrofitHelper
+import com.kkt1019.hospitalinmyhand.RetrofitService
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMedicalBinding
 import retrofit2.Call
 import retrofit2.Callback

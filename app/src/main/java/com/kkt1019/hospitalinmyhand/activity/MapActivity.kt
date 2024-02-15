@@ -1,22 +1,15 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.activity
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Looper
-import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.*
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.Marker
+import com.kkt1019.hospitalinmyhand.G
+import com.kkt1019.hospitalinmyhand.KakaoSearchPlaceItemVO
+import com.kkt1019.hospitalinmyhand.R
+import com.kkt1019.hospitalinmyhand.RetrofitHelper
+import com.kkt1019.hospitalinmyhand.RetrofitService
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMapBinding
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -124,7 +117,7 @@ class MapActivity : AppCompatActivity() {
             itemName = "내 위치"
             mapPoint = myMapPoint
             markerType=MapPOIItem.MarkerType.CustomImage
-            customImageResourceId=R.drawable.mylocation40
+            customImageResourceId= R.drawable.mylocation40
             Log.i("kim", "fghfghfgh")
 
         }

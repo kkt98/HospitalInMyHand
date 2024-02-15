@@ -1,9 +1,6 @@
 package com.kkt1019.hospitalinmyhand
 
 import android.content.Context
-import android.content.Intent
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
 
 class HomePage2Adapter constructor(val context:Context, var page2Items:MutableList<HomePage2Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage2Adapter.VH>() {
 

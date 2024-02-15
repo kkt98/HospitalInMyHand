@@ -18,28 +18,28 @@
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
         <activity
-            android:name=".MedicalMoreActivity"
+            android:name=".activity.MedicalMoreActivity"
             android:exported="false" />
         <activity
-            android:name=".CalendarActivity"
+            android:name=".activity.CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoritActivity"
+            android:name=".activity.FavoritActivity"
             android:exported="false" />
         <activity
-            android:name=".PharmacyActivity"
+            android:name=".activity.PharmacyActivity"
             android:exported="false" />
         <activity
-            android:name=".MapActivity"
+            android:name=".activity.MapActivity"
             android:exported="false" />
         <activity
-            android:name=".MedicalActivity"
+            android:name=".activity.MedicalActivity"
             android:exported="false" />
         <activity
-            android:name=".HospitalActivity"
+            android:name=".activity.HospitalActivity"
             android:exported="false" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".activity.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MyReview"
@@ -57,7 +57,7 @@
             android:name=".RevieEdit"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
 
         <uses-library
