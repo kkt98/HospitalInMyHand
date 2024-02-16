@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.util.maps.helper.Utility
@@ -18,9 +20,9 @@ class LoginActivity : AppCompatActivity() {
 
     val binding:ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
 
-//    lateinit var firebaseAuth:FirebaseAuth
-//    var googleSignInClient : GoogleSignInClient ? = null
-//    var GOOGLE_LOGIN_CODE = 9001
+    lateinit var firebaseAuth: FirebaseAuth
+    var googleSignInClient : GoogleSignInClient? = null
+    var GOOGLE_LOGIN_CODE = 9001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
         //Intent로 부터 구글 계정 정보를 가져오는 작업 객체 생성
         val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
         val account = task.result
+        Log.d("asdasdasd", account.toString())
         val email = account.email
 
         if (email != null) {
@@ -89,6 +92,7 @@ class LoginActivity : AppCompatActivity() {
         //카카오 로그인 성공했을때 반응하는 callback 객체 생성
         val callback : (OAuthToken?, Throwable?)->Unit = { token, error ->
             if (error != null) {
+                Log.d("asdasda", error.toString())
                 Toast.makeText(this, "카카오 로그인 실패😥", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(this, "카카오 로그인 성공😊", Toast.LENGTH_SHORT).show()

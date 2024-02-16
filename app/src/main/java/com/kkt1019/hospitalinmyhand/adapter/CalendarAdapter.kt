@@ -1,13 +1,13 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kkt1019.hospitalinmyhand.CalendarItemVO
+import com.kkt1019.hospitalinmyhand.R
 
 class CalendarAdapter(val context: Context,  var calendaritems: MutableList<CalendarItemVO>) : RecyclerView.Adapter<CalendarAdapter.VH>(){
 

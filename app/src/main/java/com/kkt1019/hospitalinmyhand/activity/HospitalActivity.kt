@@ -10,52 +10,53 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityHospitalBinding
 
 class HospitalActivity : AppCompatActivity() {
-    val binding: ActivityHospitalBinding by lazy { ActivityHospitalBinding.inflate(layoutInflater) }
-
-    val fragment:MutableList<Fragment> by lazy { mutableListOf() }
-
-    var firebaseAuth: FirebaseAuth? = null
+    private lateinit var binding: ActivityHospitalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityHospitalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
         toolbar.title = "병원, 응급실"
 
-        fragment.add(HomePage1Fragment())
-        fragment.add(HomePage2Fragment())
-
-
-
-        supportFragmentManager.beginTransaction().add(R.id.container, fragment[0]).commit()
-
-        binding.bnv.setOnItemSelectedListener {
-
-            supportFragmentManager.fragments.forEach {
-                supportFragmentManager.beginTransaction().hide(it).commit()
-            }
-
-            val tran =  supportFragmentManager.beginTransaction()
-
-            when(it.itemId){
-                R.id.bnv_hospital -> {
-                    tran.show(fragment[0])
-                }
-                R.id.bnv_hospital2 -> {
-                    if ( !supportFragmentManager.fragments.contains(fragment[1]))
-                        tran.add(R.id.container, fragment[1])
-                    tran.show(fragment[1])
-                }
-
-            }
-            tran.commit()
-
-            true
+        setupBottomNavigationView()
+        if (savedInstanceState == null) {
+            // 앱 처음 실행 시 첫 번째 프래그먼트를 표시
+            showFragment(HomePage1Fragment(), "HOME_1")
         }
-
     }
 
+    private fun setupBottomNavigationView() {
+        binding.bnv.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bnv_hospital -> showFragment(HomePage1Fragment(), "HOME_1")
+                R.id.bnv_hospital2 -> showFragment(HomePage2Fragment(), "HOME_2")
+            }
+            true
+        }
+    }
+
+    private fun showFragment(fragment: Fragment, tag: String) {
+        val manager = supportFragmentManager
+        val transaction = manager.beginTransaction()
+        var currentFragment = manager.findFragmentByTag(tag)
+
+        // 모든 프래그먼트를 숨김
+        manager.fragments.forEach {
+            if (it != null && it.isVisible) transaction.hide(it)
+        }
+
+        if (currentFragment == null) {
+            // 태그로 프래그먼트를 찾을 수 없으면 새로 추가
+            currentFragment = fragment
+            transaction.add(R.id.container, currentFragment, tag)
+        } else {
+            // 프래그먼트가 이미 있으면 보여줌
+            transaction.show(currentFragment)
+        }
+
+        transaction.commit()
+    }
 }

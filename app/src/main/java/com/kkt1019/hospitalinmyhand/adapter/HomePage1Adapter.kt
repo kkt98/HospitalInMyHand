@@ -1,18 +1,20 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kkt1019.hospitalinmyhand.G
+import com.kkt1019.hospitalinmyhand.HomePage1BottomSheet
+import com.kkt1019.hospitalinmyhand.HomePage1Item
+import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
 
-class HomePage1Adapter(val context: Context,  var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
 

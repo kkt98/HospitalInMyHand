@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
-import com.kkt1019.hospitalinmyhand.HomePage3Adapter
+import com.kkt1019.hospitalinmyhand.adapter.HomePage3Adapter
 import com.kkt1019.hospitalinmyhand.HomePage3Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityPharmacyBinding
@@ -24,7 +24,6 @@ import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import kotlin.math.*
 
 class PharmacyActivity : AppCompatActivity() {
     val binding: ActivityPharmacyBinding by lazy { ActivityPharmacyBinding.inflate(layoutInflater) }

@@ -8,17 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kkt1019.hospitalinmyhand.adapter.ReviewAdapter
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -134,18 +127,12 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         mapView.setMapCenterPointAndZoomLevel(myMapPoint, 4, true)
         mapView.zoomIn(true)
         mapView.zoomOut(true)
-        Log.i("kim", "qweqweqe")
-
 
         val marker = MapPOIItem()
-
-        Log.i("kim", "asdasdasdad")
-
         marker.apply {
             itemName = name
             mapPoint = myMapPoint
             markerType= MapPOIItem.MarkerType.BluePin
-            Log.i("kim", "fghfghfgh")
         }
         mapView.addPOIItem(marker)
     }

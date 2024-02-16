@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
-import com.kkt1019.hospitalinmyhand.CalendarAdapter
+import com.kkt1019.hospitalinmyhand.adapter.CalendarAdapter
 import com.kkt1019.hospitalinmyhand.CalendarItemVO
 import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.G.Companion.events

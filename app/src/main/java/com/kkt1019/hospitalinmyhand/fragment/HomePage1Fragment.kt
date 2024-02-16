@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
-import com.kkt1019.hospitalinmyhand.HomePage1Adapter
+import com.kkt1019.hospitalinmyhand.adapter.HomePage1Adapter
 import com.kkt1019.hospitalinmyhand.HomePage1Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding

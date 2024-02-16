@@ -1,4 +1,4 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kkt1019.hospitalinmyhand.G
+import com.kkt1019.hospitalinmyhand.HomePage3BottomSheet
+import com.kkt1019.hospitalinmyhand.HomePage3Item
+import com.kkt1019.hospitalinmyhand.R
 import kotlin.math.round
 
 class HomePage3Adapter constructor(val context:Context, var page3Items: MutableList<HomePage3Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage3Adapter.VH>() {

@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.kkt1019.hospitalinmyhand.HomePage2Adapter
+import com.kkt1019.hospitalinmyhand.adapter.HomePage2Adapter
 import com.kkt1019.hospitalinmyhand.HomePage2Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage2Binding

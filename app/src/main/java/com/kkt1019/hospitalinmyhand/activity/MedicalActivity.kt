@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.kkt1019.hospitalinmyhand.MedicalAdapter
+import com.kkt1019.hospitalinmyhand.adapter.MedicalAdapter
 import com.kkt1019.hospitalinmyhand.MedicalItemVO
 import com.kkt1019.hospitalinmyhand.RetrofitHelper
 import com.kkt1019.hospitalinmyhand.RetrofitService
