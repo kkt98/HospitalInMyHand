@@ -13,15 +13,14 @@ import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.kkt1019.hospitalinmyhand.adapter.HomePage1Adapter
 import com.kkt1019.hospitalinmyhand.HomePage1Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserFactory
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
+import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
 import kotlin.math.*
 
 class HomePage1Fragment:Fragment() {
@@ -31,169 +30,177 @@ class HomePage1Fragment:Fragment() {
     var items3 = mutableListOf<HomePage1Item>()
     var allitems = mutableListOf<HomePage1Item>()
 
+    private var _binding: FragmentHomePage1Binding? = null
+    private val binding get() = _binding!!
+
+    private val networkViewModel : HospitalViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        _binding = FragmentHomePage1Binding.inflate(inflater, container, false)
         binding.recycler.adapter = HomePage1Adapter(activity as Context, items3, childFragmentManager)
 
-        binding.btn.setOnClickListener { spinner() }
+//        binding.btn.setOnClickListener { spinner() }
 
-        NetworkThread().start()
+//        NetworkThread().start()
 
+        networkViewModel.hospitalInfo.observe(requireActivity(), Observer { items ->
+            // UI 업데이트
+            Log.d("Asdasdsada", items.toString())
+        })
+
+        // 네트워크 요청 시작
+        networkViewModel.fetchHospitalInfo("H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D",
+            1, 3000)
 
         return binding.root
     }
-        val binding: FragmentHomePage1Binding by lazy { FragmentHomePage1Binding.inflate(layoutInflater) }
+//    inner class NetworkThread:Thread(){
+//
+//        override fun run() {
+//
+//            val address = ("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlBassInfoInqire?service" +
+//                    "Key=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
+//                    "&pageNo=1&numOfRows=3000")
+//
+//            try {
+//                val url = URL(address)
+//
+//                val conn = url.openConnection() as HttpURLConnection
+//                conn.doInput = true
+//                val ips = conn.inputStream
+//
+//                val isr = InputStreamReader(ips)
+//
+//                val factory = XmlPullParserFactory.newInstance()
+//                val xpp = factory.newPullParser()
+//                xpp.setInput(isr)
+//
+//                var eventType = xpp.eventType
+//
+//                var item: HomePage1Item? = null
+//
+//                while (eventType != XmlPullParser.END_DOCUMENT) {
+//
+//                    when (eventType) {
+//
+//                        XmlPullParser.START_DOCUMENT -> {
+//                        }
+//                        XmlPullParser.START_TAG -> {
+//                            val tagName = xpp.name
+//
+//                            if (tagName.equals("item")) {
+//                                item = HomePage1Item()
+//
+//                            }else if (tagName.equals("dutyAddr")){
+//                                xpp.next()
+//                                if (item != null) item.dutyAddr = xpp.text
+//
+//                            }else if (tagName.equals("dutyName")){
+//                                xpp.next()
+//                                if (item != null) item.dutyName = xpp.text
+//
+//                            }else if (tagName.equals("dutyTel1")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTell = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime1c")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime1c = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime1s")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime1s = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime2c")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime2c = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime2s")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime2s = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime3c")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime3c = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime3s")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime3s = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime4c")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime4c = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime4s")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime4s = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime5c")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime5c = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime5s")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime5s = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime6c")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime6c = xpp.text
+//
+//                            }else if (tagName.equals("dutyTime6s")){
+//                                xpp.next()
+//                                if (item != null) item.dutyTime6s = xpp.text
+//
+//                            }else if (tagName.equals("wgs84Lat")){
+//                                xpp.next()
+//                                if (item != null) item.wgs84Lat = xpp.text
+//
+//                            }else if (tagName.equals("wgs84Lon")){
+//                                xpp.next()
+//                                if (item != null) item.wgs84Lon = xpp.text
+//
+//                            }else if (tagName.equals("hpid")){
+//                                xpp.next()
+//                                if (item != null) item.hpid = xpp.text
+//
+//                            }else if (tagName.equals("dgidIdName")){
+//                                xpp.next()
+//                                if (item != null) item.dgidIdName = xpp.text
+//
+//                            }
+//                        }
+//                        XmlPullParser.END_TAG -> {
+//                            val tagName2: String = xpp.name
+//                            if (tagName2 == "item") {
+//                                if (item != null) {
+//                                    allitems.add(item)
+//                                }
+//                            }
+//                        }
+//                    }
+//                    eventType = xpp.next()
+//                }
+//
+//                activity?.runOnUiThread {
+////                    Toast.makeText(context, "aaaa"+items2.size, Toast.LENGTH_SHORT).show()
+//                    items.addAll(allitems)
+//                    items2.addAll(items)
+//                    items3.addAll(items2)
+//                    binding.recycler.adapter?.notifyDataSetChanged()
+//                }
+//
+//            }catch (e:Exception){ Log.i("abc", e.toString())}
+//
+//
+//        }
+//
+//    }
 
-    inner class NetworkThread:Thread(){
-
-        override fun run() {
-
-            val address = ("http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlBassInfoInqire?service" +
-                    "Key=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
-                    "&pageNo=1&numOfRows=3000")
-
-            Log.i("abc", "nnn")
-
-            try {
-                val url = URL(address)
-
-                val conn = url.openConnection() as HttpURLConnection
-                conn.doInput = true
-                val ips = conn.inputStream
-
-                val isr = InputStreamReader(ips)
-
-                val factory = XmlPullParserFactory.newInstance()
-                val xpp = factory.newPullParser()
-                xpp.setInput(isr)
-
-                var eventType = xpp.eventType
-
-                var item: HomePage1Item? = null
-
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-
-                    when (eventType) {
-
-                        XmlPullParser.START_DOCUMENT -> {
-                        }
-                        XmlPullParser.START_TAG -> {
-                            val tagName = xpp.name
-
-                            if (tagName.equals("item")) {
-                                item = HomePage1Item()
-
-                            }else if (tagName.equals("dutyAddr")){
-                                xpp.next()
-                                if (item != null) item.dutyAddr = xpp.text
-
-                            }else if (tagName.equals("dutyName")){
-                                xpp.next()
-                                if (item != null) item.dutyName = xpp.text
-
-                            }else if (tagName.equals("dutyTel1")){
-                                xpp.next()
-                                if (item != null) item.dutyTell = xpp.text
-
-                            }else if (tagName.equals("dutyTime1c")){
-                                xpp.next()
-                                if (item != null) item.dutyTime1c = xpp.text
-
-                            }else if (tagName.equals("dutyTime1s")){
-                                xpp.next()
-                                if (item != null) item.dutyTime1s = xpp.text
-
-                            }else if (tagName.equals("dutyTime2c")){
-                                xpp.next()
-                                if (item != null) item.dutyTime2c = xpp.text
-
-                            }else if (tagName.equals("dutyTime2s")){
-                                xpp.next()
-                                if (item != null) item.dutyTime2s = xpp.text
-
-                            }else if (tagName.equals("dutyTime3c")){
-                                xpp.next()
-                                if (item != null) item.dutyTime3c = xpp.text
-
-                            }else if (tagName.equals("dutyTime3s")){
-                                xpp.next()
-                                if (item != null) item.dutyTime3s = xpp.text
-
-                            }else if (tagName.equals("dutyTime4c")){
-                                xpp.next()
-                                if (item != null) item.dutyTime4c = xpp.text
-
-                            }else if (tagName.equals("dutyTime4s")){
-                                xpp.next()
-                                if (item != null) item.dutyTime4s = xpp.text
-
-                            }else if (tagName.equals("dutyTime5c")){
-                                xpp.next()
-                                if (item != null) item.dutyTime5c = xpp.text
-
-                            }else if (tagName.equals("dutyTime5s")){
-                                xpp.next()
-                                if (item != null) item.dutyTime5s = xpp.text
-
-                            }else if (tagName.equals("dutyTime6c")){
-                                xpp.next()
-                                if (item != null) item.dutyTime6c = xpp.text
-
-                            }else if (tagName.equals("dutyTime6s")){
-                                xpp.next()
-                                if (item != null) item.dutyTime6s = xpp.text
-
-                            }else if (tagName.equals("wgs84Lat")){
-                                xpp.next()
-                                if (item != null) item.wgs84Lat = xpp.text
-
-                            }else if (tagName.equals("wgs84Lon")){
-                                xpp.next()
-                                if (item != null) item.wgs84Lon = xpp.text
-
-                            }else if (tagName.equals("hpid")){
-                                xpp.next()
-                                if (item != null) item.hpid = xpp.text
-
-                            }else if (tagName.equals("dgidIdName")){
-                                xpp.next()
-                                if (item != null) item.dgidIdName = xpp.text
-
-                            }
-                        }
-                        XmlPullParser.END_TAG -> {
-                            val tagName2: String = xpp.name
-                            if (tagName2 == "item") {
-                                if (item != null) {
-                                    allitems.add(item)
-                                }
-                            }
-                        }
-                    }
-                    eventType = xpp.next()
-                }
-
-                activity?.runOnUiThread {
-//                    Toast.makeText(context, "aaaa"+items2.size, Toast.LENGTH_SHORT).show()
-                    items.addAll(allitems)
-                    items2.addAll(items)
-                    items3.addAll(items2)
-                    binding.recycler.adapter?.notifyDataSetChanged()
-                }
-
-            }catch (e:Exception){ Log.i("abc", e.toString())}
-
-
-        }
-
-    }
-
-
-    fun spinner(){
+    fun onClickSpinner(){
 
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog, null)
 
@@ -913,7 +920,7 @@ class HomePage1Fragment:Fragment() {
 
                 items3.clear()
 
-        val arr = resources.getStringArray(R.array.medical_id)
+                val arr = resources.getStringArray(R.array.medical_id)
 
                 if (p2 == 0 ){
                     items3.addAll(items2)
@@ -979,6 +986,11 @@ class HomePage1Fragment:Fragment() {
 //
 //        }
 //    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
 
