@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePage1BottomSheet"
     android:background="@drawable/bottomback">
@@ -220,32 +220,32 @@
         android:textSize="13sp"
         android:textStyle="bold" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_below="@+id/time2S"
-        android:layout_marginTop="8dp"
-        android:background="#B5B5B5" />
+<!--    <View-->
+<!--        android:id="@+id/view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="8dp"-->
+<!--        android:layout_below="@+id/time2S"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:background="#B5B5B5" />-->
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@id/view"
-        android:layout_marginLeft="300dp"
-        android:background="#00ff0000"
-        android:drawableLeft="@drawable/ic_baseline_create_24"
-        android:text="글쓰기"
-        android:textColor="@color/black"
-        android:textSize="13sp" />
+<!--    <Button-->
+<!--        android:id="@+id/btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_below="@id/view"-->
+<!--        android:layout_marginLeft="300dp"-->
+<!--        android:background="#00ff0000"-->
+<!--        android:drawableLeft="@drawable/ic_baseline_create_24"-->
+<!--        android:text="글쓰기"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="13sp" />-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btn"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recycler"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@id/btn"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
 </RelativeLayout>

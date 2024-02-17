@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,62 +20,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="보기 설정"
             android:textColor="@color/white"
+            android:layout_margin="10dp"
             app:backgroundTint="@color/mycolor"
-            app:iconTint="@color/white" />
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/bottomsheet"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"-->
-<!--        app:behavior_peekHeight="50dp"-->
-<!--        android:background="@color/white">-->
+</layout>
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:text="Bottom Sheet Handle View"-->
-<!--            android:textStyle="bold"-->
-<!--            android:padding="16dp"-->
-<!--            android:background="#FFDDDDDD"/>-->
-
-<!--        <fragment-->
-<!--            android:id="@+id/map"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="250dp"-->
-<!--            android:name="com.google.android.gms.maps.SupportMapFragment"/>-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="One Piece"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:padding="8dp"/>-->
-
-<!--    </LinearLayout>-->
-
-
-
-
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    <!--            android:onClick="@{ () -> fragment.onClickSpinner()}"-->

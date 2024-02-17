@@ -1,17 +1,14 @@
 package com.kkt1019.hospitalinmyhand.network
 
-import com.tickaroo.tikxml.TikXml
-import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import retrofit2.Retrofit
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 object RetrofitBuilder {
-
-    var parser = TikXml.Builder().exceptionOnUnreadXml(false).build()
 
 
     val retrofit = Retrofit.Builder()
         .baseUrl("http://apis.data.go.kr/")
-        .addConverterFactory(TikXmlConverterFactory.create(parser))
+        .addConverterFactory(SimpleXmlConverterFactory.create())
         .build()
 
     val apiService = retrofit.create(ApiService::class.java)

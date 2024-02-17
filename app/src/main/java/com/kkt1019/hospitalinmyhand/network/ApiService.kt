@@ -1,7 +1,6 @@
 package com.kkt1019.hospitalinmyhand.network
 
-import com.kkt1019.hospitalinmyhand.HomePage1Item
-import com.kkt1019.hospitalinmyhand.data.Hospital1Items
+import Hospital1Items
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -15,9 +15,8 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.kkt1019.hospitalinmyhand.adapter.HomePage1Adapter
-import com.kkt1019.hospitalinmyhand.HomePage1Item
+import com.kkt1019.hospitalinmyhand.data.HomePage1Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
@@ -43,22 +42,28 @@ class HomePage1Fragment:Fragment() {
         _binding = FragmentHomePage1Binding.inflate(inflater, container, false)
         binding.recycler.adapter = HomePage1Adapter(activity as Context, items3, childFragmentManager)
 
-//        binding.btn.setOnClickListener { spinner() }
+        binding.btn.setOnClickListener { spinner() }
 
 //        NetworkThread().start()
 
-        networkViewModel.hospitalInfo.observe(requireActivity(), Observer { items ->
+        networkViewModel.hospitalData.observe(requireActivity(), Observer {
             // UI 업데이트
-            Log.d("Asdasdsada", items.toString())
+            Log.d("hospitalXmlParsing", "sussce")
+            allitems.addAll(it)
+            items.addAll(allitems)
+                    items2.addAll(items)
+                    items3.addAll(items2)
+            binding.recycler.adapter?.notifyDataSetChanged()
+            Log.d("asdasdasd", it[0].toString())
+
         })
 
-        // 네트워크 요청 시작
-        networkViewModel.fetchHospitalInfo("H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D",
-            1, 3000)
+        // 네트워크 요청 시작 (xml파싱)
+        networkViewModel.fetchDataFromNetwork()
 
         return binding.root
     }
-//    inner class NetworkThread:Thread(){
+    inner class NetworkThread:Thread(){
 //
 //        override fun run() {
 //
@@ -198,9 +203,9 @@ class HomePage1Fragment:Fragment() {
 //
 //        }
 //
-//    }
+    }
 
-    fun onClickSpinner(){
+    fun spinner(){
 
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog, null)
 

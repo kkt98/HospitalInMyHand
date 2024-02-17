@@ -23,7 +23,7 @@ import kotlin.properties.Delegates
 
 class HomePage1BottomSheet : BottomSheetDialogFragment() {
 
-    val recycler : RecyclerView by lazy { binding.recycler }
+//    val recycler : RecyclerView by lazy { binding.recycler }
 
     var items = mutableListOf<ItemVO>()
 
@@ -54,12 +54,12 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.btn.setOnClickListener {
-
-            val intent = Intent(context as Activity, RevieEdit::class.java)
-            startActivity(intent)
-
-        }
+//        binding.btn.setOnClickListener {
+//
+//            val intent = Intent(context as Activity, RevieEdit::class.java)
+//            startActivity(intent)
+//
+//        }
 
         return binding.root
     }
@@ -68,7 +68,7 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
     override fun onResume() {
         super.onResume()
 
-        datas()
+//        datas()
 
         binding.title.text = name
         binding.tell.text = tell
@@ -142,37 +142,37 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
 
 
 
-    fun datas(){
-
-        //서버에서 데이터를 불러오는 기능 메소드
-        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
-        val retrofitService = retrofit!!.create(RetrofitService::class.java)
-        val call = retrofitService.loadDataFromServer(G.uniqueid!!)
-        call.enqueue(object : Callback<ArrayList<ItemVO?>> {
-            override fun onResponse(call: Call<ArrayList<ItemVO?>>, response: Response<ArrayList<ItemVO?>>) {
-                items.clear()
-                binding.recycler.adapter?.notifyDataSetChanged()
-
-                val list = response.body()!!
-                for (ItemVO in list) {
-                    if (ItemVO != null) {
-
-                        items.add(0, ItemVO)
-
-                    }
-                    binding.recycler.adapter?.notifyItemInserted(0)
-                }
-            }
-
-            override fun onFailure(call: Call<ArrayList<ItemVO?>>, t: Throwable) {
-//                Toast.makeText(context, "error : " + t.message, Toast.LENGTH_SHORT).show()
-
-                //확인
-                AlertDialog.Builder(context as Activity).setMessage(t.message).create().show()
-            }
-        })
-
-        recycler.adapter = ReviewAdapter(activity as Context, items)
-
-    }
+//    fun datas(){
+//
+//        //서버에서 데이터를 불러오는 기능 메소드
+//        val retrofit = RetrofitHelper.getRetrofitInstanceGson()
+//        val retrofitService = retrofit!!.create(RetrofitService::class.java)
+//        val call = retrofitService.loadDataFromServer(G.uniqueid!!)
+//        call.enqueue(object : Callback<ArrayList<ItemVO?>> {
+//            override fun onResponse(call: Call<ArrayList<ItemVO?>>, response: Response<ArrayList<ItemVO?>>) {
+//                items.clear()
+//                binding.recycler.adapter?.notifyDataSetChanged()
+//
+//                val list = response.body()!!
+//                for (ItemVO in list) {
+//                    if (ItemVO != null) {
+//
+//                        items.add(0, ItemVO)
+//
+//                    }
+//                    binding.recycler.adapter?.notifyItemInserted(0)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ArrayList<ItemVO?>>, t: Throwable) {
+////                Toast.makeText(context, "error : " + t.message, Toast.LENGTH_SHORT).show()
+//
+//                //확인
+//                AlertDialog.Builder(context as Activity).setMessage(t.message).create().show()
+//            }
+//        })
+//
+//        recycler.adapter = ReviewAdapter(activity as Context, items)
+//
+//    }
 }

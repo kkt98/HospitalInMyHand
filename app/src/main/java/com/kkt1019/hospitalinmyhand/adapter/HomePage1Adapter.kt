@@ -10,8 +10,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.HomePage1BottomSheet
-import com.kkt1019.hospitalinmyhand.HomePage1Item
+import com.kkt1019.hospitalinmyhand.data.HomePage1Item
 import com.kkt1019.hospitalinmyhand.R
+import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
 
 class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
@@ -45,7 +46,7 @@ class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePag
 
         item.location = G.location.toString()
 
-        G.location = HomePage1Fragment.DistanceManager.getDistance((G.Xpos!!.toDouble()) , G.Ypos!!.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
+        G.location = HomePage1Fragment.DistanceManager.getDistance((ShareData.lat.toDouble()) , ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
 
 //            G.location = HomePage1Fragment.Distance.distance(G.Xpos!!.toDouble(), G.Ypos!!.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
                 .toString()
