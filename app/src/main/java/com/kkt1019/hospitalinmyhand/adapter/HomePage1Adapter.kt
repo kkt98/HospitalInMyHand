@@ -17,6 +17,12 @@ import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
 
 class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
+    fun updateData(newItems: List<HomePage1Item>) {
+        page1Items.clear()
+        page1Items.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
     inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         val tvTitle : TextView by lazy { itemView.findViewById(R.id.title) }
@@ -42,14 +48,9 @@ class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePag
         holder.tvTitle.text = "병원이름 : " + item.dutyName
         holder.tvAddress.text = "병원주소 : " + item.dutyAddr
         holder.tvTell.text ="전화번호 : " + item.dutyTell
+        G.location = HomePage1Fragment.DistanceManager.getDistance((ShareData.lat) , ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
         holder.location.text = G.location
-
         item.location = G.location.toString()
-
-        G.location = HomePage1Fragment.DistanceManager.getDistance((ShareData.lat.toDouble()) , ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
-
-//            G.location = HomePage1Fragment.Distance.distance(G.Xpos!!.toDouble(), G.Ypos!!.toDouble(), item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
-                .toString()
 
         holder.itemView.setOnClickListener {
 
@@ -66,4 +67,5 @@ class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePag
     }
 
     override fun getItemCount(): Int = page1Items.size
+
 }
