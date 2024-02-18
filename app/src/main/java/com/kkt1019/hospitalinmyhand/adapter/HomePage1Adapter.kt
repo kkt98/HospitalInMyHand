@@ -13,9 +13,15 @@ import com.kkt1019.hospitalinmyhand.HomePage1BottomSheet
 import com.kkt1019.hospitalinmyhand.data.HomePage1Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
-import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
+import com.kkt1019.hospitalinmyhand.util.DistanceManager
+import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
-class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePage1Item>, private val fragmentManager : FragmentManager) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
+class HomePage1Adapter(
+    val context: Context,
+    var page1Items: MutableList<HomePage1Item>,
+    private val fragmentManager: FragmentManager,
+    private val sharedViewModel: SharedViewModel
+) : RecyclerView.Adapter<HomePage1Adapter.VH>(){
 
     fun updateData(newItems: List<HomePage1Item>) {
         page1Items.clear()
@@ -48,20 +54,21 @@ class HomePage1Adapter(val context: Context, var page1Items: MutableList<HomePag
         holder.tvTitle.text = "병원이름 : " + item.dutyName
         holder.tvAddress.text = "병원주소 : " + item.dutyAddr
         holder.tvTell.text ="전화번호 : " + item.dutyTell
-        G.location = HomePage1Fragment.DistanceManager.getDistance((ShareData.lat) , ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
+        G.location = DistanceManager.getDistance((ShareData.lat) , ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
         holder.location.text = G.location
         item.location = G.location.toString()
 
         holder.itemView.setOnClickListener {
 
+            sharedViewModel.selectHospitalItem(item)
+
             val bottomSheetDialogFragment = HomePage1BottomSheet()
-            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble(), item.dgidIdName
-                                             ,item.dutyTime6c, item.dutyTime6s, item.dutyTime2s, item.dutyTime2c, item.dutyTime3s, item.dutyTime3c, item.dutyTime4s, item.dutyTime4c,
-                                                item.dutyTime5s, item.dutyTime5c )
+//            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTell, item.dutyTime1s, item.dutyTime1c, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble(), item.dgidIdName
+//                                             ,item.dutyTime6c, item.dutyTime6s, item.dutyTime2s, item.dutyTime2c, item.dutyTime3s, item.dutyTime3c, item.dutyTime4s, item.dutyTime4c,
+//                                                item.dutyTime5s, item.dutyTime5c )
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
             G.uniqueid = item.hpid
-
         }
 
     }

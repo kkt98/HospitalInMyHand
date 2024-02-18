@@ -1,251 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomePage1BottomSheet"
-    android:background="@drawable/bottomback">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
-        android:id="@+id/view_top"
-        android:layout_width="100dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
-        android:background="#B5B5B5" />
+    <data>
+        <variable
+            name="hospitalItem"
+            type="com.kkt1019.hospitalinmyhand.data.HomePage1Item" />
+    </data>
 
     <RelativeLayout
-        android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginTop="50dp"/>
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map_view"
-        android:drawableLeft="@drawable/icons8hospitalsign20"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        tools:context=".HomePage1BottomSheet"
+        android:background="@drawable/bottomback">
 
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:drawableLeft="@drawable/icons8region20"
-        android:paddingLeft="10dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <View
+            android:id="@+id/view_top"
+            android:layout_width="100dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:background="#B5B5B5" />
 
-    <TextView
-        android:id="@+id/tell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/address"
-        android:drawableLeft="@drawable/icons8phone20"
-        android:paddingLeft="10dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <RelativeLayout
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="50dp" />
 
-    <ImageView
-        android:id="@+id/time_ic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tell"
-        android:paddingLeft="10dp"
-        android:paddingRight="4dp"
-        android:paddingBottom="10dp"
-        android:src="@drawable/icons8clock20" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/map_view"
+            android:drawableLeft="@drawable/icons8hospitalsign20"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="10dp"
+            android:text="@{hospitalItem.dutyName}"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:drawableLeft="@drawable/icons8region20"
+            android:paddingLeft="10dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="10dp"
+            android:text="@{hospitalItem.dutyAddr}"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address"
+            android:drawableLeft="@drawable/icons8phone20"
+            android:paddingLeft="10dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="10dp"
+            android:text="@{hospitalItem.dutyTell}"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/time_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tell"
+            android:paddingLeft="10dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/icons8clock20" />
 
 
-    <TextView
-        android:id="@+id/timeS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tell"
-        android:layout_toRightOf="@id/time_ic"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/timeS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tell"
+            android:layout_toRightOf="@id/time_ic"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/timeC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tell"
-        android:layout_toRightOf="@id/timeS"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/timeC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tell"
+            android:layout_toRightOf="@id/timeS"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time2S"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timeC"
-        android:layout_toRightOf="@+id/time_ic"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time2S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeC"
+            android:layout_toRightOf="@+id/time_ic"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time2C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timeC"
-        android:layout_toRightOf="@id/time2S"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time2C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeC"
+            android:layout_toRightOf="@id/time2S"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time1S"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tell"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/timeC"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time1S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tell"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/timeC"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time1C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tell"
-        android:layout_toRightOf="@id/time1S"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time1C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tell"
+            android:layout_toRightOf="@id/time1S"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time3S"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tell"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/time1C"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time3S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tell"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/time1C"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time3C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tell"
-        android:layout_toRightOf="@id/time3S"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time3C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tell"
+            android:layout_toRightOf="@id/time3S"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time4S"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timeS"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/time2C"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time4S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeS"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/time2C"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time4C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timeS"
-        android:layout_toRightOf="@id/time4S"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time4C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeS"
+            android:layout_toRightOf="@id/time4S"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time5S"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timeS"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/time4C"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time5S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeS"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/time4C"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/time5C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/timeS"
-        android:layout_toRightOf="@id/time5S"
-        android:paddingBottom="10dp"
-        android:text="운영시간"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/time5C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeS"
+            android:layout_toRightOf="@id/time5S"
+            android:paddingBottom="10dp"
+            android:text="운영시간"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-<!--    <View-->
-<!--        android:id="@+id/view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="8dp"-->
-<!--        android:layout_below="@+id/time2S"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:background="#B5B5B5" />-->
+        <!--    <View-->
+        <!--        android:id="@+id/view"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="8dp"-->
+        <!--        android:layout_below="@+id/time2S"-->
+        <!--        android:layout_marginTop="8dp"-->
+        <!--        android:background="#B5B5B5" />-->
 
-<!--    <Button-->
-<!--        android:id="@+id/btn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_below="@id/view"-->
-<!--        android:layout_marginLeft="300dp"-->
-<!--        android:background="#00ff0000"-->
-<!--        android:drawableLeft="@drawable/ic_baseline_create_24"-->
-<!--        android:text="글쓰기"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="13sp" />-->
+        <!--    <Button-->
+        <!--        android:id="@+id/btn"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="40dp"-->
+        <!--        android:layout_below="@id/view"-->
+        <!--        android:layout_marginLeft="300dp"-->
+        <!--        android:background="#00ff0000"-->
+        <!--        android:drawableLeft="@drawable/ic_baseline_create_24"-->
+        <!--        android:text="글쓰기"-->
+        <!--        android:textColor="@color/black"-->
+        <!--        android:textSize="13sp" />-->
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recycler"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@id/btn"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
+        <!--    <androidx.recyclerview.widget.RecyclerView-->
+        <!--        android:id="@+id/recycler"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:layout_below="@id/btn"-->
+        <!--        android:orientation="vertical"-->
+        <!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

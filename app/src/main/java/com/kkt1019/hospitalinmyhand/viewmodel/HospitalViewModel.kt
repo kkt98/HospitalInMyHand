@@ -44,7 +44,9 @@ class HospitalViewModel : ViewModel() {
                         XmlPullParser.START_TAG -> {
                             val tagName = xpp.name
                             when (tagName) {
-                                "item" -> item = HomePage1Item()
+                                "item" -> {
+                                    item = HomePage1Item()
+                                }
                                 "dutyAddr" -> {
                                     xpp.next()
                                     item?.dutyAddr = xpp.text

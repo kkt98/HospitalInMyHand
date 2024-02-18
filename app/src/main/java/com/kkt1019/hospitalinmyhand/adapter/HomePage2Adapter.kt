@@ -13,6 +13,7 @@ import com.kkt1019.hospitalinmyhand.HomePage2BottomSheet
 import com.kkt1019.hospitalinmyhand.HomePage2Item
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
+import com.kkt1019.hospitalinmyhand.util.DistanceManager
 
 class HomePage2Adapter constructor(val context:Context, var page2Items:MutableList<HomePage2Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage2Adapter.VH>() {
 
@@ -46,7 +47,7 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
 
 //        item.location = G.location.toString()
 
-        G.location = HomePage1Fragment.DistanceManager.getDistance(G.Xpos.toDouble(), G.Ypos.toDouble(), item.wgs84Lat.toDouble() ?: 37.5663, item.wgs84Lon.toDouble() ?: 126.9779)
+        G.location = DistanceManager.getDistance(G.Xpos.toDouble(), G.Ypos.toDouble(), item.wgs84Lat.toDouble() ?: 37.5663, item.wgs84Lon.toDouble() ?: 126.9779)
             .toString()
 
 

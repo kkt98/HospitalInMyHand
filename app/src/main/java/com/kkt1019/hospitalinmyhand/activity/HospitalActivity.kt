@@ -2,15 +2,19 @@ package com.kkt1019.hospitalinmyhand.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
 import com.kkt1019.hospitalinmyhand.fragment.HomePage2Fragment
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityHospitalBinding
+import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class HospitalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHospitalBinding
+    private lateinit var viewModel: SharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,8 @@ class HospitalActivity : AppCompatActivity() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = "병원, 응급실"
+
+        viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
         setupBottomNavigationView()
         if (savedInstanceState == null) {

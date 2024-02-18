@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.kkt1019.hospitalinmyhand.data.HomePage1Item
@@ -16,7 +17,7 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.adapter.HomePage1Adapter
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
 import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
-import kotlin.math.*
+import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class HomePage1Fragment : Fragment() {
 
@@ -26,6 +27,8 @@ class HomePage1Fragment : Fragment() {
     private val binding get() = _binding!!
 
     private val networkViewModel: HospitalViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +36,7 @@ class HomePage1Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomePage1Binding.inflate(inflater, container, false)
-        binding.recycler.adapter = HomePage1Adapter(requireContext(), items, childFragmentManager)
+        binding.recycler.adapter = HomePage1Adapter(requireContext(), items, childFragmentManager, sharedViewModel)
 
         binding.btn.setOnClickListener { showDialog() }
 
@@ -41,7 +44,6 @@ class HomePage1Fragment : Fragment() {
             allItems.addAll(it)
             (binding.recycler.adapter as? HomePage1Adapter)?.updateData(it)
         })
-
         networkViewModel.fetchDataFromNetwork()
 
         return binding.root
@@ -82,7 +84,6 @@ class HomePage1Fragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // Initialize spinner2 and spinner3 in updateNeighborhoodSpinner and updateHospitalTypeSpinner respectively
     }
 
     private fun updateNeighborhoodSpinner(city: String, spinner2: Spinner) {
@@ -147,29 +148,6 @@ class HomePage1Fragment : Fragment() {
         (binding.recycler.adapter as? HomePage1Adapter)?.let { adapter ->
             adapter.updateData(items)
             adapter.notifyDataSetChanged()
-        }
-    }
-
-
-    object DistanceManager {
-
-        private const val R = 6372.8
-
-        /**
-         * 두 좌표의 거리를 계산한다.
-         *
-         * @param lat1 위도1
-         * @param lon1 경도1
-         * @param lat2 위도2
-         * @param lon2 경도2
-         * @return 두 좌표의 거리(m)
-         */
-        fun getDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
-            val dLat = Math.toRadians(lat1 - lat2)
-            val dLon = Math.toRadians(lon1 - lon2)
-            val a = sin(dLat / 2).pow(2.0) + sin(dLon / 2).pow(2.0) * cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2))
-            val c = 2 * asin(sqrt(a))
-            return (round((R * c)*100) / 100)
         }
     }
 
