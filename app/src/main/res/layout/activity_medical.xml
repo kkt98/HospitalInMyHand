@@ -1,52 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MedicalActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/MyToolBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/MyToolbarTheme"
-        app:title="내손안에 병원" />
+    <data>
+        <variable
+            name="activity"
+            type="com.kkt1019.hospitalinmyhand.activity.MedicalActivity" />
+    </data>
 
-    <EditText
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_below="@+id/toolbar"
-        android:ems="14"
-        android:inputType="text"
-        android:hint="의약품명을 입력하세요."
-        android:padding="8dp" />
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_toRightOf="@+id/edit"
-        android:backgroundTint="@color/mycolor2"
-        android:text="검색" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/edit"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        tools:context=".activity.MedicalActivity">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        style="@android:style/Widget.Holo.ProgressBar.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_centerInParent="true" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/MyToolBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/MyToolbarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="내손안에 병원" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:hint="의약품명을 입력하세요."
+            android:inputType="text"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toStartOf="@+id/btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_toRightOf="@+id/edit"
+            android:backgroundTint="@color/mycolor2"
+            android:onClick="@{ () -> activity.onClickMedicalSearch()}"
+            android:text="검색"
+            app:layout_constraintBottom_toBottomOf="@+id/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edit" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/edit"
+            android:orientation="vertical"
+            android:layout_marginTop="3dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/sfl_sample"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/recycler"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recycler">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/recycler_shimmer_item" />
+
+                <include layout="@layout/recycler_shimmer_item" />
+
+                <include layout="@layout/recycler_shimmer_item" />
+
+                <include layout="@layout/recycler_shimmer_item" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

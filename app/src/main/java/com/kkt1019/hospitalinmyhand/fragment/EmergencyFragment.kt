@@ -1,56 +1,71 @@
 package com.kkt1019.hospitalinmyhand.fragment
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.kkt1019.hospitalinmyhand.data.HomePage1Item
+import com.kkt1019.hospitalinmyhand.adapter.EmergencyFragmentAdapter
+import com.kkt1019.hospitalinmyhand.data.HomePage2Item
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.adapter.HomePage1Adapter
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomePage1Binding
-import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
+import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBinding
+import com.kkt1019.hospitalinmyhand.viewmodel.EmergencyViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
-class HomePage1Fragment : Fragment() {
+class EmergencyFragment:Fragment() {
 
-    private var items = mutableListOf<HomePage1Item>()
-    private var allItems = mutableListOf<HomePage1Item>()
-    private var _binding: FragmentHomePage1Binding? = null
-    private val binding get() = _binding!!
+    var items = mutableListOf<HomePage2Item>()
+    var allItems = mutableListOf<HomePage2Item>()
 
-    private val networkViewModel: HospitalViewModel by viewModels()
+    private val emergencyViewModel : EmergencyViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHomePage1Binding.inflate(inflater, container, false)
-        binding.recycler.adapter = HomePage1Adapter(requireContext(), items, childFragmentManager, sharedViewModel)
+
+        binding.recycler.adapter = EmergencyFragmentAdapter(activity as Context, items, childFragmentManager, sharedViewModel)
 
         binding.btn.setOnClickListener { showDialog() }
-
-        networkViewModel.hospitalData.observe(viewLifecycleOwner, Observer {
-            allItems.addAll(it)
-            (binding.recycler.adapter as? HomePage1Adapter)?.updateData(it)
-        })
-        networkViewModel.fetchDataFromNetwork()
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+//        Mylocation()
+
+        binding.sflSample.startShimmer()
+        binding.sflSample.visibility = View.VISIBLE
+
+        emergencyViewModel.fetchDataFromNetwork()
+
+        emergencyViewModel.emergencyItem.observe(requireActivity(), Observer {
+            allItems.addAll(it)
+
+            (binding.recycler.adapter as? EmergencyFragmentAdapter)?.updateData(it)
+
+            binding.sflSample.stopShimmer()
+            binding.sflSample.visibility = View.GONE
+
+        })
+
+    }
+
+    val binding: FragmentEmergencyBinding by lazy { FragmentEmergencyBinding.inflate(layoutInflater) }
+
     private fun showDialog() {
-        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog, null)
+        val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog2, null)
         val dialog = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
             .setPositiveButton("확인", null) // Initially, we don't handle the click here
@@ -83,7 +98,6 @@ class HomePage1Fragment : Fragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
-
     }
 
     private fun updateNeighborhoodSpinner(city: String, spinner2: Spinner) {
@@ -105,55 +119,27 @@ class HomePage1Fragment : Fragment() {
             "경상북도" -> R.array.spinner_region_jeon_buk
             "경상남도" -> R.array.spinner_region_jeon_nam
             "제주특별자치도" -> R.array.spinner_jeju
-            else -> R.array.choice
+            else -> R.array.choice // 기본값 또는 지원되지 않는 도시
         }
         val neighborhoodAdapter = ArrayAdapter.createFromResource(requireContext(), neighborhoodArrayId, android.R.layout.simple_spinner_dropdown_item)
         spinner2.adapter = neighborhoodAdapter
-
-        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                // 여기서 updateHospitalTypeSpinner 함수를 호출합니다.
-                // 선택된 동네 이름을 전달하거나, 동네 선택에 따른 병원 종류 데이터를 설정하는 데 사용할 수 있습니다.
-                // 이 예시에서는 동네 이름을 사용하지 않고 병원 종류 스피너를 직접 업데이트합니다.
-                val spinner3 = view?.rootView?.findViewById<Spinner>(R.id.spinner3)
-                spinner3?.let {
-                    updateHospitalTypeSpinner(it)
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-    }
-
-    private fun updateHospitalTypeSpinner(spinner3: Spinner) {
-        val hospitalTypeAdapter = ArrayAdapter.createFromResource(requireContext(), R.array.medical_id, android.R.layout.simple_spinner_dropdown_item)
-        spinner3.adapter = hospitalTypeAdapter
     }
 
     private fun filterAndDisplayItems(mDialogView: View) {
         val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
         val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
-        val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
 
         val selectedCity = spinner.selectedItem.toString()
         val selectedNeighborhood = spinner2.selectedItem.toString()
-        val selectedHospitalType = spinner3.selectedItem.toString()
 
         items = allItems.filter { item ->
-            item.dutyAddr.contains(selectedCity) &&
-                    item.dutyAddr.contains(selectedNeighborhood) &&
-                    item.dgidIdName.contains(selectedHospitalType)
+            item.dutyAddr.contains(selectedCity) && item.dutyAddr.contains(selectedNeighborhood)
         }.toMutableList()
 
-        (binding.recycler.adapter as? HomePage1Adapter)?.let { adapter ->
+        (binding.recycler.adapter as? EmergencyFragmentAdapter)?.let { adapter ->
             adapter.updateData(items)
             adapter.notifyDataSetChanged()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
-

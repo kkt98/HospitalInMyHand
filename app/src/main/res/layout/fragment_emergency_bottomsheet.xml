@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomePage1BottomSheet"
+    tools:context=".fragment.HospitalBottomSheetFragment"
     android:orientation="vertical"
     android:background="@drawable/bottomback">
 
@@ -74,33 +74,5 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
-
-    <View
-        android:id="@+id/view"
-        android:background="#B5B5B5"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_below="@+id/tell2"
-        android:layout_marginTop="8dp"/>
-
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="글쓰기"
-        android:textSize="13sp"
-        android:textColor="@color/black"
-        android:background="#00ff0000"
-        android:layout_marginLeft="300dp"
-        android:drawableLeft="@drawable/ic_baseline_create_24"
-        android:layout_below="@id/view"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_below="@id/btn"/>
 
 </RelativeLayout>

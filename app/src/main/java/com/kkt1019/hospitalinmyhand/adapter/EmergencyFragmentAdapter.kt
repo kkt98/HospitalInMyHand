@@ -5,17 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
-import com.kkt1019.hospitalinmyhand.HomePage2BottomSheet
-import com.kkt1019.hospitalinmyhand.HomePage2Item
+import com.kkt1019.hospitalinmyhand.fragment.EmergencyBottomSheetFragment
+import com.kkt1019.hospitalinmyhand.data.HomePage2Item
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
+import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
+import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
-class HomePage2Adapter constructor(val context:Context, var page2Items:MutableList<HomePage2Item>, private val fragmentManager : FragmentManager): RecyclerView.Adapter<HomePage2Adapter.VH>() {
+class EmergencyFragmentAdapter (
+    val context:Context,
+    var page2Items:MutableList<HomePage2Item>,
+    private val fragmentManager : FragmentManager,
+    private val sharedViewModel: SharedViewModel): RecyclerView.Adapter<EmergencyFragmentAdapter.VH>() {
+
+    fun updateData(newItems: List<HomePage2Item>) {
+        page2Items.clear()
+        page2Items.addAll(newItems)
+        notifyDataSetChanged()
+    }
 
     inner class VH(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -30,7 +40,7 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
 
         val inflater: LayoutInflater = LayoutInflater.from(context)
-        val itemView = inflater.inflate(R.layout.recycler_homepage2_item, parent, false)
+        val itemView = inflater.inflate(R.layout.recycler_emergency_item, parent, false)
 
         return VH(itemView)
 
@@ -43,26 +53,22 @@ class HomePage2Adapter constructor(val context:Context, var page2Items:MutableLi
         holder.tvAddr.text = "주소 : " + item.dutyAddr
         holder.tvTell.text = "대표 전화 : " + item.dutyTel1
         holder.tvTell2.text = "응급실 전화 : " + item.dutyTel3
-        holder.tvLocation.text = G.location
 
-//        item.location = G.location.toString()
-
-        G.location = DistanceManager.getDistance(G.Xpos.toDouble(), G.Ypos.toDouble(), item.wgs84Lat.toDouble() ?: 37.5663, item.wgs84Lon.toDouble() ?: 126.9779)
+        G.location = DistanceManager.getDistance(ShareData.lat, ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             .toString()
-
-
+        holder.tvLocation.text = G.location + "km"
+        item.location = G.location.toString()
 
 
 
         holder.itemView.setOnClickListener {
 
-            val bottomSheetDialogFragment = HomePage2BottomSheet()
-            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
+            sharedViewModel.selectEmergencyItem(item)
+            val bottomSheetDialogFragment = EmergencyBottomSheetFragment()
+//            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
             G.uniqueid = item.hpid
-
-            Toast.makeText(context, G.uniqueid, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -1,33 +1,22 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.fragment
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kkt1019.hospitalinmyhand.adapter.ReviewAdapter
-import com.kkt1019.hospitalinmyhand.databinding.FragmentHomepage1BottomsheetBinding
+import com.kkt1019.hospitalinmyhand.ItemVO
+import com.kkt1019.hospitalinmyhand.databinding.FragmentHospitalBottomsheetBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.properties.Delegates
 
-class HomePage1BottomSheet : BottomSheetDialogFragment() {
+class HospitalBottomSheetFragment : BottomSheetDialogFragment() {
 
-    val binding: FragmentHomepage1BottomsheetBinding by lazy { FragmentHomepage1BottomsheetBinding.inflate(layoutInflater) }
+    val binding: FragmentHospitalBottomsheetBinding by lazy { FragmentHospitalBottomsheetBinding.inflate(layoutInflater) }
     var items = mutableListOf<ItemVO>()
 
     val mapView: MapView by lazy { MapView(context) }
@@ -35,23 +24,8 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
 //    lateinit var name : String
-    lateinit var addr : String
-    lateinit var tell : String
-    lateinit var timeS : String
-    lateinit var timeC : String
     var  Xpos :Double = 0.0
     var Ypos :Double = 0.0
-    lateinit var medical : String
-    lateinit var time1s : String
-    lateinit var time1c : String
-    lateinit var time2s : String
-    lateinit var time2c : String
-    lateinit var time3s : String
-    lateinit var time3c : String
-    lateinit var time4s : String
-    lateinit var time4c : String
-    lateinit var time5s : String
-    lateinit var time5c : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,6 +35,9 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
 
 
         sharedViewModel.hospitalItem.observe(viewLifecycleOwner) { item ->
+
+            Log.d("Asdadad", item.dutyAddr)
+
             binding.title.text = item.dutyName
             binding.tell.text = item.dutyTell
             binding.address.text = item.dutyAddr
@@ -92,30 +69,6 @@ class HomePage1BottomSheet : BottomSheetDialogFragment() {
         binding.mapView.addView(mapView)
 
     }
-
-//    fun detail(name: String, addr:String, tell:String, timeS:String, timeC:String, Xpos:Double, Ypos:Double, medical:String, time2S:String, time2c:String,
-//               time1S:String, time1C:String, time3S:String, time3C:String, time4S:String, time4C:String, time5S:String, time5C:String){
-//
-//        this.name = name
-//        this.addr = addr
-//        this.tell = tell
-//        this.timeS = timeS
-//        this.timeC = timeC
-//        this.Xpos = Xpos
-//        this.Ypos = Ypos
-//        this.medical = medical
-//        this.time1s = time1S
-//        this.time1c = time1C
-//        this.time2s = time2S
-//        this.time2c = time2c
-//        this.time3s = time3S
-//        this.time3c = time3C
-//        this.time4s = time4S
-//        this.time4c = time4C
-//        this.time5s = time5S
-//        this.time5c = time5C
-//
-//    }
     ////////////////////////////////상세정보///////////////////////////
 
 

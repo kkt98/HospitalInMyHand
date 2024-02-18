@@ -2,12 +2,10 @@ package com.kkt1019.hospitalinmyhand.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.kkt1019.hospitalinmyhand.fragment.HomePage1Fragment
-import com.kkt1019.hospitalinmyhand.fragment.HomePage2Fragment
+import com.kkt1019.hospitalinmyhand.fragment.HospitalFragment
+import com.kkt1019.hospitalinmyhand.fragment.EmergencyFragment
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityHospitalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
@@ -30,15 +28,15 @@ class HospitalActivity : AppCompatActivity() {
         setupBottomNavigationView()
         if (savedInstanceState == null) {
             // 앱 처음 실행 시 첫 번째 프래그먼트를 표시
-            showFragment(HomePage1Fragment(), "HOME_1")
+            showFragment(HospitalFragment(), "HOME_1")
         }
     }
 
     private fun setupBottomNavigationView() {
         binding.bnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.bnv_hospital -> showFragment(HomePage1Fragment(), "HOME_1")
-                R.id.bnv_hospital2 -> showFragment(HomePage2Fragment(), "HOME_2")
+                R.id.bnv_hospital -> showFragment(HospitalFragment(), "HOME_1")
+                R.id.bnv_hospital2 -> showFragment(EmergencyFragment(), "HOME_2")
             }
             true
         }

@@ -10,6 +10,7 @@ import com.kkt1019.hospitalinmyhand.KakaoSearchPlaceItemVO
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.RetrofitHelper
 import com.kkt1019.hospitalinmyhand.RetrofitService
+import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMapBinding
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -49,7 +50,7 @@ class MapActivity : AppCompatActivity() {
         //레트로핏을 이용하여 카카오 키워드 장소검색 API 파싱하기
 
         val retrofit = RetrofitHelper.getRetrofitKakaoLocation()
-        retrofit.create(RetrofitService::class.java).searchPlaces(searchQurey, G.Ypos.toString(), G.Xpos.toString())
+        retrofit.create(RetrofitService::class.java).searchPlaces(searchQurey, ShareData.lat.toString(), ShareData.lng.toString())
             .enqueue(object : Callback<KakaoSearchPlaceItemVO>{
                 override fun onResponse(
                     call: Call<KakaoSearchPlaceItemVO>,
@@ -99,8 +100,8 @@ class MapActivity : AppCompatActivity() {
 
     fun kakaoMapMaker(){
 
-        val lat: Double = G.Xpos?.toDouble() ?: 37.5666805
-        val lng: Double = G.Ypos?.toDouble() ?: 126.9784147
+        val lat: Double = ShareData.lat
+        val lng: Double = ShareData.lng
 
         var myMapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
         mapView.setMapCenterPointAndZoomLevel(myMapPoint, 4, true)

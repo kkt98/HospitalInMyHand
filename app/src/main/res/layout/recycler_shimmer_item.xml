@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_margin="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/pg2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/text_size_medium_small"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            android:text="                              "
+            android:background="#D5D2CF"
+            app:layout_constraintBottom_toTopOf="@+id/pg2_address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pg2_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg2_title"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            android:text="                                           "
+            android:background="#D5D2CF"
+            app:layout_constraintBottom_toTopOf="@+id/pg2_tell"
+            app:layout_constraintStart_toStartOf="@+id/pg2_title"
+            app:layout_constraintTop_toBottomOf="@+id/pg2_title" />
+
+        <TextView
+            android:id="@+id/pg2_tell"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg2_address"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            android:text="                                         "
+            android:background="#D5D2CF"
+            app:layout_constraintBottom_toTopOf="@+id/pg2_tell2"
+            app:layout_constraintStart_toStartOf="@+id/pg2_address"
+            app:layout_constraintTop_toBottomOf="@+id/pg2_address" />
+
+        <TextView
+            android:id="@+id/pg2_tell2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pg2_tell"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small"
+            android:text="                                            "
+            android:background="#D5D2CF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pg2_tell"
+            app:layout_constraintTop_toBottomOf="@+id/pg2_tell" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -103,11 +103,8 @@ dependencies {
         }
     }
 
-//    //xml parser
-//    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
-//    implementation 'com.tickaroo.tikxml:core:0.8.13'
-//    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
-//    kapt 'com.tickaroo.tikxml:processor:0.8.13'
-
     implementation 'com.squareup.retrofit2:converter-simplexml:2.9.0'
+
+    //리사이클러뷰 아이템 로딩 화면
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
 }

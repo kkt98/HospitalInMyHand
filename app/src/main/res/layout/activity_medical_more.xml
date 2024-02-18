@@ -38,6 +38,7 @@
                 android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/black"
                 android:text="업체명"/>
 
             <View
@@ -54,6 +55,7 @@
                 android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/black"
                 android:text="제품명"/>
 
             <View
@@ -70,6 +72,7 @@
                 android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/black"
                 android:text="효능"/>
 
             <View
@@ -86,6 +89,7 @@
                 android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/black"
                 android:text="복용방법"/>
 
             <View
@@ -102,6 +106,7 @@
                 android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/black"
                 android:text="주의시항"/>
 
             <View
@@ -118,6 +123,7 @@
                 android:paddingTop="8dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/black"
                 android:text="부작용"/>
 
         </LinearLayout>

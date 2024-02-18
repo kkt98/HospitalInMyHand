@@ -4,7 +4,7 @@ data class MedicalItemVO(val body:ItemsBody )
 
 //data class aaa(val resultCod:String)
 
-data class ItemsBody(var items:MutableList<MedicalItems>)
+data class ItemsBody(var items:List<MedicalItems>)
 
 data class MedicalItems(
     val entpName:String,

@@ -1,69 +1,66 @@
 package com.kkt1019.hospitalinmyhand.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.adapter.MedicalAdapter
 import com.kkt1019.hospitalinmyhand.MedicalItemVO
+import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.RetrofitHelper
 import com.kkt1019.hospitalinmyhand.RetrofitService
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMedicalBinding
+import com.kkt1019.hospitalinmyhand.viewmodel.MedicalViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MedicalActivity : AppCompatActivity() {
-    val binding: ActivityMedicalBinding by lazy { ActivityMedicalBinding.inflate(layoutInflater) }
+    private lateinit var binding: ActivityMedicalBinding
 
     val recycler: RecyclerView by lazy { binding.recycler }
 
+    private val medicalViewModel : MedicalViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_medical)
+        binding.activity = this
         setSupportActionBar(binding.toolbar)
 
         binding.toolbar.title = "의약품 검색"
 
-        binding.btn.setOnClickListener { datas() }
+        binding.sflSample.stopShimmer()
+        binding.sflSample.visibility = View.GONE
+
+        medicalViewModel.medicalItems.observe(this, Observer { items ->
+            binding.recycler.adapter = MedicalAdapter(this, items)
+            binding.edit.text.clear()
+
+            //아이템로딩 없애기
+            binding.sflSample.stopShimmer()
+            binding.sflSample.visibility = View.GONE
+        })
     }
 
-    fun datas(){
-
-        binding.progress.visibility = View.VISIBLE
-
+    fun onClickMedicalSearch() {
+        //뷰모델 레트로핏 실행
         val etname = binding.edit.text.toString()
+        medicalViewModel.fetchMedicalData(etname)
 
-        val retrofit = RetrofitHelper.getRetrofitInstance()
-        val retrofitService = retrofit.create(RetrofitService::class.java)
-        val call = retrofitService.MedicalData("H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==",
-                                                "$etname", "json")
+        //아이템 로딩 보여주기
+        binding.sflSample.startShimmer()
+        binding.sflSample.visibility = View.VISIBLE
 
-        call.enqueue(object : Callback<MedicalItemVO> {
-            override fun onResponse(call: Call<MedicalItemVO>, response: Response<MedicalItemVO>) {
-
-                val medicalResponse: MedicalItemVO? = response.body()
-                Log.i("ccc", medicalResponse?.body?.items?.size.toString())
-
-                medicalResponse?.body?.items?.let {
-
-                    binding.recycler.adapter = MedicalAdapter(this@MedicalActivity, it)
-
-                    binding.edit.text.clear()
-
-                    binding.progress.visibility = View.GONE
-
-                }
-            }
-
-            override fun onFailure(call: Call<MedicalItemVO>, t: Throwable) {
-                AlertDialog.Builder(this@MedicalActivity).setMessage("error : ${t.message}").create().show()
-            }
-
-        })
-
+        // 키보드 숨기기
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(binding.edit.windowToken, 0)
     }
 }
