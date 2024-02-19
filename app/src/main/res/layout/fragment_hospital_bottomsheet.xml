@@ -6,7 +6,7 @@
     <data>
         <variable
             name="hospitalItem"
-            type="com.kkt1019.hospitalinmyhand.data.HomePage1Item" />
+            type="com.kkt1019.hospitalinmyhand.data.HospitalItem" />
     </data>
 
     <RelativeLayout
@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:background="#B5B5B5" />
 
-        <RelativeLayout
+        <com.google.android.gms.maps.MapView
             android:id="@+id/map_view"
             android:layout_width="match_parent"
             android:layout_height="250dp"

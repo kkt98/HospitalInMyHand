@@ -1,5 +1,6 @@
 package com.kkt1019.hospitalinmyhand.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.fragment.EmergencyBottomSheetFragment
-import com.kkt1019.hospitalinmyhand.data.HomePage2Item
+import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
@@ -17,11 +18,11 @@ import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class EmergencyFragmentAdapter (
     val context:Context,
-    var page2Items:MutableList<HomePage2Item>,
+    var page2Items:MutableList<EmergencyItem>,
     private val fragmentManager : FragmentManager,
     private val sharedViewModel: SharedViewModel): RecyclerView.Adapter<EmergencyFragmentAdapter.VH>() {
 
-    fun updateData(newItems: List<HomePage2Item>) {
+    fun updateData(newItems: List<EmergencyItem>) {
         page2Items.clear()
         page2Items.addAll(newItems)
         notifyDataSetChanged()
@@ -46,6 +47,7 @@ class EmergencyFragmentAdapter (
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = page2Items[position]
 
@@ -53,9 +55,7 @@ class EmergencyFragmentAdapter (
         holder.tvAddr.text = "주소 : " + item.dutyAddr
         holder.tvTell.text = "대표 전화 : " + item.dutyTel1
         holder.tvTell2.text = "응급실 전화 : " + item.dutyTel3
-
-        G.location = DistanceManager.getDistance(ShareData.lat, ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
-            .toString()
+        G.location = DistanceManager.getDistance(ShareData.lat, ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
         holder.tvLocation.text = G.location + "km"
         item.location = G.location.toString()
 
@@ -65,7 +65,6 @@ class EmergencyFragmentAdapter (
 
             sharedViewModel.selectEmergencyItem(item)
             val bottomSheetDialogFragment = EmergencyBottomSheetFragment()
-//            bottomSheetDialogFragment.detail(item.dutyName, item.dutyAddr, item.dutyTel1, item.dutyTel3, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble())
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
             G.uniqueid = item.hpid

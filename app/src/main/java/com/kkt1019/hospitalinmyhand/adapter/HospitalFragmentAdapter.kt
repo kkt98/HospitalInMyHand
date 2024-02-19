@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.fragment.HospitalBottomSheetFragment
-import com.kkt1019.hospitalinmyhand.data.HomePage1Item
+import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
@@ -18,12 +18,12 @@ import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class HospitalFragmentAdapter(
     val context: Context,
-    var page1Items: MutableList<HomePage1Item>,
+    var page1Items: MutableList<HospitalItem>,
     private val fragmentManager: FragmentManager,
     private val sharedViewModel: SharedViewModel
 ) : RecyclerView.Adapter<HospitalFragmentAdapter.VH>(){
 
-    fun updateData(newItems: List<HomePage1Item>) {
+    fun updateData(newItems: List<HospitalItem>) {
         page1Items.clear()
         page1Items.addAll(newItems)
         notifyDataSetChanged()

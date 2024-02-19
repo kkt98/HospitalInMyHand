@@ -2,25 +2,17 @@ package com.kkt1019.hospitalinmyhand.activity
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.adapter.MedicalAdapter
-import com.kkt1019.hospitalinmyhand.MedicalItemVO
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.RetrofitHelper
-import com.kkt1019.hospitalinmyhand.RetrofitService
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMedicalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.MedicalViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MedicalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMedicalBinding

@@ -50,9 +50,6 @@
             android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MyReview"
-            android:exported="false" />
-        <activity
             android:name=".RevieEdit"
             android:exported="false" />
         <activity
@@ -68,7 +65,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCaAMy_bNVUWMbdAM_ObJjqCIuCdGaKw14" />
+            android:value="AIzaSyAvCQkBI3sQsiXZnGEwekkF321kX_AuW0M" />
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="beb29a3a8bb38a001c5f2da0f105f101"/>
 

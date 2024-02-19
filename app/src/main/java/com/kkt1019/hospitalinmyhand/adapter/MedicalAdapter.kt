@@ -39,7 +39,6 @@ class MedicalAdapter(val context:Context, var items: List<MedicalItems>) : Recyc
         holder.binding.maker.text = "업체명 : " + items[position].entpName
         holder.binding.name.text = "제품명 : " + items[position].itemName
 
-        Glide.with(context).load(items[position].itemImage).into(holder.binding.image)
 
         holder.itemView.setOnClickListener {
 
@@ -53,10 +52,7 @@ class MedicalAdapter(val context:Context, var items: List<MedicalItems>) : Recyc
             intent.putExtra("seQesitm", items[position].seQesitm)
             intent.putExtra("useMethodQesitm", items[position].useMethodQesitm)
 
-            val optionsCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                context as Activity, Pair(holder.binding.image,"zzz"))
-
-            context.startActivity(intent, optionsCompat.toBundle())
+            context.startActivity(intent)
 
         }
 

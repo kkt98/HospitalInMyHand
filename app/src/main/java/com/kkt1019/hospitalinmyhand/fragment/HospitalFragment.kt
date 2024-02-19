@@ -7,22 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.kkt1019.hospitalinmyhand.data.HomePage1Item
+import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.adapter.HospitalFragmentAdapter
+import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHospitalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class HospitalFragment : Fragment() {
 
-    private var items = mutableListOf<HomePage1Item>()
-    private var allItems = mutableListOf<HomePage1Item>()
+    private var items = mutableListOf<HospitalItem>()
+    private var allItems = mutableListOf<HospitalItem>()
     private var _binding: FragmentHospitalBinding? = null
     private val binding get() = _binding!!
 
@@ -43,8 +45,8 @@ class HospitalFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.sflSample.startShimmer()
         binding.sflSample.visibility = View.VISIBLE
@@ -58,21 +60,54 @@ class HospitalFragment : Fragment() {
 
         })
         networkViewModel.fetchDataFromNetwork()
-    }
 
+        networkViewModel.filteredHospitalData.observe(viewLifecycleOwner) { data ->
+            // 데이터가 변경될 때 UI 업데이트
+            (binding.recycler.adapter as? HospitalFragmentAdapter)?.updateData(data)
+
+            binding.sflSample.stopShimmer()
+            binding.sflSample.visibility = View.GONE
+        }
+    }
     private fun showDialog() {
         val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog, null)
+        val checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
+        val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
+        val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
+
+        // 체크박스 상태에 따라 스피너 가시성 조정
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                spinner.visibility = View.GONE
+                spinner2.visibility = View.GONE
+            } else {
+                spinner.visibility = View.VISIBLE
+                spinner2.visibility = View.VISIBLE
+            }
+        }
+
         val dialog = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
-            .setPositiveButton("확인", null) // Initially, we don't handle the click here
+            .setPositiveButton("확인", null)
             .setNegativeButton("취소") { dialogInterface, _ -> dialogInterface.cancel() }
             .create()
 
         dialog.show()
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            // '확인' 버튼 클릭 시 필터링 및 업데이트 로직
-            filterAndDisplayItems(mDialogView)
+
+            items.clear()
+            (binding.recycler.adapter as? HospitalFragmentAdapter)?.notifyDataSetChanged()
+            binding.sflSample.startShimmer()
+            binding.sflSample.visibility = View.VISIBLE
+
+            if (checkBox.isChecked) {
+                // 체크박스가 선택된 경우, 사용자 위치 기반으로 병원 목록 정렬 및 업데이트
+                nearByMyLocation(mDialogView)
+            } else {
+                // 체크박스가 해제된 경우, 기존 필터링 로직 실행
+                filterAndDisplayItems(mDialogView)
+            }
             dialog.dismiss()
         }
 
@@ -138,20 +173,20 @@ class HospitalFragment : Fragment() {
         val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
         val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
 
-        val selectedCity = spinner.selectedItem.toString()
-        val selectedNeighborhood = spinner2.selectedItem.toString()
-        val selectedHospitalType = spinner3.selectedItem.toString()
+        val selectedCity = if (spinner.selectedItemPosition > 0) spinner.selectedItem.toString() else null
+        val selectedNeighborhood = if (spinner2.selectedItemPosition > 0) spinner2.selectedItem.toString() else null
+        val selectedHospitalType = if (spinner3.selectedItemPosition > 0) spinner3.selectedItem.toString() else null
 
-        items = allItems.filter { item ->
-            item.dutyAddr.contains(selectedCity) &&
-                    item.dutyAddr.contains(selectedNeighborhood) &&
-                    item.dgidIdName.contains(selectedHospitalType)
-        }.toMutableList()
+        // 필터링 작업 뷰모델에서 실행
+        networkViewModel.filterDataBySelection(selectedCity, selectedNeighborhood, selectedHospitalType)
+    }
 
-        (binding.recycler.adapter as? HospitalFragmentAdapter)?.let { adapter ->
-            adapter.updateData(items)
-            adapter.notifyDataSetChanged()
-        }
+    private fun nearByMyLocation(mDialogView: View) {
+
+        val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
+        val selectedHospitalType = if (spinner3.selectedItemPosition > 0) spinner3.selectedItem.toString() else null
+
+        networkViewModel.sortByUserLocation(ShareData.lat, ShareData.lng, selectedHospitalType)
     }
 
     override fun onDestroyView() {

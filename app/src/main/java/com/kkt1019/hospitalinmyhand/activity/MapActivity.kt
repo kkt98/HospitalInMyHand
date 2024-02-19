@@ -5,11 +5,10 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.KakaoSearchPlaceItemVO
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.RetrofitHelper
-import com.kkt1019.hospitalinmyhand.RetrofitService
+import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
+import com.kkt1019.hospitalinmyhand.network.RetrofitService
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMapBinding
 import net.daum.mf.map.api.MapPOIItem

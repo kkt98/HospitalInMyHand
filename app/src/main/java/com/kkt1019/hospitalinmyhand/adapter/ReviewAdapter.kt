@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide
 import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.ItemVO
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.RetrofitHelper
-import com.kkt1019.hospitalinmyhand.RetrofitService
+import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
+import com.kkt1019.hospitalinmyhand.network.RetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

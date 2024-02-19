@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
-import com.kkt1019.hospitalinmyhand.Permission
+import com.kkt1019.hospitalinmyhand.util.Permission
 import com.kkt1019.hospitalinmyhand.R
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer

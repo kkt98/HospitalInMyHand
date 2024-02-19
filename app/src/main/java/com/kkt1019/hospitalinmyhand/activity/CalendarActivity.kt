@@ -15,8 +15,8 @@ import com.kkt1019.hospitalinmyhand.CalendarItemVO
 import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.G.Companion.events
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.RetrofitHelper
-import com.kkt1019.hospitalinmyhand.RetrofitService
+import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
+import com.kkt1019.hospitalinmyhand.network.RetrofitService
 import com.kkt1019.hospitalinmyhand.databinding.ActivityCalendarBinding
 import com.kkt1019.hospitalinmyhand.databinding.AlertdialogEdittextBinding
 import retrofit2.Call

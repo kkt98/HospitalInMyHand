@@ -6,6 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kkt1019.hospitalinmyhand.ItemVO
 import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBottomsheetBinding
@@ -15,21 +21,19 @@ import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import kotlin.properties.Delegates
 
-class EmergencyBottomSheetFragment : BottomSheetDialogFragment() {
+class EmergencyBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallback {
 
     val binding: FragmentEmergencyBottomsheetBinding by lazy { FragmentEmergencyBottomsheetBinding.inflate(layoutInflater) }
-    var items = mutableListOf<ItemVO>()
-
-    val mapView: MapView by lazy { MapView(context) }
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-    lateinit var name : String
-    lateinit var addr : String
-    lateinit var tell1 : String
-    lateinit var tell2: String
-    var  Xpos by Delegates.notNull<Double>()
-    var Ypos by Delegates.notNull<Double>()
+    var name : String = ""
+    var Xpos : Double = 0.0
+    var Ypos : Double = 0.0
+
+    private lateinit var mapView: com.google.android.gms.maps.MapView
+    private lateinit var googleMap: GoogleMap
+    private var currentMarker: Marker? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,63 +41,47 @@ class EmergencyBottomSheetFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        this.mapView = binding.mapView
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
+
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        sharedViewModel.emergencyItem.observe(viewLifecycleOwner) {
-            binding.title.text = it.dutyName
-            binding.address.text = it.dutyAddr
-            binding.tell1.text = it.dutyTel1
-            binding.tell1.text = it.dutyTel3
-        }
-
-        binding.title.text = name
-        binding.address.text = addr
-        binding.tell1.text = tell1
-        binding.tell2.text = tell2
-
-        binding.mapView.addView(mapView)
-
-    }
-
-
-    fun detail(name: String, addr:String, tell1:String, tell2:String, Xpos:Double, Ypos:Double){
-
-        this.name = name
-        this.addr = addr
-        this.tell1 = tell1
-        this.tell2 = tell2
-        this.Xpos = Xpos
-        this.Ypos = Ypos
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lat: Double = Xpos
-        val lng: Double = Ypos
-
-        var myMapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
-        mapView.setMapCenterPointAndZoomLevel(myMapPoint, 4, true)
-        mapView.zoomIn(true)
-        mapView.zoomOut(true)
-        Log.i("kim", "qweqweqe")
-
-
-        val marker = MapPOIItem()
-
-        Log.i("kim", "asdasdasdad")
-
-        marker.apply {
-            itemName = name
-            mapPoint = myMapPoint
-            markerType= MapPOIItem.MarkerType.BluePin
-            Log.i("kim", "fghfghfgh")
+        sharedViewModel.emergencyItem.observe(/* owner = */ viewLifecycleOwner) {
+            binding.title.text = it.dutyName
+            binding.address.text = it.dutyAddr
+            binding.tell1.text = it.dutyTel1
+            binding.tell2.text = it.dutyTel3
+            Xpos = it.wgs84Lat.toDouble()
+            Ypos = it.wgs84Lon.toDouble()
+            name = it.dutyName
         }
-        mapView.addPOIItem(marker)
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        this.googleMap = googleMap
+
+        currentMarker = setupMarker()  // default 서울역
+        currentMarker?.showInfoWindow()
+    }
+
+    private fun setupMarker(): Marker? {
+
+        val positionLatLng = LatLng(Xpos,Ypos)
+        val markerOption = MarkerOptions().apply {
+            position(positionLatLng)
+            title(name)
+        }
+
+        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL  // 지도 유형 설정
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng, 15f))  // 카메라 이동
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))  // 줌의 정도 - 1 일 경우 세계지도 수준, 숫자가 커질 수록 상세지도가 표시됨
+        return googleMap.addMarker(markerOption)
+
     }
 }

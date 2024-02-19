@@ -3,7 +3,6 @@ package com.kkt1019.hospitalinmyhand.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +12,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.kkt1019.hospitalinmyhand.adapter.EmergencyFragmentAdapter
-import com.kkt1019.hospitalinmyhand.data.HomePage2Item
+import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.R
+import com.kkt1019.hospitalinmyhand.adapter.HospitalFragmentAdapter
+import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.EmergencyViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class EmergencyFragment:Fragment() {
 
-    var items = mutableListOf<HomePage2Item>()
-    var allItems = mutableListOf<HomePage2Item>()
+    val binding: FragmentEmergencyBinding by lazy { FragmentEmergencyBinding.inflate(layoutInflater) }
+
+    var items = mutableListOf<EmergencyItem>()
+    var allItems = mutableListOf<EmergencyItem>()
 
     private val emergencyViewModel : EmergencyViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -40,43 +43,66 @@ class EmergencyFragment:Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-
-//        Mylocation()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.sflSample.startShimmer()
         binding.sflSample.visibility = View.VISIBLE
 
         emergencyViewModel.fetchDataFromNetwork()
 
-        emergencyViewModel.emergencyItem.observe(requireActivity(), Observer {
+        emergencyViewModel.emergencyItem.observe(viewLifecycleOwner) {
             allItems.addAll(it)
-
             (binding.recycler.adapter as? EmergencyFragmentAdapter)?.updateData(it)
-
             binding.sflSample.stopShimmer()
             binding.sflSample.visibility = View.GONE
+        }
 
-        })
-
+        emergencyViewModel.filteredEmergencyData.observe(viewLifecycleOwner) {
+            (binding.recycler.adapter as? EmergencyFragmentAdapter)?.updateData(it)
+            binding.sflSample.stopShimmer()
+            binding.sflSample.visibility = View.GONE
+        }
     }
-
-    val binding: FragmentEmergencyBinding by lazy { FragmentEmergencyBinding.inflate(layoutInflater) }
-
     private fun showDialog() {
         val mDialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog2, null)
+        val checkBox = mDialogView.findViewById<CheckBox>(R.id.check_my)
+        val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
+        val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
+
+        // 체크박스 상태에 따라 스피너 가시성 조정
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                spinner.visibility = View.GONE
+                spinner2.visibility = View.GONE
+            } else {
+                spinner.visibility = View.VISIBLE
+                spinner2.visibility = View.VISIBLE
+            }
+        }
+
         val dialog = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
-            .setPositiveButton("확인", null) // Initially, we don't handle the click here
+            .setPositiveButton("확인", null)
             .setNegativeButton("취소") { dialogInterface, _ -> dialogInterface.cancel() }
             .create()
 
         dialog.show()
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            // '확인' 버튼 클릭 시 필터링 및 업데이트 로직
-            filterAndDisplayItems(mDialogView)
+
+            items.clear()
+            (binding.recycler.adapter as? HospitalFragmentAdapter)?.notifyDataSetChanged()
+            binding.sflSample.startShimmer()
+            binding.sflSample.visibility = View.VISIBLE
+
+            if (checkBox.isChecked) {
+                // 체크박스가 선택된 경우, 사용자 위치 기반으로 병원 목록 정렬 및 업데이트
+                nearByMyLocation()
+            } else {
+                // 체크박스가 해제된 경우, 기존 필터링 로직 실행
+                filterAndDisplayItems(mDialogView)
+            }
             dialog.dismiss()
         }
 
@@ -132,14 +158,11 @@ class EmergencyFragment:Fragment() {
         val selectedCity = spinner.selectedItem.toString()
         val selectedNeighborhood = spinner2.selectedItem.toString()
 
-        items = allItems.filter { item ->
-            item.dutyAddr.contains(selectedCity) && item.dutyAddr.contains(selectedNeighborhood)
-        }.toMutableList()
+        emergencyViewModel.filterDataBySelection(selectedCity, selectedNeighborhood)
+    }
 
-        (binding.recycler.adapter as? EmergencyFragmentAdapter)?.let { adapter ->
-            adapter.updateData(items)
-            adapter.notifyDataSetChanged()
-        }
+    private fun nearByMyLocation() {
+        emergencyViewModel.sortByUserLocation(ShareData.lat, ShareData.lng)
     }
 
 }

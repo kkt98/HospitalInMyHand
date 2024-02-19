@@ -6,6 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kkt1019.hospitalinmyhand.ItemVO
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHospitalBottomsheetBinding
@@ -14,24 +20,30 @@ import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
-class HospitalBottomSheetFragment : BottomSheetDialogFragment() {
+class HospitalBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallback {
 
     val binding: FragmentHospitalBottomsheetBinding by lazy { FragmentHospitalBottomsheetBinding.inflate(layoutInflater) }
-    var items = mutableListOf<ItemVO>()
-
-    val mapView: MapView by lazy { MapView(context) }
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
-//    lateinit var name : String
+    var name : String = ""
     var  Xpos :Double = 0.0
     var Ypos :Double = 0.0
+
+    private lateinit var mapView: com.google.android.gms.maps.MapView
+    private lateinit var googleMap: GoogleMap
+    private var currentMarker: Marker? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        this.mapView = binding.mapView
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
 
 
         sharedViewModel.hospitalItem.observe(viewLifecycleOwner) { item ->
@@ -56,7 +68,7 @@ class HospitalBottomSheetFragment : BottomSheetDialogFragment() {
 
             Xpos = item.wgs84Lat.toDouble()
             Ypos = item.wgs84Lon.toDouble()
-//            name = it.dutyName
+            name = item.dutyName
         }
 
         return binding.root
@@ -66,31 +78,31 @@ class HospitalBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onResume() {
         super.onResume()
 
-        binding.mapView.addView(mapView)
-
     }
     ////////////////////////////////상세정보///////////////////////////
 
 
-    ////////////////////////////지도///////////////////////////////
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    ////////////////////////////지도//////////////////////////////
+    override fun onMapReady(googleMap: GoogleMap) {
+        this.googleMap = googleMap
 
-        val lat: Double = Xpos
-        val lng: Double = Ypos
+        currentMarker = setupMarker()  // default 서울역
+        currentMarker?.showInfoWindow()
+    }
 
-        val myMapPoint = MapPoint.mapPointWithGeoCoord(lat, lng)
-        mapView.setMapCenterPointAndZoomLevel(myMapPoint, 4, true)
-        mapView.zoomIn(true)
-        mapView.zoomOut(true)
+    private fun setupMarker(): Marker? {
 
-        val marker = MapPOIItem()
-        marker.apply {
-//            itemName = name
-            mapPoint = myMapPoint
-            markerType= MapPOIItem.MarkerType.BluePin
+        val positionLatLng = LatLng(Xpos,Ypos)
+        val markerOption = MarkerOptions().apply {
+            position(positionLatLng)
+            title(name)
         }
-        mapView.addPOIItem(marker)
+
+        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL  // 지도 유형 설정
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(positionLatLng, 15f))  // 카메라 이동
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))  // 줌의 정도 - 1 일 경우 세계지도 수준, 숫자가 커질 수록 상세지도가 표시됨
+        return googleMap.addMarker(markerOption)
+
     }
     ////////////////////////////지도///////////////////////////////
 

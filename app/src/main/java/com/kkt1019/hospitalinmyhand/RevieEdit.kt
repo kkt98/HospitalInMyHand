@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.kkt1019.hospitalinmyhand.databinding.ActivityRevieEditBinding
+import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
+import com.kkt1019.hospitalinmyhand.network.RetrofitService
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

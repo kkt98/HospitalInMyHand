@@ -22,7 +22,6 @@ class MedicalMoreActivity : AppCompatActivity() {
         val efcyQesitm =intent.getStringExtra("efcyQesitm")
         val seQesitm =intent.getStringExtra("seQesitm")
         val useMethodQesitm =intent.getStringExtra("useMethodQesitm")
-        val itemImage =intent.getStringExtra("itemImage")
 
         binding.atpnQesitm.text = "주의사항 : " + atpnQesitm
         binding.efcyQesitm.text = "효능 : " + efcyQesitm
@@ -31,13 +30,7 @@ class MedicalMoreActivity : AppCompatActivity() {
         binding.seQesitm.text = "부작용 : " + seQesitm
         binding.useMethod.text = "복용법 : " + useMethodQesitm
 
-        Glide.with(this).load(itemImage).into(binding.ivDetail)
-
-        binding.ivDetail.transitionName = "zzz"
-
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
