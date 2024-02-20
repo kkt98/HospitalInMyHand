@@ -57,17 +57,6 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <ToggleButton
-            android:id="@+id/pg2_fav"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_baseline_star_border_24"
-            android:paddingTop="8dp"
-            android:visibility="gone"
-            android:paddingRight="8dp"
-            android:textOff=" "
-            android:textOn=" " />
 
         <TextView
             android:id="@+id/pg2_tv_location"

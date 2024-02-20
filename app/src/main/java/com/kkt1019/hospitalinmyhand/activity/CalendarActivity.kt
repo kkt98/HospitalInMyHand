@@ -9,8 +9,8 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.adapter.CalendarAdapter
 import com.kkt1019.hospitalinmyhand.databinding.ActivityCalendarBinding
 import com.kkt1019.hospitalinmyhand.databinding.AlertdialogEdittextBinding
-import com.kkt1019.hospitalinmyhand.roomdata.CalendarDatabase
-import com.kkt1019.hospitalinmyhand.roomdata.CalendarEntity
+import com.kkt1019.hospitalinmyhand.roomdatabase.calender.CalendarDatabase
+import com.kkt1019.hospitalinmyhand.roomdatabase.calender.CalendarEntity
 import kotlinx.coroutines.*
 import java.util.Calendar
 

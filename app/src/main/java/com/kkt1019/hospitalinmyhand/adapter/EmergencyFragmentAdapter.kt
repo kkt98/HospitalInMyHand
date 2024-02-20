@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
@@ -15,6 +16,9 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EmergencyFragmentAdapter (
     val context:Context,
@@ -58,8 +62,6 @@ class EmergencyFragmentAdapter (
         G.location = DistanceManager.getDistance(ShareData.lat, ShareData.lng, item.wgs84Lat.toDouble(), item.wgs84Lon.toDouble()).toString()
         holder.tvLocation.text = G.location + "km"
         item.location = G.location.toString()
-
-
 
         holder.itemView.setOnClickListener {
             sharedViewModel.selectEmergencyItem(item)

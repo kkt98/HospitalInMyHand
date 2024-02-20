@@ -1,4 +1,4 @@
-package com.kkt1019.hospitalinmyhand.roomdata
+package com.kkt1019.hospitalinmyhand.roomdatabase.calender
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

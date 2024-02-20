@@ -45,18 +45,6 @@
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <ToggleButton
-            android:id="@+id/pg3_fav"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_baseline_star_border_24"
-            android:paddingTop="8dp"
-            android:paddingRight="8dp"
-            android:visibility="gone"
-            android:textOff=" "
-            android:textOn=" " />
-
         <TextView
             android:id="@+id/pg3_tv_location"
             android:layout_width="wrap_content"

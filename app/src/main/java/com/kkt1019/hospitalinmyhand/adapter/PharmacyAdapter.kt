@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.data.PharmacyItem
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
@@ -40,7 +39,7 @@ class PharmacyAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
 
         val inflater:LayoutInflater = LayoutInflater.from(context)
-        val itemView = inflater.inflate(R.layout.recycler_homepage3_item, parent, false)
+        val itemView = inflater.inflate(R.layout.recycler_pharmacy_item, parent, false)
 
         return VH(itemView)
     }

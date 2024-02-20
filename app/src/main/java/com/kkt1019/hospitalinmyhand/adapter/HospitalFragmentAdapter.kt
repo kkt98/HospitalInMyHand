@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
@@ -15,6 +16,9 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HospitalFragmentAdapter(
     val context: Context,
@@ -63,7 +67,6 @@ class HospitalFragmentAdapter(
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
         }
-
     }
 
     override fun getItemCount(): Int = page1Items.size

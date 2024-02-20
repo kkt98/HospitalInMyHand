@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.mmedical).into(binding.gifHospital)
         Glide.with(this).load(R.drawable.map).into(binding.gifMap)
         Glide.with(this).load(R.drawable.medical).into(binding.gifMedical)
-        Glide.with(this).load(R.drawable.favorit).into(binding.gifFav)
         Glide.with(this).load(R.drawable.hos).into(binding.gifPharmacy)
         Glide.with(this).load(R.drawable.calendar).into(binding.gifCalender)
 
@@ -60,10 +59,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun onClickFavorit() {
-        val intent = Intent(this, FavoritActivity::class.java)
-        startActivity(intent)
-    }
 
     fun onClickCalender() {
         val intent = Intent(this, CalendarActivity::class.java)

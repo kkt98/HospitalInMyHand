@@ -28,8 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.47" />
-
+            app:layout_constraintGuide_percent="0.45" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -50,11 +49,11 @@
             android:onClick="@{ () -> activity.onClickHospital()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
-            android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <ImageView
                 android:id="@+id/gif_hospital"
@@ -80,11 +79,11 @@
             android:onClick="@{ () -> activity.onClickMedical()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/hospital"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="@+id/hospital">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <ImageView
                 android:id="@+id/gif_medical"
@@ -110,7 +109,6 @@
             android:onClick="@{ () -> activity.onClickMap()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
-            android:layout_marginTop="30dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +141,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="@+id/map">
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
 
             <ImageView
                 android:id="@+id/gif_pharmacy"
@@ -162,42 +160,9 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/fav"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_below="@+id/map"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
-            android:onClick="@{ () -> activity.onClickFavorit()}"
-            android:visibility="gone"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:layout_constraintDimensionRatio="4.5:1"
-            app:layout_constraintEnd_toEndOf="@+id/pharmacy"
-            app:layout_constraintStart_toStartOf="@+id/map"
-            app:layout_constraintTop_toBottomOf="@+id/calender">
-
-            <ImageView
-                android:id="@+id/gif_fav"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="즐겨찾기"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
             android:id="@+id/calender"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_below="@+id/fav"
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
             android:onClick="@{ () -> activity.onClickCalender()}"

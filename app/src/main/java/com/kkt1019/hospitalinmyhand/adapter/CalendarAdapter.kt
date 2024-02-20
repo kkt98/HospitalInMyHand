@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.roomdata.CalendarEntity
+import com.kkt1019.hospitalinmyhand.roomdatabase.calender.CalendarEntity
 
 class CalendarAdapter(val context: Context, var calendarItems: MutableList<CalendarEntity>) : RecyclerView.Adapter<CalendarAdapter.VH>() {
 
