@@ -23,6 +23,14 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47" />
+
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/MyToolBarStyle"
@@ -38,15 +46,15 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_below="@+id/toolbar"
-            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
             android:onClick="@{ () -> activity.onClickHospital()}"
-            app:layout_constraintDimensionRatio="1:1"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/gif_hospital"
@@ -68,15 +76,15 @@
             android:id="@+id/medical"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
             android:onClick="@{ () -> activity.onClickMedical()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/hospital"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toTopOf="@+id/hospital">
 
             <ImageView
                 android:id="@+id/gif_medical"
@@ -98,15 +106,15 @@
             android:id="@+id/map"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
             android:onClick="@{ () -> activity.onClickMap()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hospital">
+            app:layout_constraintTop_toTopOf="@+id/guideline3">
 
             <ImageView
                 android:id="@+id/gif_map"
@@ -128,15 +136,14 @@
             android:id="@+id/pharmacy"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:1"
-            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
             android:onClick="@{ () -> activity.onClickPharmacy()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/medical">
+            app:layout_constraintTop_toTopOf="@+id/map">
 
             <ImageView
                 android:id="@+id/gif_pharmacy"
@@ -162,6 +169,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
             android:onClick="@{ () -> activity.onClickFavorit()}"
+            android:visibility="gone"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:layout_constraintDimensionRatio="4.5:1"
@@ -191,10 +199,11 @@
             android:layout_height="0dp"
             android:layout_below="@+id/fav"
             android:layout_alignParentRight="true"
-            android:onClick="@{ () -> activity.onClickCalender()}"
             android:layout_marginTop="20dp"
+            android:onClick="@{ () -> activity.onClickCalender()}"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="4.5:1"
             app:layout_constraintEnd_toEndOf="@+id/pharmacy"
             app:layout_constraintStart_toStartOf="@+id/map"

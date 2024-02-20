@@ -62,7 +62,6 @@ class HospitalFragmentAdapter(
             val bottomSheetDialogFragment = HospitalBottomSheetFragment()
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
-            G.uniqueid = item.hpid
         }
 
     }

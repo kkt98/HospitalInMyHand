@@ -53,6 +53,7 @@
             android:background="@drawable/ic_baseline_star_border_24"
             android:paddingTop="8dp"
             android:paddingRight="8dp"
+            android:visibility="gone"
             android:textOff=" "
             android:textOn=" " />
 

@@ -13,13 +13,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kkt1019.hospitalinmyhand.ItemVO
 import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBottomsheetBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
-import kotlin.properties.Delegates
 
 class EmergencyBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallback {
 

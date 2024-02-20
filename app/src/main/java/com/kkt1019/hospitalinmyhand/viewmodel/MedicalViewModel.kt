@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kkt1019.hospitalinmyhand.MedicalItemVO
-import com.kkt1019.hospitalinmyhand.MedicalItems
+import com.kkt1019.hospitalinmyhand.data.MedicalItemVO
+import com.kkt1019.hospitalinmyhand.data.MedicalItems
 import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
 import com.kkt1019.hospitalinmyhand.network.RetrofitService
 import retrofit2.Call

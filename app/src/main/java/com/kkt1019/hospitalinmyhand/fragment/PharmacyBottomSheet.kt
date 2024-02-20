@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.kkt1019.hospitalinmyhand.ItemVO
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentPharmacyBottomSheetBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel

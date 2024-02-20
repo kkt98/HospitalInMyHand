@@ -1,63 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.MapActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/MyToolBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/MyToolbarTheme"
-        app:title="내손안에 병원" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/choice_hospital"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/toolbar"
-        android:layout_marginStart="8dp"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/white"
-        android:padding="8dp"
-        android:layout_toLeftOf="@id/choice_emergency"
-        android:src="@drawable/icons8doctorsbag64" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/choice_emergency"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/toolbar"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/white"
-        android:padding="8dp"
-        android:src="@drawable/emergency"
-        android:layout_centerHorizontal="true"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/choice_pill"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/toolbar"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_toRightOf="@+id/choice_emergency"
-        android:backgroundTint="@color/white"
-        android:padding="8dp"
-        android:src="@drawable/icons8pills64"/>
+    <data>
+        <variable
+            name="activity"
+            type="com.kkt1019.hospitalinmyhand.activity.MapActivity" />
+    </data>
 
     <RelativeLayout
-        android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar" />
+        tools:context=".activity.MapActivity">
 
-</RelativeLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/MyToolBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/MyToolbarTheme"
+            app:title="내손안에 병원" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/choice_hospital"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/toolbar"
+            android:layout_marginStart="8dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="8dp"
+            android:onClick="@{ () -> activity.clickChoice(1)}"
+            android:layout_toLeftOf="@id/choice_emergency"
+            android:src="@drawable/icons8doctorsbag64" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/choice_emergency"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/toolbar"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="8dp"
+            android:onClick="@{ () -> activity.clickChoice(2)}"
+            android:src="@drawable/emergency"
+            android:layout_centerHorizontal="true" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/choice_pill"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/toolbar"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@+id/choice_emergency"
+            android:backgroundTint="@color/white"
+            android:onClick="@{ () -> activity.clickChoice(3)}"
+            android:padding="8dp"
+            android:src="@drawable/icons8pills64" />
+
+        <RelativeLayout
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar" />
+
+    </RelativeLayout>
+</layout>

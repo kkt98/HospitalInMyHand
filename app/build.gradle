@@ -64,7 +64,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
-    implementation platform('com.google.firebase:firebase-bom:29.3.1')
     implementation platform('com.google.firebase:firebase-bom:30.0.0')
 
     implementation files('libs/libDaumMapAndroid.jar')
@@ -106,4 +105,14 @@ dependencies {
 
     //리사이클러뷰 아이템 로딩 화면
     implementation "com.facebook.shimmer:shimmer:0.5.0"
+
+    //카카오 지도
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/libDaumMapAndroid.jar')
+
+    //Room DataBase
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt "androidx.room:room-compiler:2.6.1"
+    // Kotlin Coroutines 사용 시
+    implementation "androidx.room:room-ktx:2.6.1"
 }

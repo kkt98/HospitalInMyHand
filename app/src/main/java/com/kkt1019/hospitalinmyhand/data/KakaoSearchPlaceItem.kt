@@ -1,6 +1,6 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.data
 
-data class KakaoSearchPlaceItemVO(var meta:PlaceMeta,  var documents:MutableList<Place>)
+data class KakaoSearchPlaceItemVO(var meta: PlaceMeta, var documents:MutableList<Place>)
 
 data class PlaceMeta(
     var total_count:Int,

@@ -1,17 +1,13 @@
 package com.kkt1019.hospitalinmyhand.adapter
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.kkt1019.hospitalinmyhand.MedicalItems
+import com.kkt1019.hospitalinmyhand.data.MedicalItems
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.activity.MedicalMoreActivity
 import com.kkt1019.hospitalinmyhand.databinding.RecyclerMedicalItemBinding

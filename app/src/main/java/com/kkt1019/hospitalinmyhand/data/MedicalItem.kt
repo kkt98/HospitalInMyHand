@@ -1,6 +1,6 @@
-package com.kkt1019.hospitalinmyhand
+package com.kkt1019.hospitalinmyhand.data
 
-data class MedicalItemVO(val body:ItemsBody )
+data class MedicalItemVO(val body: ItemsBody)
 
 //data class aaa(val resultCod:String)
 

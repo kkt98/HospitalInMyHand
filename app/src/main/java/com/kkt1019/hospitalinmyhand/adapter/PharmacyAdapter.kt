@@ -46,7 +46,7 @@ class PharmacyAdapter(
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val item = page3Items.get(position)
+        val item = page3Items[position]
 
         holder.tvTitle.text ="약국 이름 : " + item.yadmNm
         holder.tvAddr.text ="주소 : " + item.addr
@@ -59,9 +59,7 @@ class PharmacyAdapter(
             sharedViewModel.selectPharmacyItem(item)
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
-            G.uniqueid = item.ykiho
         }
-
     }
 
     override fun getItemCount(): Int = page3Items.size

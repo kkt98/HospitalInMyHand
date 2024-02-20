@@ -62,12 +62,9 @@ class EmergencyFragmentAdapter (
 
 
         holder.itemView.setOnClickListener {
-
             sharedViewModel.selectEmergencyItem(item)
             val bottomSheetDialogFragment = EmergencyBottomSheetFragment()
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
-
-            G.uniqueid = item.hpid
         }
     }
 
