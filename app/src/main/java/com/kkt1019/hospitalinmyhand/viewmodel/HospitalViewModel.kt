@@ -109,8 +109,8 @@ class HospitalViewModel : ViewModel() {
                 }
                 ?.sortedBy { item ->
                     val itemLocation = Location("").apply {
-                        latitude = item.wgs84Lat.toDoubleOrNull() ?: 0.0
-                        longitude = item.wgs84Lon.toDoubleOrNull() ?: 0.0
+                        latitude = item.wgs84Lat!!.toDoubleOrNull() ?: 0.0
+                        longitude = item.wgs84Lon!!.toDoubleOrNull() ?: 0.0
                     }
                     val userLocation = Location("").apply {
                         latitude = lat
@@ -126,9 +126,9 @@ class HospitalViewModel : ViewModel() {
 
         CoroutineScope(Dispatchers.Default).launch {
             val filteredList = _hospitalData.value?.filter { item ->
-                (city == null || item.dutyAddr.contains(city)) &&
-                        (neighborhood == null || item.dutyAddr.contains(neighborhood)) &&
-                        (hospitalType == null || item.dgidIdName.contains(hospitalType))
+                (city == null || item.dutyAddr!!.contains(city)) &&
+                        (neighborhood == null || item.dutyAddr!!.contains(neighborhood)) &&
+                        (hospitalType == null || item.dgidIdName!!.contains(hospitalType))
             }
             _filteredHospitalData.postValue(filteredList ?: listOf())
         }

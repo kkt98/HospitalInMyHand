@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.roomdatabase.calender.CalendarEntity
 
-class CalendarAdapter(val context: Context, var calendarItems: MutableList<CalendarEntity>) : RecyclerView.Adapter<CalendarAdapter.VH>() {
+class CalendarAdapter(val context: Context, var calendarItems: MutableList<CalendarEntity>) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
 
-    inner class VH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvSchedule: TextView by lazy { itemView.findViewById(R.id.my_schedule) }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater: LayoutInflater = LayoutInflater.from(context)
         val itemView = inflater.inflate(R.layout.recycler_calendar_item, parent, false)
-        return VH(itemView)
+        return ViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = calendarItems[position]
         // CalendarEntity의 content를 표시
         holder.tvSchedule.text = item.content

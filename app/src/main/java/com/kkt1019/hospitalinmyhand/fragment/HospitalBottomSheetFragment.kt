@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -14,22 +16,28 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHospitalBottomsheetBinding
+import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalDataBase
+import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalEntity
+import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HospitalBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallback {
 
     val binding: FragmentHospitalBottomsheetBinding by lazy { FragmentHospitalBottomsheetBinding.inflate(layoutInflater) }
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val roomViewModel: RoomViewModel by viewModels()
 
     var name : String = ""
-    var  Xpos :Double = 0.0
-    var Ypos :Double = 0.0
+    private var Xpos :Double = 0.0
+    private var Ypos :Double = 0.0
 
     private lateinit var mapView: com.google.android.gms.maps.MapView
     private lateinit var googleMap: GoogleMap
     private var currentMarker: Marker? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +51,6 @@ class HospitalBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallb
 
 
         sharedViewModel.hospitalItem.observe(viewLifecycleOwner) { item ->
-
-            Log.d("Asdadad", item.dutyAddr)
 
             binding.title.text = item.dutyName
             binding.tell.text = item.dutyTell
@@ -62,17 +68,25 @@ class HospitalBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallb
             binding.time5S.text = "토 : " + item.dutyTime6s+" ~ "
             binding.time5C.text = item.dutyTime6c
 
-            Xpos = item.wgs84Lat.toDouble()
-            Ypos = item.wgs84Lon.toDouble()
-            name = item.dutyName
+            Xpos = item.wgs84Lat!!.toDouble()
+            Ypos = item.wgs84Lon!!.toDouble()
+            name = item.dutyName!!
+
+            binding.favorite.setOnClickListener {
+                roomViewModel.insertHospitalItem(item)
+            }
+        }
+
+        roomViewModel.uiMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
     }
 
     ////////////////////////////////상세정보///////////////////////////
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
     }
     ////////////////////////////////상세정보///////////////////////////

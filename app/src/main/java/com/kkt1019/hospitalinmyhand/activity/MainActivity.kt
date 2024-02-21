@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         Glide.with(this).load(R.drawable.medical).into(binding.gifMedical)
         Glide.with(this).load(R.drawable.hos).into(binding.gifPharmacy)
         Glide.with(this).load(R.drawable.calendar).into(binding.gifCalender)
+        Glide.with(this).load(R.drawable.favorit).into(binding.gifFavorite)
 
         Permission.requestPermission()
 
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
             ShareData.lng = it?.longitude ?: 0.0
         })
     }
-
 
     fun onClickHospital() {
         val intent = Intent(this, HospitalActivity::class.java)
@@ -59,9 +59,13 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     fun onClickCalender() {
         val intent = Intent(this, CalendarActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickFavorite() {
+        val intent = Intent(this, FavoriteActivity::class.java)
         startActivity(intent)
     }
 }

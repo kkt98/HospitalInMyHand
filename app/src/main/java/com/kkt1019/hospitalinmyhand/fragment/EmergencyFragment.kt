@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import com.kkt1019.hospitalinmyhand.adapter.EmergencyFragmentAdapter
 import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.adapter.HospitalFragmentAdapter
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.EmergencyViewModel
@@ -92,7 +91,7 @@ class EmergencyFragment:Fragment() {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
 
             items.clear()
-            (binding.recycler.adapter as? HospitalFragmentAdapter)?.notifyDataSetChanged()
+            (binding.recycler.adapter as? EmergencyFragmentAdapter)?.notifyDataSetChanged()
             binding.sflSample.startShimmer()
             binding.sflSample.visibility = View.VISIBLE
 

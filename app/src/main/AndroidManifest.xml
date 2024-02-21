@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
         <activity
+            android:name=".activity.FavoriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MedicalMoreActivity"
             android:exported="false" />
         <activity
@@ -66,23 +69,25 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAvCQkBI3sQsiXZnGEwekkF321kX_AuW0M" />
-
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="beb29a3a8bb38a001c5f2da0f105f101"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="beb29a3a8bb38a001c5f2da0f105f101" />
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="kakaobeb29a3a8bb38a001c5f2da0f105f101" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

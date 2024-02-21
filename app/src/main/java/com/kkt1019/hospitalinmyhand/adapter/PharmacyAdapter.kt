@@ -19,7 +19,7 @@ class PharmacyAdapter(
     var page3Items: MutableList<PharmacyItem>,
     private val fragmentManager: FragmentManager,
     private val sharedViewModel: SharedViewModel
-): RecyclerView.Adapter<PharmacyAdapter.VH>() {
+): RecyclerView.Adapter<PharmacyAdapter.ViewHolder>() {
 
     fun updateData(newItems: List<PharmacyItem>) {
         page3Items.clear()
@@ -27,30 +27,17 @@ class PharmacyAdapter(
         notifyDataSetChanged()
     }
 
-    inner class VH(itemView: View):RecyclerView.ViewHolder(itemView){
-
-        val tvTitle : TextView by lazy { itemView.findViewById(R.id.pg3_title) }
-        val tvAddr : TextView by lazy { itemView.findViewById(R.id.pg3_address) }
-        val tvTell : TextView by lazy { itemView.findViewById(R.id.pg3_tell) }
-        val tvLocation : TextView by lazy { itemView.findViewById(R.id.pg3_tv_location) }
-
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val inflater:LayoutInflater = LayoutInflater.from(context)
         val itemView = inflater.inflate(R.layout.recycler_pharmacy_item, parent, false)
 
-        return VH(itemView)
+        return ViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = page3Items[position]
-
-        holder.tvTitle.text ="약국 이름 : " + item.yadmNm
-        holder.tvAddr.text ="주소 : " + item.addr
-        holder.tvTell.text ="전화번호 : " + item.telno
-        holder.tvLocation.text = DistanceManager.getDistance(ShareData.lat, ShareData.lng, item.yPos.toDouble(), item.xPos.toDouble()).toString()
+        holder.bind(item)
 
         holder.itemView.setOnClickListener {
 
@@ -62,4 +49,21 @@ class PharmacyAdapter(
     }
 
     override fun getItemCount(): Int = page3Items.size
+
+    class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+
+        val tvTitle : TextView by lazy { itemView.findViewById(R.id.pg3_title) }
+        val tvAddr : TextView by lazy { itemView.findViewById(R.id.pg3_address) }
+        val tvTell : TextView by lazy { itemView.findViewById(R.id.pg3_tell) }
+        val tvLocation : TextView by lazy { itemView.findViewById(R.id.pg3_tv_location) }
+
+        fun bind(item: PharmacyItem) {
+            tvTitle.text ="약국 이름 : " + item.yadmNm
+            tvAddr.text ="주소 : " + item.addr
+            tvTell.text ="전화번호 : " + item.telno
+            item.location = DistanceManager.getDistance(ShareData.lat, ShareData.lng, item.yPos.toDouble(), item.xPos.toDouble()).toString()
+            tvLocation.text = item.location
+        }
+
+    }
 }

@@ -103,6 +103,9 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:converter-simplexml:2.9.0'
 
+    implementation 'com.google.android.material:material:1.11.0'
+
+
     //리사이클러뷰 아이템 로딩 화면
     implementation "com.facebook.shimmer:shimmer:0.5.0"
 

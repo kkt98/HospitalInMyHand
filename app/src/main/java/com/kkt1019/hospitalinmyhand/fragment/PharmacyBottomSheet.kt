@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentPharmacyBottomSheetBinding
+import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 import kotlin.properties.Delegates
 
@@ -25,6 +27,7 @@ class PharmacyBottomSheet : BottomSheetDialogFragment(), OnMapReadyCallback {
     val binding: FragmentPharmacyBottomSheetBinding by lazy { FragmentPharmacyBottomSheetBinding.inflate(layoutInflater) }
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val roomViewModel: RoomViewModel by viewModels()
 
     var name : String = ""
     private var Xpos : Double = 0.0
@@ -50,13 +53,21 @@ class PharmacyBottomSheet : BottomSheetDialogFragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.pharmacyItem.observe(viewLifecycleOwner) {
-            binding.title.text = it.yadmNm
-            binding.address.text = it.addr
-            binding.tell.text = it.telno
-            Ypos = it.yPos.toDouble()
-            Xpos = it.xPos.toDouble()
-            name = it.yadmNm
+        sharedViewModel.pharmacyItem.observe(viewLifecycleOwner) {item ->
+            binding.title.text = item.yadmNm
+            binding.address.text = item.addr
+            binding.tell.text = item.telno
+            Ypos = item.yPos.toDouble()
+            Xpos = item.xPos.toDouble()
+            name = item.yadmNm
+
+            binding.favorite.setOnClickListener {
+                roomViewModel.insertPharmacyItem(item)
+            }
+        }
+
+        roomViewModel.uiMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
 

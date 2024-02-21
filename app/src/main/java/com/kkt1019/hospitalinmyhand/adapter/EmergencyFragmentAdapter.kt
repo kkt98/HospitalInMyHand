@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.ToggleButton
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.G
@@ -16,15 +15,12 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class EmergencyFragmentAdapter (
     val context:Context,
     var page2Items:MutableList<EmergencyItem>,
     private val fragmentManager : FragmentManager,
-    private val sharedViewModel: SharedViewModel): RecyclerView.Adapter<EmergencyFragmentAdapter.VH>() {
+    private val sharedViewModel: SharedViewModel): RecyclerView.Adapter<EmergencyFragmentAdapter.ViewHolder>() {
 
     fun updateData(newItems: List<EmergencyItem>) {
         page2Items.clear()
@@ -32,27 +28,18 @@ class EmergencyFragmentAdapter (
         notifyDataSetChanged()
     }
 
-    inner class VH(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        val tvTitle : TextView by lazy { itemView.findViewById(R.id.pg2_title) }
-        val tvAddr : TextView by lazy { itemView.findViewById(R.id.pg2_address) }
-        val tvTell : TextView by lazy { itemView.findViewById(R.id.pg2_tell) }
-        val tvTell2 : TextView by lazy { itemView.findViewById(R.id.pg2_tell2) }
-        val tvLocation : TextView by lazy { itemView.findViewById(R.id.pg2_tv_location) }
-
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val inflater: LayoutInflater = LayoutInflater.from(context)
         val itemView = inflater.inflate(R.layout.recycler_emergency_item, parent, false)
 
-        return VH(itemView)
+        return ViewHolder(itemView)
 
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: VH, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = page2Items[position]
 
         holder.tvTitle.text = "응급실이름 : " + item.dutyName
@@ -71,4 +58,14 @@ class EmergencyFragmentAdapter (
     }
 
     override fun getItemCount(): Int = page2Items.size
+
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+
+        val tvTitle : TextView by lazy { itemView.findViewById(R.id.pg2_title) }
+        val tvAddr : TextView by lazy { itemView.findViewById(R.id.pg2_address) }
+        val tvTell : TextView by lazy { itemView.findViewById(R.id.pg2_tell) }
+        val tvTell2 : TextView by lazy { itemView.findViewById(R.id.pg2_tell2) }
+        val tvLocation : TextView by lazy { itemView.findViewById(R.id.pg2_tv_location) }
+
+    }
 }

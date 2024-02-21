@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBottomsheetBinding
+import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class EmergencyBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCallback {
@@ -21,6 +24,7 @@ class EmergencyBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCall
     val binding: FragmentEmergencyBottomsheetBinding by lazy { FragmentEmergencyBottomsheetBinding.inflate(layoutInflater) }
 
     private val sharedViewModel: SharedViewModel by activityViewModels()
+    private val roomViewModel: RoomViewModel by viewModels()
 
     var name : String = ""
     var Xpos : Double = 0.0
@@ -46,14 +50,22 @@ class EmergencyBottomSheetFragment : BottomSheetDialogFragment(), OnMapReadyCall
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedViewModel.emergencyItem.observe(/* owner = */ viewLifecycleOwner) {
-            binding.title.text = it.dutyName
-            binding.address.text = it.dutyAddr
-            binding.tell1.text = it.dutyTel1
-            binding.tell2.text = it.dutyTel3
-            Xpos = it.wgs84Lat.toDouble()
-            Ypos = it.wgs84Lon.toDouble()
-            name = it.dutyName
+        sharedViewModel.emergencyItem.observe(/* owner = */ viewLifecycleOwner) { item ->
+            binding.title.text = item.dutyName
+            binding.address.text = item.dutyAddr
+            binding.tell1.text = item.dutyTel1
+            binding.tell2.text = item.dutyTel3
+            Xpos = item.wgs84Lat.toDouble()
+            Ypos = item.wgs84Lon.toDouble()
+            name = item.dutyName
+
+            binding.favorite.setOnClickListener {
+                roomViewModel.insertEmergencyItem(item)
+            }
+        }
+
+        roomViewModel.uiMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
     }
