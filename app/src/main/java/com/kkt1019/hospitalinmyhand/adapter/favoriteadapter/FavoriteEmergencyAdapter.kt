@@ -52,7 +52,7 @@ class FavoriteEmergencyAdapter(
                 wgs84Lon = item.wgs84Lon, hpid = item.hpid, location = item.location) // 마커 아이콘 수정
 
             sharedViewModel.selectEmergencyItem(emergencyItem)
-            val bottomSheetDialogFragment = PharmacyBottomSheet()
+            val bottomSheetDialogFragment = EmergencyBottomSheetFragment()
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
         }
     }

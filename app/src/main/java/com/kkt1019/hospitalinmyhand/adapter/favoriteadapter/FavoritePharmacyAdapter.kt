@@ -12,6 +12,7 @@ import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.data.PharmacyItem
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.fragment.HospitalBottomSheetFragment
+import com.kkt1019.hospitalinmyhand.fragment.PharmacyBottomSheet
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalEntity
 import com.kkt1019.hospitalinmyhand.roomdatabase.pharmacy.PharmacyEntity
 import com.kkt1019.hospitalinmyhand.util.DistanceManager
@@ -47,7 +48,7 @@ class FavoritePharmacyAdapter(
                 ykiho = item.ykiho, location = item.location) // 마커 아이콘 수정
 
             sharedViewModel.selectPharmacyItem(pharmacyItem)
-            val bottomSheetDialogFragment = HospitalBottomSheetFragment()
+            val bottomSheetDialogFragment = PharmacyBottomSheet()
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
         }
     }
