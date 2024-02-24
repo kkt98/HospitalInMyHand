@@ -2,6 +2,7 @@ package com.kkt1019.hospitalinmyhand.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,8 @@ import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHospitalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 class HospitalFragment : Fragment() {
 
@@ -28,7 +31,7 @@ class HospitalFragment : Fragment() {
     private var _binding: FragmentHospitalBinding? = null
     private val binding get() = _binding!!
 
-    private val networkViewModel: HospitalViewModel by viewModels()
+    private val hospitalViewModel: HospitalViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
 
@@ -51,7 +54,7 @@ class HospitalFragment : Fragment() {
         binding.sflSample.startShimmer()
         binding.sflSample.visibility = View.VISIBLE
 
-        networkViewModel.hospitalData.observe(viewLifecycleOwner, Observer {
+        hospitalViewModel.hospitalData.observe(viewLifecycleOwner, Observer {
             allItems.addAll(it)
             (binding.recycler.adapter as? HospitalFragmentAdapter)?.updateData(it)
 
@@ -59,9 +62,11 @@ class HospitalFragment : Fragment() {
             binding.sflSample.visibility = View.GONE
 
         })
-        networkViewModel.fetchDataFromNetwork()
+        hospitalViewModel.fetchDataFromNetwork()
 
-        networkViewModel.filteredHospitalData.observe(viewLifecycleOwner) { data ->
+        hospitalViewModel.filteredHospitalData.observe(viewLifecycleOwner) { data ->
+
+            Log.d("asdasda", data.size.toString())
             // 데이터가 변경될 때 UI 업데이트
             (binding.recycler.adapter as? HospitalFragmentAdapter)?.updateData(data)
 
@@ -177,8 +182,8 @@ class HospitalFragment : Fragment() {
         val selectedNeighborhood = if (spinner2.selectedItemPosition > 0) spinner2.selectedItem.toString() else null
         val selectedHospitalType = if (spinner3.selectedItemPosition > 0) spinner3.selectedItem.toString() else null
 
-        // 필터링 작업 뷰모델에서 실행
-        networkViewModel.filterDataBySelection(selectedCity, selectedNeighborhood, selectedHospitalType)
+        Log.d("selectedHospitalType", selectedHospitalType!!)
+        hospitalViewModel.fetchDataAndFilter((selectedCity!!), (selectedNeighborhood!!), selectedHospitalType ?: "내과")
     }
 
     private fun nearByMyLocation(mDialogView: View) {
@@ -186,7 +191,7 @@ class HospitalFragment : Fragment() {
         val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
         val selectedHospitalType = if (spinner3.selectedItemPosition > 0) spinner3.selectedItem.toString() else null
 
-        networkViewModel.sortByUserLocation(ShareData.lat, ShareData.lng, selectedHospitalType)
+        hospitalViewModel.sortByUserLocation(ShareData.lat, ShareData.lng, selectedHospitalType)
     }
 
     override fun onDestroyView() {

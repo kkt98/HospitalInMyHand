@@ -25,6 +25,7 @@ class CalendarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_calendar)
         setContentView(binding.root)
+        binding.activity = this
 
         setSupportActionBar(binding.toolbar)
         binding.toolbar.title = "일정"

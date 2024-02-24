@@ -5,15 +5,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 class HospitalViewModel : ViewModel() {
 
@@ -26,6 +31,7 @@ class HospitalViewModel : ViewModel() {
     fun fetchDataFromNetwork() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
+
                 val address = "http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytBassInfoInqire?" +
                         "serviceKey=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
                         "&pageNo=1&numOfRows=10000"
@@ -97,6 +103,85 @@ class HospitalViewModel : ViewModel() {
         }
     }
 
+    private fun fetchDataFromNetwork2(aaa: String, bbb: String): Deferred<List<HospitalItem>> = viewModelScope.async(Dispatchers.IO) {
+        val address = if (bbb != null) {
+            "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?" +
+                    "serviceKey=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
+                    "&Q0=${URLEncoder.encode(aaa, "UTF-8")}&Q1=${URLEncoder.encode(bbb, "UTF-8")}" +
+                    "&pageNo=1&numOfRows=1000"
+        } else{
+            "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?" +
+                    "serviceKey=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
+                    "&Q0=${URLEncoder.encode(aaa, "UTF-8")}" +
+                    "&pageNo=1&numOfRows=1000"
+        }
+
+
+        val url = URL(address)
+        val conn = url.openConnection() as HttpURLConnection
+        conn.doInput = true
+        val ips = conn.inputStream
+        val isr = InputStreamReader(ips)
+        val factory = XmlPullParserFactory.newInstance()
+        val xpp = factory.newPullParser()
+        xpp.setInput(isr)
+        var eventType = xpp.eventType
+        val allItems = mutableListOf<HospitalItem>()
+        var item: HospitalItem? = null
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            when (eventType) {
+                XmlPullParser.START_TAG -> {
+                    val tagName = xpp.name
+
+                    if (tagName == "item") {
+                        item = HospitalItem()
+
+                    } else {
+                        xpp.next()
+                        item?.apply {
+                            when (tagName) {
+                                "dutyAddr" -> dutyAddr = xpp.text
+                                "dutyName" -> dutyName = xpp.text
+                                "dutyTel1" -> dutyTell = xpp.text
+                                "dutyTime1c", "dutyTime1s", "dutyTime2c", "dutyTime2s", "dutyTime3c",
+                                "dutyTime3s", "dutyTime4c", "dutyTime4s", "dutyTime5c", "dutyTime5s",
+                                "dutyTime6c", "dutyTime6s", "wgs84Lat", "wgs84Lon", "hpid", "dgidIdName" -> {
+                                    val value = xpp.text
+                                    when (tagName) {
+                                        "dutyTime1c" -> dutyTime1c = value
+                                        "dutyTime1s" -> dutyTime1s = value
+                                        "dutyTime2c" -> dutyTime2c = value
+                                        "dutyTime2s" -> dutyTime2s = value
+                                        "dutyTime3c" -> dutyTime3c = value
+                                        "dutyTime3s" -> dutyTime3s = value
+                                        "dutyTime4c" -> dutyTime4c = value
+                                        "dutyTime4s" -> dutyTime4s = value
+                                        "dutyTime5c" -> dutyTime5c = value
+                                        "dutyTime5s" -> dutyTime5s = value
+                                        "dutyTime6c" -> dutyTime6c = value
+                                        "dutyTime6s" -> dutyTime6s = value
+                                        "wgs84Lat" -> wgs84Lat = value
+                                        "wgs84Lon" -> wgs84Lon = value
+                                        "hpid" -> hpid = value
+                                        "dgidIdName" -> dgidIdName = value
+                                        else -> { }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                XmlPullParser.END_TAG -> {
+                    if (xpp.name == "item") {
+                        item?.let { allItems.add(it) }
+                    }
+                }
+            }
+            eventType = xpp.next()
+        }
+        allItems // 파싱된 결과를 반환
+    }
+
     fun sortByUserLocation(lat: Double, lon: Double, selectedHospitalType: String?) {
 
         CoroutineScope(Dispatchers.Default).launch {
@@ -122,18 +207,26 @@ class HospitalViewModel : ViewModel() {
         }
     }
 
-    fun filterDataBySelection(city: String?, neighborhood: String?, hospitalType: String?) {
 
-        CoroutineScope(Dispatchers.Default).launch {
-            val filteredList = _hospitalData.value?.filter { item ->
-                (city == null || item.dutyAddr!!.contains(city)) &&
-                        (neighborhood == null || item.dutyAddr!!.contains(neighborhood)) &&
-                        (hospitalType == null || item.dgidIdName!!.contains(hospitalType))
+    fun fetchDataAndFilter(aaa: String, bbb: String, hospitalType: String?) = viewModelScope.launch {
+        try {
+            // fetchDataFromNetwork2의 결과를 기다립니다.
+            val items = fetchDataFromNetwork2(aaa, bbb).await()
+
+            // 필터링 작업을 수행합니다.
+            val filteredItems = if (!hospitalType.isNullOrEmpty()) {
+                items.filter { it.dutyName!!.contains(hospitalType) }
+            } else {
+                items // hospitalType이 null이거나 비어 있으면 모든 아이템을 반환
             }
-            _filteredHospitalData.postValue(filteredList ?: listOf())
-        }
 
+            // 필터링된 결과를 LiveData에 설정합니다.
+            _filteredHospitalData.postValue(filteredItems)
+        } catch (e: Exception) {
+            Log.e("HospitalViewModel", "Error in fetchDataAndFilter", e)
+        }
     }
+
 }
 
 
