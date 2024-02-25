@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.kkt1019.hospitalinmyhand.adapter.EmergencyFragmentAdapter
 import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.R
@@ -154,8 +153,8 @@ class EmergencyFragment:Fragment() {
         val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
         val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
 
-        val selectedCity = spinner.selectedItem.toString()
-        val selectedNeighborhood = spinner2.selectedItem.toString()
+        val selectedCity = if (spinner.selectedItemPosition > 0) spinner.selectedItem.toString() else null
+        val selectedNeighborhood = if (spinner2.selectedItemPosition > 0) spinner2.selectedItem.toString() else null
 
         emergencyViewModel.filterDataBySelection(selectedCity, selectedNeighborhood)
     }

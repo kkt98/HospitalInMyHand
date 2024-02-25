@@ -182,7 +182,6 @@ class HospitalFragment : Fragment() {
         val selectedNeighborhood = if (spinner2.selectedItemPosition > 0) spinner2.selectedItem.toString() else null
         val selectedHospitalType = if (spinner3.selectedItemPosition > 0) spinner3.selectedItem.toString() else null
 
-        Log.d("selectedHospitalType", selectedHospitalType!!)
         hospitalViewModel.fetchDataAndFilter((selectedCity!!), (selectedNeighborhood!!), selectedHospitalType ?: "내과")
     }
 

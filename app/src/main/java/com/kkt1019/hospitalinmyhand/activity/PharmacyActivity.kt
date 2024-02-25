@@ -157,8 +157,8 @@ class PharmacyActivity : AppCompatActivity() {
         val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
         val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
 
-        val selectedCity = spinner.selectedItem.toString()
-        val selectedNeighborhood = spinner2.selectedItem.toString()
+        val selectedCity = if (spinner.selectedItemPosition > 0) spinner.selectedItem.toString() else null
+        val selectedNeighborhood = if (spinner2.selectedItemPosition > 0) spinner2.selectedItem.toString() else null
 
         // emergency에서 쓰는 기능이랑 같아서 재활용
         pharmacyViewModel.filterDataBySelection(selectedCity, selectedNeighborhood)

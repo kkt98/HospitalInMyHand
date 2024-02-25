@@ -28,7 +28,7 @@ class PharmacyViewModel: ViewModel() {
                 val address = ("http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList" +
                         "?serviceKey=H7PvoIiO2D6%2BqVfe6kF2WAoJgdpbVUtJT52Wx7dL6%2BDLP4IEk5i5xqP%2BGZMDktix9xaYS03X6YP4JtLGSnuunw%3D%3D" +
                         "&pageNo=1" +
-                        "&numOfRows=5000")
+                        "&numOfRows=10000")
 
                 val url = URL(address)
                 val conn = url.openConnection() as HttpURLConnection
