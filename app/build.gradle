@@ -118,4 +118,8 @@ dependencies {
     kapt "androidx.room:room-compiler:2.6.1"
     // Kotlin Coroutines 사용 시
     implementation "androidx.room:room-ktx:2.6.1"
+
+    //애드몹
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+
 }

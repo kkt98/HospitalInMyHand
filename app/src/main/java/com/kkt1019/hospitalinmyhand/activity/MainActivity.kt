@@ -9,6 +9,8 @@ import com.kkt1019.hospitalinmyhand.util.Permission
 import com.kkt1019.hospitalinmyhand.R
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.LocationViewModel
@@ -37,6 +39,10 @@ class MainActivity : AppCompatActivity() {
             ShareData.lat = it?.latitude ?: 0.0
             ShareData.lng = it?.longitude ?: 0.0
         })
+
+        MobileAds.initialize(this)
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     fun onClickHospital() {

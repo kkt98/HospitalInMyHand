@@ -16,6 +16,11 @@
         android:theme="@style/Theme.HospitalInMyHand"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id"/>
+
         <activity
             android:name=".activity.FavoriteActivity"
             android:exported="false" />
@@ -24,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.CalendarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.FavoritActivity"
             android:exported="false" />
         <activity
             android:name=".activity.PharmacyActivity"
@@ -51,9 +53,6 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RevieEdit"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
