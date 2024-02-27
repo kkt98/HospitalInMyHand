@@ -22,7 +22,6 @@ class MedicalViewModel: ViewModel() {
         val retrofitService = retrofit.create(RetrofitService::class.java)
         val call = retrofitService.MedicalData("H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==",
             etname, "json")
-
         call.enqueue(object : Callback<MedicalItemVO> {
             override fun onResponse(call: Call<MedicalItemVO>, response: Response<MedicalItemVO>) {
                 val medicalResponse: MedicalItemVO? = response.body()

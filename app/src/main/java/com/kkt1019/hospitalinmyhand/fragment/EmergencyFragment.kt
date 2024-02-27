@@ -17,7 +17,9 @@ import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.FragmentEmergencyBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.EmergencyViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EmergencyFragment:Fragment() {
 
     val binding: FragmentEmergencyBinding by lazy { FragmentEmergencyBinding.inflate(layoutInflater) }

@@ -11,7 +11,7 @@ import com.google.android.gms.location.Priority
 
 class LocationViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val fusedLocationProviderClient: FusedLocationProviderClient =
+    private val _fusedLocationProviderClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(application)
 
     private val _locationData = MutableLiveData<Location?>()
@@ -19,12 +19,9 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
     @SuppressLint("MissingPermission")
     fun fetchCurrentLocation() {
-        fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+        _fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
                 _locationData.value = location
-            }
-            .addOnFailureListener {
-                // Handle failure case
             }
     }
 }

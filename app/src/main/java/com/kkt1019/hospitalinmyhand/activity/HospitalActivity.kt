@@ -9,7 +9,9 @@ import com.kkt1019.hospitalinmyhand.fragment.EmergencyFragment
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityHospitalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HospitalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHospitalBinding
     private lateinit var viewModel: SharedViewModel

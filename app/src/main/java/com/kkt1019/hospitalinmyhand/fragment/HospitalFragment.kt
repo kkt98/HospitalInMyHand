@@ -21,9 +21,11 @@ import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.FragmentHospitalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.HospitalViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
+@AndroidEntryPoint
 class HospitalFragment : Fragment() {
 
     private var items = mutableListOf<HospitalItem>()
