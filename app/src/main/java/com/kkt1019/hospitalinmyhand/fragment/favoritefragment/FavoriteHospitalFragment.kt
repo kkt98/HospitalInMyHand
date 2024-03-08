@@ -11,11 +11,13 @@ import com.kkt1019.hospitalinmyhand.adapter.favoriteadapter.FavoriteHospitalAdap
 import com.kkt1019.hospitalinmyhand.databinding.FragmentFavoirteHospitalBinding
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalDataBase
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class FavoriteHospitalFragment : Fragment() {
 
     private var binding: FragmentFavoirteHospitalBinding? = null

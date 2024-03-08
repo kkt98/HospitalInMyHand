@@ -57,11 +57,6 @@ class HospitalFragmentAdapter(
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
 
         }
-
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val isSaved = HospitalDataBase.getDatabase(context).hospitalDao().exists(item.hpid!!)
-//            }
-
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

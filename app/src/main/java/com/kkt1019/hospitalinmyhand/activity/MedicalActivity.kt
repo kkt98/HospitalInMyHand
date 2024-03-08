@@ -13,7 +13,9 @@ import com.kkt1019.hospitalinmyhand.adapter.MedicalAdapter
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMedicalBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.MedicalViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MedicalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMedicalBinding
 

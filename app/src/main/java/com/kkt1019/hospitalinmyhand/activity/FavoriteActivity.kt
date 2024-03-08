@@ -9,7 +9,9 @@ import com.kkt1019.hospitalinmyhand.databinding.ActivityFavoriteBinding
 import com.kkt1019.hospitalinmyhand.fragment.favoritefragment.FavoriteHospitalFragment
 import com.kkt1019.hospitalinmyhand.fragment.favoritefragment.FavoriteEmergencyFragment
 import com.kkt1019.hospitalinmyhand.fragment.favoritefragment.FavoritePharmacyFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoriteBinding

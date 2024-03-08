@@ -21,8 +21,10 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.databinding.FragmentPharmacyBottomSheetBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class PharmacyBottomSheet : BottomSheetDialogFragment(), OnMapReadyCallback {
     val binding: FragmentPharmacyBottomSheetBinding by lazy { FragmentPharmacyBottomSheetBinding.inflate(layoutInflater) }
 

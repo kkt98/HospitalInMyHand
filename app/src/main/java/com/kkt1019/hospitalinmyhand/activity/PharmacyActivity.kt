@@ -16,7 +16,9 @@ import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.ActivityPharmacyBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.PharmacyViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PharmacyActivity : AppCompatActivity() {
     val binding: ActivityPharmacyBinding by lazy { ActivityPharmacyBinding.inflate(layoutInflater) }
 

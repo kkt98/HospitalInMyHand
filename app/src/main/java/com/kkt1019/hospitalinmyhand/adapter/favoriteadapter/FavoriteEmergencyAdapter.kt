@@ -7,16 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kkt1019.hospitalinmyhand.G
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.EmergencyItem
-import com.kkt1019.hospitalinmyhand.data.HospitalItem
-import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.fragment.EmergencyBottomSheetFragment
-import com.kkt1019.hospitalinmyhand.fragment.HospitalBottomSheetFragment
-import com.kkt1019.hospitalinmyhand.fragment.PharmacyBottomSheet
 import com.kkt1019.hospitalinmyhand.roomdatabase.emergency.EmergencyEntity
-import com.kkt1019.hospitalinmyhand.util.DistanceManager
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class FavoriteEmergencyAdapter(

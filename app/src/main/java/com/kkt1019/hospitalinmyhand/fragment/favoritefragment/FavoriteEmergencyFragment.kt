@@ -12,11 +12,14 @@ import com.kkt1019.hospitalinmyhand.databinding.FragmentFavoriteEmergencyBinding
 import com.kkt1019.hospitalinmyhand.roomdatabase.emergency.EmergencyDataBase
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalDataBase
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
+@AndroidEntryPoint
 class FavoriteEmergencyFragment : Fragment() {
 
     private var binding: FragmentFavoriteEmergencyBinding? = null

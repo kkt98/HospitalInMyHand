@@ -12,7 +12,6 @@ import java.net.URL
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class EmergencyRepository @Inject constructor()  {
 
     suspend fun fetchDataFromNetwork(): List<EmergencyItem> = withContext(Dispatchers.IO) {

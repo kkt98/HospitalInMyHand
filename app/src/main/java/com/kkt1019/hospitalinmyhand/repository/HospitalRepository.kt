@@ -14,7 +14,6 @@ import java.net.URLEncoder
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class HospitalRepository @Inject constructor() {
 
     suspend fun fetchDataFromNetwork(): List<HospitalItem> = withContext(Dispatchers.IO) {

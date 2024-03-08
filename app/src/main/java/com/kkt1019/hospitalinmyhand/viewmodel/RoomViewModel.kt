@@ -7,25 +7,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import com.kkt1019.hospitalinmyhand.data.PharmacyItem
+import com.kkt1019.hospitalinmyhand.repository.RoomRepository
+import com.kkt1019.hospitalinmyhand.roomdatabase.calender.CalendarDatabase
+import com.kkt1019.hospitalinmyhand.roomdatabase.calender.CalendarEntity
 import com.kkt1019.hospitalinmyhand.roomdatabase.emergency.EmergencyDataBase
 import com.kkt1019.hospitalinmyhand.roomdatabase.emergency.EmergencyEntity
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalDataBase
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalEntity
 import com.kkt1019.hospitalinmyhand.roomdatabase.pharmacy.PharmacyDataBase
 import com.kkt1019.hospitalinmyhand.roomdatabase.pharmacy.PharmacyEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RoomViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val hospitalDatabase = HospitalDataBase.getDatabase(application)
-    private val emergencyDataBase = EmergencyDataBase.getDatabase(application)
-    private val pharmacyDatabase = PharmacyDataBase.getDatabase(application)
-
+@HiltViewModel
+class RoomViewModel @Inject constructor(
+    private val repository: RoomRepository,
+    application: Application
+) : AndroidViewModel(application) {
 
     private val _uiMessage = MutableLiveData<String?>()
     val uiMessage: LiveData<String?> get() = _uiMessage
@@ -39,29 +44,17 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
                 dutyTime6s = item.dutyTime6s, dutyTime6c = item.dutyTime6c, wgs84Lat = item.wgs84Lat, wgs84Lon = item.wgs84Lon,
                 hpid = item.hpid, dgidIdName = item.dgidIdName, location = item.location) // 마커 아이콘 수정
 
-            val state = hospitalDatabase.hospitalDao().exists(item.hpid!!)
-            if (!state) {
-                hospitalDatabase.hospitalDao().insertAll(hospitalEntity)
-                _uiMessage.postValue("저장 완료.")
-            } else {
-                _uiMessage.postValue("이미 저장된 항목입니다.")
-            }
+            _uiMessage.postValue(repository.insertHospitalItem(hospitalEntity))
         }
     }
 
     fun insertEmergencyItem(item: EmergencyItem) {
         viewModelScope.launch(Dispatchers.IO){
-            val hospitalEntity = EmergencyEntity(
+            val emergencyEntity = EmergencyEntity(
                 dutyAddr = item.dutyAddr, dutyName = item.dutyName, dutyTel1 = item.dutyTel1, dutyTel3 = item.dutyTel3, wgs84Lat = item.wgs84Lat,
                 wgs84Lon = item.wgs84Lon, hpid = item.hpid, location = item.location) // 마커 아이콘 수정) // 마커 아이콘 수정
 
-            val state = emergencyDataBase.emergencyDao().exists(item.hpid)
-            if (!state) {
-                emergencyDataBase.emergencyDao().insertAll(hospitalEntity)
-                _uiMessage.postValue("저장 완료.")
-            } else {
-                _uiMessage.postValue("이미 저장된 항목입니다.")
-            }
+            _uiMessage.postValue(repository.insertEmergencyItem(emergencyEntity))
         }
     }
 
@@ -71,13 +64,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
                 yadmNm = item.yadmNm, addr = item.addr, telno = item.telno, xPos = item.xPos, yPos = item.yPos,
                 ykiho = item.ykiho, location = item.location)
 
-            val state = pharmacyDatabase.pharmacyDao().exists(item.ykiho!!)
-            if (!state) {
-                pharmacyDatabase.pharmacyDao().insertAll(pharmacyEntity)
-                _uiMessage.postValue("저장 완료.")
-            } else {
-                _uiMessage.postValue("이미 저장된 항목입니다.")
-            }
+            _uiMessage.postValue(repository.insertPharmacyItem(pharmacyEntity))
         }
     }
 }

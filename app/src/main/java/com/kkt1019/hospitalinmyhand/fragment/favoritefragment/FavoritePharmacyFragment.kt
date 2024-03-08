@@ -13,11 +13,13 @@ import com.kkt1019.hospitalinmyhand.databinding.FragmentFavoritePharmacyBinding
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalDataBase
 import com.kkt1019.hospitalinmyhand.roomdatabase.pharmacy.PharmacyDataBase
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class FavoritePharmacyFragment : Fragment() {
 
     private var binding: FragmentFavoritePharmacyBinding? = null

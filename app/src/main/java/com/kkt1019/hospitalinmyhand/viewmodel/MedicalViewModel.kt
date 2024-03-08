@@ -8,32 +8,29 @@ import com.kkt1019.hospitalinmyhand.data.MedicalItemVO
 import com.kkt1019.hospitalinmyhand.data.MedicalItems
 import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
 import com.kkt1019.hospitalinmyhand.network.RetrofitService
+import com.kkt1019.hospitalinmyhand.repository.MedicalRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class MedicalViewModel: ViewModel() {
+@HiltViewModel
+class MedicalViewModel @Inject constructor(
+    private val repository: MedicalRepository
+): ViewModel() {
 
     private val _medicalItems = MutableLiveData<List<MedicalItems>>()
     val medicalItems: LiveData<List<MedicalItems>> = _medicalItems
 
     fun fetchMedicalData(etname: String) {
-        val retrofit = RetrofitHelper.getRetrofitInstance()
-        val retrofitService = retrofit.create(RetrofitService::class.java)
-        val call = retrofitService.MedicalData("H7PvoIiO2D6+qVfe6kF2WAoJgdpbVUtJT52Wx7dL6+DLP4IEk5i5xqP+GZMDktix9xaYS03X6YP4JtLGSnuunw==",
-            etname, "json")
-        call.enqueue(object : Callback<MedicalItemVO> {
-            override fun onResponse(call: Call<MedicalItemVO>, response: Response<MedicalItemVO>) {
-                val medicalResponse: MedicalItemVO? = response.body()
-                medicalResponse?.body?.items?.let {
-                    _medicalItems.postValue(it)
-                }
+        repository.fetchMedicalData(etname,
+            onSuccess = { items ->
+                _medicalItems.postValue(items)
+            },
+            onFailure = { error ->
+                Log.e("MedicalViewModel", "Error fetching medical data", error)
             }
-
-            override fun onFailure(call: Call<MedicalItemVO>, t: Throwable) {
-                Log.e("MedicalViewModel", "Error fetching medical data", t)
-            }
-        })
+        )
     }
-
 }
