@@ -56,6 +56,7 @@ class HospitalFragment : Fragment() {
         binding.sflSample.startShimmer()
         binding.sflSample.visibility = View.VISIBLE
 
+        hospitalViewModel.fetchDataFromNetwork()
         hospitalViewModel.hospitalData.observe(viewLifecycleOwner, Observer {
             allItems.addAll(it)
             (binding.recycler.adapter as? HospitalFragmentAdapter)?.updateData(it)
@@ -64,11 +65,9 @@ class HospitalFragment : Fragment() {
             binding.sflSample.visibility = View.GONE
 
         })
-        hospitalViewModel.fetchDataFromNetwork()
 
         hospitalViewModel.filteredHospitalData.observe(viewLifecycleOwner) { data ->
 
-            Log.d("asdasda", data.size.toString())
             // 데이터가 변경될 때 UI 업데이트
             (binding.recycler.adapter as? HospitalFragmentAdapter)?.updateData(data)
 

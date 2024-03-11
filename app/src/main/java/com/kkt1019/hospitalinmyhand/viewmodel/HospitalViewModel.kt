@@ -1,27 +1,16 @@
 package com.kkt1019.hospitalinmyhand.viewmodel
 
-import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import com.kkt1019.hospitalinmyhand.repository.HospitalRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserFactory
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 import javax.inject.Inject
 
+@HiltViewModel
 class HospitalViewModel @Inject constructor(
     private val repository: HospitalRepository
 ) : ViewModel() {

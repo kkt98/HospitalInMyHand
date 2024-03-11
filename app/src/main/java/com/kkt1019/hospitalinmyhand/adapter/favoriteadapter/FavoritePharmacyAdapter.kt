@@ -1,6 +1,5 @@
 package com.kkt1019.hospitalinmyhand.adapter.favoriteadapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,27 +7,26 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kkt1019.hospitalinmyhand.R
-import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.data.PharmacyItem
-import com.kkt1019.hospitalinmyhand.data.ShareData
-import com.kkt1019.hospitalinmyhand.fragment.HospitalBottomSheetFragment
 import com.kkt1019.hospitalinmyhand.fragment.PharmacyBottomSheet
-import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalEntity
 import com.kkt1019.hospitalinmyhand.roomdatabase.pharmacy.PharmacyEntity
-import com.kkt1019.hospitalinmyhand.util.DistanceManager
+import com.kkt1019.hospitalinmyhand.util.SwifeDelete
+import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class FavoritePharmacyAdapter(
-    val requireContext: Context,
+    private val roomViewModel: RoomViewModel,
     private var pharmacy: List<PharmacyEntity>,
     private val sharedViewModel: SharedViewModel,
-    private val fragmentManager: FragmentManager
+    private val fragmentManager: FragmentManager,
+    private val recyclerView: RecyclerView
 ) : RecyclerView.Adapter<FavoritePharmacyAdapter.ViewHolder>() {
 
     fun updateData(newItems: List<PharmacyEntity>) {
         pharmacy = newItems
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -68,6 +66,15 @@ class FavoritePharmacyAdapter(
             tvAddr.text ="주소 : " + item.addr
             tvTell.text ="전화번호 : " + item.telno
             tvLocation.text = item.location
+        }
+    }
+
+    init {
+        SwifeDelete.setupSwipeToDelete(recyclerView) { position ->
+            // 삭제 로직 구현, 예: pharmacy 리스트에서 해당 항목 제거
+            roomViewModel.deletePharmacyItem(pharmacy[position].ykiho)
+            pharmacy = pharmacy.toMutableList().apply { removeAt(position) }
+            notifyDataSetChanged()
         }
     }
 }

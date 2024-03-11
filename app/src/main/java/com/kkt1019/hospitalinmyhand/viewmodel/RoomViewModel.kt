@@ -67,4 +67,45 @@ class RoomViewModel @Inject constructor(
             _uiMessage.postValue(repository.insertPharmacyItem(pharmacyEntity))
         }
     }
+
+    fun deletePharmacyItem(ykiho: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            // PharmacyDataBase 또는 repository를 통해 해당 아이템 삭제
+            val result = repository.deletePharmacyItem(ykiho)
+            withContext(Dispatchers.Main) {
+                if (result > 0) {
+                    _uiMessage.postValue("삭제완료.")
+                } else {
+                    _uiMessage.postValue("에러 잠시 후에 다시 시도 해 주세요.")
+                }
+            }
+        }
+    }
+
+    fun deleteHospitalItem(hpid: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = repository.deleteHospitalItem(hpid)
+            withContext(Dispatchers.Main) {
+                if (result > 0) {
+                    _uiMessage.postValue("삭제완료.")
+                } else {
+                    _uiMessage.postValue("에러 잠시 후에 다시 시도 해 주세요.")
+                }
+            }
+        }
+    }
+
+    fun deleteEmergencyItem(hpid: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = repository.deleteEmergencyItem(hpid)
+            withContext(Dispatchers.Main) {
+                if (result > 0) {
+                    _uiMessage.postValue("삭제완료.")
+                } else {
+                    _uiMessage.postValue("에러 잠시 후에 다시 시도 해 주세요.")
+                }
+            }
+        }
+    }
+
 }

@@ -8,11 +8,14 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.RoomDatabase
 import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import com.kkt1019.hospitalinmyhand.fragment.HospitalBottomSheetFragment
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalDataBase
 import com.kkt1019.hospitalinmyhand.roomdatabase.hospital.HospitalEntity
+import com.kkt1019.hospitalinmyhand.util.SwifeDelete
+import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,10 +23,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class FavoriteHospitalAdapter(
-    val context: Context,
+    private val roomViewModel: RoomViewModel,
     private var hospitals: List<HospitalEntity>,
     private var sharedViewModel: SharedViewModel,
-    private val fragmentManager: FragmentManager
+    private val fragmentManager: FragmentManager,
+    private val recyclerView: RecyclerView
 ): RecyclerView.Adapter<FavoriteHospitalAdapter.ViewHolder>() {
 
     fun updateData(newItems: List<HospitalEntity>) {
@@ -54,13 +58,6 @@ class FavoriteHospitalAdapter(
             bottomSheetDialogFragment.show(fragmentManager, bottomSheetDialogFragment.tag)
         }
 
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val isSaved = HospitalDataBase.getDatabase(context).hospitalDao().exists(item.hpid!!)
-//            withContext(Dispatchers.Main) {
-//                // UI 스레드에서 토글 버튼 상태 업데이트
-//                holder.toggle.isChecked = isSaved
-//            }
-//        }
     }
 
     override fun getItemCount(): Int = hospitals.size
@@ -76,6 +73,14 @@ class FavoriteHospitalAdapter(
             tvAddress.text = hospital.dutyAddr
             tvTell.text = hospital.dutyTell
             location.text = hospital.location + "km"
+        }
+    }
+
+    init {
+        SwifeDelete.setupSwipeToDelete(recyclerView) { position ->
+            roomViewModel.deleteHospitalItem(hospitals[position].hpid!!)
+            hospitals = hospitals.toMutableList().apply { removeAt(position) }
+            notifyDataSetChanged()
         }
     }
 }

@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.kkt1019.hospitalinmyhand.data.HospitalItem
 import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.data.PharmacyItem
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SharedViewModel: ViewModel() {
+@HiltViewModel
+class SharedViewModel @Inject constructor() : ViewModel() {
 
     private val _hospitalItem = MutableLiveData<HospitalItem>()
     val hospitalItem: LiveData<HospitalItem> = _hospitalItem

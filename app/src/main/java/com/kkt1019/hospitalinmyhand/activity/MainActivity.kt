@@ -14,7 +14,9 @@ import com.google.android.gms.ads.MobileAds
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMainBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.LocationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding

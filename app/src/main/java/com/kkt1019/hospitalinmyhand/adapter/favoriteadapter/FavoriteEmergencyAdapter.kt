@@ -11,13 +11,16 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.EmergencyItem
 import com.kkt1019.hospitalinmyhand.fragment.EmergencyBottomSheetFragment
 import com.kkt1019.hospitalinmyhand.roomdatabase.emergency.EmergencyEntity
+import com.kkt1019.hospitalinmyhand.util.SwifeDelete
+import com.kkt1019.hospitalinmyhand.viewmodel.RoomViewModel
 import com.kkt1019.hospitalinmyhand.viewmodel.SharedViewModel
 
 class FavoriteEmergencyAdapter(
-    val context: Context,
+    private val roomViewModel: RoomViewModel,
     private var emergency: List<EmergencyEntity>,
     private val sharedViewModel: SharedViewModel,
     private val fragmentManager: FragmentManager,
+    private val recyclerView: RecyclerView
 ) : RecyclerView.Adapter<FavoriteEmergencyAdapter.ViewHolder>() {
 
     fun updateData(newItems: List<EmergencyEntity>) {
@@ -64,6 +67,14 @@ class FavoriteEmergencyAdapter(
             tvTell.text = "대표 전화 : " + item.dutyTel1
             tvTell2.text = "응급실 전화 : " + item.dutyTel3
             tvLocation.text = item.location + "km"
+        }
+    }
+
+    init {
+        SwifeDelete.setupSwipeToDelete(recyclerView) { position ->
+            roomViewModel.deleteEmergencyItem(emergency[position].hpid)
+            emergency = emergency.toMutableList().apply { removeAt(position) }
+            notifyDataSetChanged()
         }
     }
 }

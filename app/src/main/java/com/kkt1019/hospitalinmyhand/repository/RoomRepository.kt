@@ -40,4 +40,16 @@ class RoomRepository @Inject constructor(
             }
         }
 
+    suspend fun deletePharmacyItem(ykiho: String): Int {
+        return pharmacyDao.deleteByYkiho(ykiho)
+    }
+
+    suspend fun deleteHospitalItem(hpid: String): Int {
+        return hospitalDao.deleteByHospital(hpid)
+    }
+
+    suspend fun deleteEmergencyItem(hpid: String): Int {
+        return emergencyDao.deleteByEmergency(hpid)
+    }
+
 }

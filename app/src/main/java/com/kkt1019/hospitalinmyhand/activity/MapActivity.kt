@@ -11,10 +11,12 @@ import com.kkt1019.hospitalinmyhand.R
 import com.kkt1019.hospitalinmyhand.data.ShareData
 import com.kkt1019.hospitalinmyhand.databinding.ActivityMapBinding
 import com.kkt1019.hospitalinmyhand.viewmodel.MapViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
+@AndroidEntryPoint
 class MapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMapBinding
@@ -48,6 +50,7 @@ class MapActivity : AppCompatActivity() {
         }
     }
 
+    //마커
     private fun kakaoMarkers(response: KakaoSearchPlaceItemVO) {
         response.documents.forEach { document ->
             val marker = MapPOIItem().apply {
@@ -60,6 +63,7 @@ class MapActivity : AppCompatActivity() {
         }
     }
 
+    //내 위치 마커
     private fun myLocationMarker() {
         val lat: Double = ShareData.lat
         val lng: Double = ShareData.lng

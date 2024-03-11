@@ -7,64 +7,64 @@
     app:cardElevation="4dp"
     android:layout_margin="12dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@color/white">
 
-        <TextView
-            android:id="@+id/pg3_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Title"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"/>
+          <TextView
+              android:id="@+id/pg3_title"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="8dp"
+              android:text="Title"
+              android:textColor="@color/black"
+              android:textSize="15sp"
+              android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/pg3_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="adress"
-            android:paddingLeft="8dp"
-            android:paddingBottom="8dp"
-            android:paddingRight="8dp"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:layout_below="@+id/pg3_title"/>
+          <TextView
+              android:id="@+id/pg3_address"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="adress"
+              android:paddingLeft="8dp"
+              android:paddingBottom="8dp"
+              android:paddingRight="8dp"
+              android:textSize="15sp"
+              android:textColor="@color/black"
+              android:layout_below="@+id/pg3_title"/>
 
-        <TextView
-            android:id="@+id/pg3_tell"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pg3_address"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
-            android:text="tell"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+          <TextView
+              android:id="@+id/pg3_tell"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/pg3_address"
+              android:paddingLeft="8dp"
+              android:paddingRight="8dp"
+              android:paddingBottom="8dp"
+              android:text="tell"
+              android:textColor="@color/black"
+              android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/pg3_tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pg3_address"
-            android:layout_toLeftOf="@id/pg3_tv_km"
-            android:text="123"
-            android:textSize="18sp"
-            app:drawableLeftCompat="@drawable/icons8region20" />
+          <TextView
+              android:id="@+id/pg3_tv_location"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/pg3_address"
+              android:layout_toLeftOf="@id/pg3_tv_km"
+              android:text="123"
+              android:textSize="18sp"
+              app:drawableLeftCompat="@drawable/icons8region20" />
 
-        <TextView
-            android:id="@+id/pg3_tv_km"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pg3_address"
-            android:layout_alignParentEnd="true"
-            android:paddingRight="8dp"
-            android:text="km"
-            android:textSize="18sp" />
+          <TextView
+              android:id="@+id/pg3_tv_km"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/pg3_address"
+              android:layout_alignParentEnd="true"
+              android:paddingRight="8dp"
+              android:text="km"
+              android:textSize="18sp" />
 
-    </RelativeLayout>
-
+      </RelativeLayout>
 </androidx.cardview.widget.CardView>

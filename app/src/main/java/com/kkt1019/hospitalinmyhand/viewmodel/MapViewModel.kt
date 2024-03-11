@@ -7,11 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.kkt1019.hospitalinmyhand.data.KakaoSearchPlaceItemVO
 import com.kkt1019.hospitalinmyhand.network.RetrofitHelper
 import com.kkt1019.hospitalinmyhand.network.RetrofitService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MapViewModel : ViewModel() {
+@HiltViewModel
+class MapViewModel @Inject constructor(): ViewModel() {
 
     private val _searchPlaceResponse = MutableLiveData<KakaoSearchPlaceItemVO?>()
     val searchPlaceResponse: LiveData<KakaoSearchPlaceItemVO?> = _searchPlaceResponse

@@ -21,4 +21,7 @@ interface HospitalDao {
     @Query("SELECT EXISTS(SELECT 1 FROM hospitalDataBase WHERE hpid = :hpid LIMIT 1)")
     suspend fun exists(hpid: String): Boolean
 
+    @Query("DELETE FROM hospitalDataBase WHERE hpid = :hpid")
+    suspend fun deleteByHospital(hpid: String): Int
+
 }

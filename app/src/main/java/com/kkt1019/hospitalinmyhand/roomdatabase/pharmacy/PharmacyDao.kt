@@ -22,4 +22,7 @@ interface PharmacyDao {
     @Query("SELECT EXISTS(SELECT 1 FROM pharmacyDataBase WHERE ykiho = :ykiho LIMIT 1)")
     suspend fun exists(ykiho: String): Boolean
 
+    @Query("DELETE FROM pharmacyDataBase WHERE ykiho = :ykiho")
+    suspend fun deleteByYkiho(ykiho: String): Int
+
 }

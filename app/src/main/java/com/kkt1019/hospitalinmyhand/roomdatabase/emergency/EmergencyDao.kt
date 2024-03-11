@@ -22,5 +22,6 @@ interface EmergencyDao {
     @Query("SELECT EXISTS(SELECT 1 FROM emergencyDataBase WHERE hpid = :hpid LIMIT 1)")
     suspend fun exists(hpid: String): Boolean
 
-
+    @Query("DELETE FROM emergencyDataBase WHERE hpid = :hpid")
+    suspend fun deleteByEmergency(hpid: String): Int
 }

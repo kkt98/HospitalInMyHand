@@ -8,8 +8,13 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LocationViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class LocationViewModel @Inject constructor(
+    application: Application
+) : AndroidViewModel(application) {
 
     private val _fusedLocationProviderClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(application)
