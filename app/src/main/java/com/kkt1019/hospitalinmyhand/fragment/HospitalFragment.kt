@@ -175,15 +175,15 @@ class HospitalFragment : Fragment() {
     }
 
     private fun filterAndDisplayItems(mDialogView: View) {
-        val spinner = mDialogView.findViewById<Spinner>(R.id.spinner)
-        val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2)
-        val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3)
+        val spinner = mDialogView.findViewById<Spinner>(R.id.spinner) ?: return
+        val spinner2 = mDialogView.findViewById<Spinner>(R.id.spinner2) ?: return
+        val spinner3 = mDialogView.findViewById<Spinner>(R.id.spinner3) ?: return
 
         val selectedCity = if (spinner.selectedItemPosition > 0) spinner.selectedItem.toString() else null
         val selectedNeighborhood = if (spinner2.selectedItemPosition > 0) spinner2.selectedItem.toString() else null
         val selectedHospitalType = if (spinner3.selectedItemPosition > 0) spinner3.selectedItem.toString() else null
 
-        hospitalViewModel.fetchDataAndFilter((selectedCity!!), (selectedNeighborhood!!), selectedHospitalType ?: "내과")
+        hospitalViewModel.fetchDataAndFilter(selectedCity, selectedNeighborhood, selectedHospitalType)
     }
 
     private fun nearByMyLocation(mDialogView: View) {

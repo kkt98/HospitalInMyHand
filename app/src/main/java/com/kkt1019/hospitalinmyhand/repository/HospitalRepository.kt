@@ -90,7 +90,7 @@ class HospitalRepository @Inject constructor() {
         }
     }
 
-    private suspend fun fetchDataFromNetwork2(aaa: String, bbb: String): List<HospitalItem> = withContext(Dispatchers.IO) {
+    private suspend fun fetchDataFromNetwork2(aaa: String?, bbb: String?): List<HospitalItem> = withContext(Dispatchers.IO) {
         try {
             val address = if (bbb != null) {
                 "http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncListInfoInqire?" +
@@ -192,7 +192,7 @@ class HospitalRepository @Inject constructor() {
         })
     }
 
-    suspend fun fetchDataAndFilter(aaa: String, bbb: String, hospitalType: String?): List<HospitalItem> {
+    suspend fun fetchDataAndFilter(aaa: String?, bbb: String?, hospitalType: String?): List<HospitalItem> {
         return withContext(Dispatchers.IO) {
             try {
                 // fetchDataFromNetwork2의 결과를 기다립니다.

@@ -36,7 +36,7 @@ class HospitalViewModel @Inject constructor(
         }
     }
 
-    fun fetchDataAndFilter(aaa: String, bbb: String, hospitalType: String?) {
+    fun fetchDataAndFilter(aaa: String?, bbb: String?, hospitalType: String?) {
         viewModelScope.launch {
             _filteredHospitalData.postValue(repository.fetchDataAndFilter(aaa, bbb, hospitalType))
         }
